@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "zod": "^4.6.5"
+  },
+  "exports": {
+    "./*": "./src/*"
+  },
+  "name": "@analytics/protocol",
+  "private": true,
+  "scripts": {
+    "build": "pnpm typecheck",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

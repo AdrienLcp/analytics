@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "assets": {
+    "directory": "./public",
+    "run_worker_first": ["/api/*"]
+  },
+  "compatibility_date": "2026-09-26",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "b2670059-e5c6-4685-8003-d484cbb38cef",
+      "database_name": "analytics",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "dev": {
+    "port": 8790
+  },
+  "main": "src/index.ts",
+  "name": "analytics",
+  "observability": {
+    "enabled": true
+  }
+}

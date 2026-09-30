@@ -1,0 +1,42 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ":URL:",
+              ":BLANK_LINE:",
+              [":BUN:", ":NODE:"],
+              ":BLANK_LINE:",
+              [
+                ":PACKAGE:",
+                ":PACKAGE_WITH_PROTOCOL:",
+                "!@/**",
+                "!@analytics/**"
+              ],
+              ":BLANK_LINE:",
+              "@analytics/protocol/**",
+              ":BLANK_LINE:",
+              [":ALIAS:", "@/**", "!@analytics/**"],
+              ":BLANK_LINE:",
+              [":PATH:", "@/**", "!@analytics/**"]
+            ],
+            "identifierOrder": "natural"
+          }
+        }
+      }
+    }
+  },
+  "extends": ["@adrienlcp/biome-config"],
+  "files": {
+    "includes": [
+      "!.claude/skills",
+      "!**/.wrangler",
+      "!apps/api/public",
+      "!apps/api/worker-configuration.d.ts"
+    ]
+  }
+}

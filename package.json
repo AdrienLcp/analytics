@@ -1,0 +1,31 @@
+{
+  "author": "Adrien Lacourpaille",
+  "devDependencies": {
+    "@adrienlcp/biome-config": "^0.1.0",
+    "@adrienlcp/tsconfig": "^0.1.0",
+    "@biomejs/biome": "2.5.14",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=12.0.0"
+  },
+  "license": "AGPL-3.0-or-later",
+  "name": "analytics",
+  "packageManager": "pnpm@12.8.1+sha512.f64ba907507f5ceafe06c8d38e6052d0179444580ec1279ddd5bfc11cb48aa8a2644b66598e07e761da84872a9fc57d5f902b87fa49d024198d558612aabbe45",
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter @analytics/protocol build && pnpm --filter @analytics/tracker build && pnpm --filter @analytics/api build",
+    "deploy": "pnpm build && pnpm --filter @analytics/api run deploy",
+    "deps:upgrade": "corepack use pnpm@latest && pnpm -r up -L && biome migrate --write",
+    "dev": "pnpm build && pnpm --filter @analytics/api dev",
+    "lint": "biome check --write",
+    "lint:ci": "biome ci",
+    "preinstall": "git config core.hooksPath .githooks || true",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "validate": "pnpm build && pnpm lint:ci && pnpm test"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}
