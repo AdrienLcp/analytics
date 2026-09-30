@@ -24,6 +24,7 @@ type ApiRequestInit = {
   body?: string
   headers?: Record<string, string>
   method?: 'GET' | 'POST'
+  redirect?: 'follow' | 'manual'
 }
 
 /**

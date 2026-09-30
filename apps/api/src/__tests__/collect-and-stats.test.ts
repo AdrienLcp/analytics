@@ -107,3 +107,14 @@ describe('reading stats', () => {
     ).toBe(400)
   })
 })
+
+describe('the root', () => {
+  it('[home] sends a visitor to the source until the dashboard ships', async () => {
+    const response = await api.request('/', { redirect: 'manual' })
+
+    expect(response.status).toBe(302)
+    expect(response.headers.get('Location')).toBe(
+      'https://github.com/AdrienLcp/analytics'
+    )
+  })
+})
