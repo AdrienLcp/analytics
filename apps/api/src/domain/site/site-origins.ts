@@ -6,6 +6,7 @@ import type { SiteId } from '@analytics/protocol/site-ids'
  * numbers.
  */
 const SITE_ORIGINS = {
+  'on-record': ['https://on-record-203.pages.dev'],
   portfolio: ['https://portfolio-9qi.pages.dev'],
   taverla: ['https://taverla.onrender.com']
 } as const satisfies Record<SiteId, readonly string[]>
