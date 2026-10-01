@@ -1,0 +1,49 @@
+@use '@/presentation/styles/layout'
+
+@layer components
+  .plate-notice
+    margin-top: 28px
+    position: relative
+
+    .field
+      border-bottom: 1px solid var(--ink-3)
+      min-height: 380px
+      padding: 40px 0 56px
+      position: relative
+
+      &::before
+        background-image: radial-gradient(var(--dot) 1px, transparent 1.4px)
+        background-size: 14px 14px
+        content: ''
+        inset: 0
+        position: absolute
+
+    .copy
+      background: var(--ground)
+      max-width: 620px
+      padding: 28px 32px 30px 0
+      position: relative
+
+    h3
+      font-size: clamp(30px, 3.4vw, 44px)
+      font-weight: 400
+      letter-spacing: -0.02em
+      line-height: 1.05
+      text-wrap: balance
+
+    p
+      color: var(--ink-2)
+      margin-top: 16px
+      max-width: 46ch
+
+    &.is-pending .field::before
+      @media (prefers-reduced-motion: no-preference)
+        animation: plate-breathe 2.4s ease-in-out infinite
+
+    @include layout.below-medium
+      .field
+        min-height: 0
+        padding: 24px 0 48px
+
+      .copy
+        padding: 20px 16px 22px 0

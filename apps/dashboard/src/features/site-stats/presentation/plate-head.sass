@@ -1,0 +1,51 @@
+@use '@/presentation/styles/layout'
+@use '@/presentation/styles/typography'
+
+@layer components
+  .plate-head
+    @include layout.grid
+
+    align-items: end
+    padding-top: 88px
+
+    h1
+      font-size: clamp(56px, 8.2vw, 92px)
+      font-weight: 400
+      grid-column: 1 / span 8
+      letter-spacing: -0.02em
+      line-height: 0.94
+      overflow-wrap: anywhere
+      text-wrap: balance
+
+    .lede
+      color: var(--ink-2)
+      font-size: 17px
+      grid-column: 9 / span 4
+      max-width: 38ch
+      padding-bottom: 6px
+
+    .meta
+      @include typography.label
+
+      color: var(--ink-2)
+      display: flex
+      flex-wrap: wrap
+      gap: 10px 28px
+      grid-column: 1 / -1
+      margin-top: 28px
+
+    @include layout.below-wide
+      h1
+        grid-column: 1 / -1
+
+      .lede
+        grid-column: 1 / span 8
+        margin-top: 24px
+        max-width: 56ch
+
+    @include layout.below-medium
+      .lede
+        grid-column: 1 / -1
+
+    @include layout.below-narrow
+      padding-top: 56px

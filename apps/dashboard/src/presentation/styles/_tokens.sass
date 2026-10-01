@@ -1,0 +1,65 @@
+// Side-effect module: emits top-level CSS. Loaded once, from globals.sass.
+//
+// The palette follows the system theme through `light-dark()`: the dashboard
+// offers no theme switch of its own, so nothing is ever stamped on `<html>`.
+
+@use './layout'
+
+@layer tokens
+  :root
+    color-scheme: light dark
+
+    // Paper, ink and rules
+    --ground: light-dark(oklch(96.8% 0.003 308.4), oklch(19.5% 0.003 248))
+    --edge-warm: light-dark(oklch(97.6% 0.004 34.3), oklch(21.2% 0.005 39.4))
+    --edge-green: light-dark(oklch(95.9% 0.007 151.9), oklch(19.9% 0.009 169.3))
+    --ink: light-dark(oklch(20.8% 0.005 248.1), oklch(93.7% 0.006 84.6))
+    --ink-2: light-dark(oklch(43.4% 0.008 255.5), oklch(74.1% 0.007 88.7))
+    --ink-3: light-dark(oklch(63.9% 0.005 258.3), oklch(53.8% 0.005 91.5))
+    --on-ink: light-dark(oklch(96.8% 0.003 308.4), oklch(19.5% 0.003 248))
+    --hair: light-dark(oklch(83% 0.005 78.3), oklch(34.8% 0.003 106.6))
+    --dot: light-dark(oklch(20.8% 0.005 248.1 / 0.17), oklch(93.7% 0.006 84.6 / 0.13))
+
+    // The stamp
+    --seal: light-dark(oklch(90.3% 0.03 283.7), oklch(31.3% 0.061 279.7))
+    --seal-ink: var(--ink)
+
+    // The two series: periwinkle for page views, terracotta for visits
+    --page-views: light-dark(oklch(50.8% 0.177 275.9), oklch(64.4% 0.153 279.1))
+    --page-views-fill: light-dark(oklch(50.8% 0.177 275.9 / 0.11), oklch(64.4% 0.153 279.1 / 0.15))
+    --visits: light-dark(oklch(59.7% 0.134 41.5), oklch(66.7% 0.123 44.6))
+
+    // A three-step sequence for parts of one whole, darkest first
+    --sequence-1: light-dark(oklch(39.1% 0.163 273.8), oklch(79.9% 0.088 282.1))
+    --sequence-2: light-dark(oklch(59.3% 0.152 278.6), oklch(64.4% 0.153 279.1))
+    --sequence-3: light-dark(oklch(79.6% 0.078 282), oklch(46.2% 0.147 277.1))
+
+    // What a light or a dark page looks like, whichever palette draws it
+    --swatch-light-theme: oklch(96.8% 0.003 308.4)
+    --swatch-dark-theme: oklch(20.8% 0.005 248.1)
+
+    --font-sans: 'Familjen Grotesk', 'Helvetica Neue', sans-serif
+    --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1)
+    --transition-fast: 160ms
+    --transition-base: 520ms
+
+    // The page's measure: side margin, column gutter, and the stamp's size
+    --side: 56px
+    --gutter: 40px
+    --stamp: 132px
+    --wrap-max-width: 1440px
+
+    @include layout.below-wide
+      --side: 40px
+      --gutter: 28px
+
+    @include layout.below-medium
+      --side: 24px
+      --gutter: 20px
+      --stamp: 104px
+
+    @include layout.below-narrow
+      --side: 16px
+      --stamp: 88px

@@ -1,0 +1,84 @@
+@use './styles/focus'
+@use './styles/layout'
+@use './styles/token'
+@use './styles/typography'
+
+@layer components
+  .token-bar
+    background: var(--ground)
+    border-block: 1px solid var(--hair)
+    position: sticky
+    top: 0
+    z-index: 30
+
+    .bar-inner
+      @include layout.wrap
+
+      align-items: center
+      display: flex
+      gap: 40px
+      min-height: 72px
+
+    .group
+      align-items: center
+      display: flex
+      gap: 14px
+
+    .group-label
+      @include typography.label
+
+      color: var(--ink-2)
+
+    .tokens
+      display: flex
+      gap: 6px
+
+    .token
+      @include token.token
+      @include focus.ring
+
+      &[aria-current='page'],
+      &[data-selected]
+        @include token.token-current
+
+    @include layout.below-medium
+      .bar-inner
+        flex-wrap: wrap
+        gap: 10px 24px
+        padding-block: 12px
+
+    @include layout.below-narrow
+      .bar-inner
+        gap: 8px
+
+      .group
+        gap: 0
+        width: 100%
+
+      .group-label
+        @include layout.visually-hidden
+
+      .group.period,
+      .group.language
+        width: auto
+
+      .group.period
+        flex: 1
+
+      .tokens
+        flex: 1
+        gap: 4px
+
+      .token
+        flex: 1 1 auto
+        height: 40px
+        letter-spacing: 0.1em
+        min-width: 0
+        padding: 0 8px
+
+      .group.language .tokens
+        flex: 0 0 auto
+
+      .group.language .token
+        flex: 0 0 44px
+        padding: 0

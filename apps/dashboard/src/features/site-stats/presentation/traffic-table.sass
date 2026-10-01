@@ -1,0 +1,62 @@
+@use '@/presentation/styles/focus'
+@use '@/presentation/styles/layout'
+@use '@/presentation/styles/typography'
+
+@layer components
+  .traffic-table
+    border-top: 1px solid var(--hair)
+    margin-top: 18px
+    padding-top: 14px
+
+    .toggle
+      @include typography.label
+      @include focus.ring
+
+      align-items: center
+      color: var(--ink-2)
+      cursor: pointer
+      display: inline-flex
+      gap: 10px
+      min-height: 24px
+
+      svg
+        height: 10px
+        transition: transform var(--transition-fast, 0) var(--ease-out)
+        width: 10px
+
+      &[data-hovered]
+        color: var(--ink)
+
+    &[data-expanded] .toggle svg
+      transform: rotate(90deg)
+
+    .scroller
+      margin-top: 14px
+      max-height: 320px
+      overflow: auto
+
+    table
+      border-collapse: collapse
+      font-size: 15px
+      width: 100%
+
+    caption
+      @include layout.visually-hidden
+
+    th,
+    td
+      border-bottom: 1px solid var(--hair)
+      padding: 7px 0 7px 16px
+      text-align: right
+
+      &:first-child
+        padding-left: 0
+        text-align: left
+
+    thead th
+      @include typography.label
+
+      background: var(--ground)
+      color: var(--ink-2)
+      position: sticky
+      top: 0

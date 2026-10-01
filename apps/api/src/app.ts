@@ -1,7 +1,6 @@
 import { Hono } from 'hono'
 
 import { registerCollectRoute } from '@/infrastructure/http/collect-route'
-import { registerHomeRedirect } from '@/infrastructure/http/home-redirect'
 import { registerSiteStatsRoute } from '@/infrastructure/http/site-stats-route'
 import type { WorkerEnv } from '@/infrastructure/http/worker-env'
 import { logger } from '@/infrastructure/logging/logger'
@@ -12,7 +11,6 @@ export const createApp = () => {
 
   registerCollectRoute(app)
   registerSiteStatsRoute(app)
-  registerHomeRedirect(app)
 
   app.onError((error, context) => {
     logger.error('Unhandled error', { error: String(error) })

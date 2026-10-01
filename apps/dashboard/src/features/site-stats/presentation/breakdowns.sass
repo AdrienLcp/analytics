@@ -1,0 +1,19 @@
+@use 'breakdown-layout'
+
+@layer components
+  .breakdowns
+    @include breakdown-layout.grid
+
+    > .half
+      @include breakdown-layout.half
+
+    > .third
+      @include breakdown-layout.third
+
+    > .column
+      display: flex
+      flex-direction: column
+      gap: 56px
+      min-width: 0
+
+      @include breakdown-layout.third

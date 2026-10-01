@@ -38,5 +38,15 @@
       "!apps/api/public",
       "!apps/api/worker-configuration.d.ts"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["apps/dashboard/**"],
+      "linter": {
+        "domains": {
+          "react": "recommended"
+        }
+      }
+    }
+  ]
 }

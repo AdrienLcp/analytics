@@ -1,0 +1,27 @@
+@use './styles/layout'
+@use './styles/typography'
+
+@layer components
+  .site-footer
+    @include layout.wrap
+    @include typography.label
+
+    color: var(--ink-2)
+    display: flex
+    flex-wrap: wrap
+    gap: 12px 32px
+    margin-top: 120px
+    padding-block: 18px 40px
+    position: relative
+
+    &::before
+      border-top: 1px solid var(--hair)
+      content: ''
+      inset: 0 var(--side) auto
+      position: absolute
+
+    .spacer
+      flex: 1
+
+    @include layout.below-narrow
+      margin-top: 88px

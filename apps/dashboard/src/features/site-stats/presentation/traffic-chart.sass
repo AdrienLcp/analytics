@@ -1,0 +1,141 @@
+@use '@/presentation/styles/typography'
+
+@layer components
+  .traffic-chart
+    margin-top: 28px
+    outline-offset: 6px
+    position: relative
+    touch-action: pan-y
+
+    svg
+      display: block
+      overflow: visible
+      width: 100%
+
+    text
+      fill: var(--ink-2)
+      font-family: var(--font-mono)
+      font-size: 11px
+      letter-spacing: 0.06em
+
+    .end-label,
+    .end-value
+      font-family: var(--font-sans)
+      font-size: 14px
+      letter-spacing: 0
+
+    .end-value
+      fill: var(--ink)
+
+    .grid-line
+      stroke: var(--hair)
+      stroke-dasharray: 1 3
+
+    .zero-line,
+    .tick
+      stroke: var(--ink-3)
+
+    .page-views-area
+      fill: var(--page-views-fill)
+
+    .page-views-halo,
+    .page-views-line,
+    .visits-line
+      fill: none
+      stroke-linecap: round
+      stroke-linejoin: round
+      stroke-width: 2
+
+    .page-views-halo
+      stroke: var(--ground)
+      stroke-width: 6
+
+    .page-views-line
+      stroke: var(--page-views)
+
+    .visits-line
+      stroke: var(--visits)
+      stroke-dasharray: 6 5
+      stroke-linecap: butt
+
+    .page-views-dot,
+    .visits-dot
+      stroke: var(--ground)
+      stroke-width: 2
+
+    .page-views-dot,
+    .page-views-bar
+      fill: var(--page-views)
+
+    .visits-dot,
+    .visits-bar
+      fill: var(--visits)
+
+    .empty-bar
+      stroke: var(--ink-3)
+      stroke-width: 2
+
+    .crosshair
+      opacity: 0.5
+      stroke: var(--ink)
+
+    .active-band
+      fill: var(--seal)
+      opacity: 0.55
+
+    .chart-tip
+      background: var(--ink)
+      box-shadow: 0 10px 28px -12px oklch(0% 0 0 / 0.35)
+      color: var(--on-ink)
+      left: 0
+      min-width: 168px
+      opacity: 0
+      padding: 12px 14px
+      pointer-events: none
+      position: absolute
+      top: 20px
+      transform: translate(calc(var(--tip-x) + 16px), 4px)
+      transition: opacity var(--transition-fast, 0) var(--ease-out), transform var(--transition-fast, 0) var(--ease-out)
+      z-index: 3
+
+      &.is-shown
+        opacity: 1
+        transform: translate(calc(var(--tip-x) + 16px), 0)
+
+      &.is-flipped,
+      &.is-flipped.is-shown
+        transform: translate(calc(var(--tip-x) - 100% - 16px), 0)
+
+    .tip-date
+      @include typography.label
+
+      opacity: 0.75
+
+    dl
+      align-items: center
+      column-gap: 10px
+      display: grid
+      font-size: 15px
+      grid-template-columns: 1fr auto
+      margin-top: 8px
+      row-gap: 4px
+
+    dt
+      align-items: center
+      display: flex
+      gap: 8px
+
+    dd
+      text-align: right
+
+    i
+      border-radius: 50%
+      display: inline-block
+      height: 10px
+      width: 10px
+
+      &.page-views
+        background: var(--page-views)
+
+      &.visits
+        background: var(--visits)

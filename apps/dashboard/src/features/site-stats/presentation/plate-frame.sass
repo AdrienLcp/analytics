@@ -1,0 +1,117 @@
+@use '@/presentation/styles/layout'
+
+@layer components
+  .plate-frame
+    border: 1px solid var(--hair)
+    margin: 88px 0 0
+    padding: 32px 32px 20px
+    position: relative
+
+    .registration
+      color: var(--ink-3)
+      height: 26px
+      pointer-events: none
+      position: absolute
+      width: 26px
+
+      &.top-left
+        left: -13px
+        top: -13px
+
+      &.top-right
+        right: -13px
+        top: -13px
+
+      &.bottom-left
+        bottom: -13px
+        left: -13px
+
+      &.bottom-right
+        bottom: -13px
+        right: -13px
+
+    .plate-stamp
+      height: var(--stamp)
+      pointer-events: none
+      position: absolute
+      right: 64px
+      top: calc(var(--stamp) / -2)
+      width: var(--stamp)
+      z-index: 2
+
+      .seal
+        fill: var(--seal)
+
+      .rule
+        fill: none
+        stroke: var(--seal-ink)
+        stroke-opacity: 0.35
+
+      .ring
+        transform-origin: 50% 50%
+
+        @media (prefers-reduced-motion: no-preference)
+          animation: stamp-turn 48s linear infinite
+
+      text
+        fill: var(--seal-ink)
+        font-family: var(--font-mono)
+        font-size: 9.4px
+        letter-spacing: 1.1px
+        text-transform: uppercase
+
+      .mark
+        fill: none
+        stroke: var(--seal-ink)
+        stroke-width: 1.3
+
+    .plate-caption
+      align-items: baseline
+      display: flex
+      flex-wrap: wrap
+      gap: 12px 32px
+      padding-right: calc(var(--stamp) + 40px)
+
+      h2
+        font-size: 26px
+        font-weight: 400
+        letter-spacing: -0.01em
+        line-height: 1.15
+
+    .legend
+      color: var(--ink-2)
+      display: flex
+      font-size: 15px
+      gap: 22px
+
+      span
+        align-items: center
+        display: inline-flex
+        gap: 8px
+
+      i
+        display: inline-block
+        height: 2px
+        width: 18px
+
+        &.page-views
+          background: var(--page-views)
+
+        &.visits
+          background: repeating-linear-gradient(to right, var(--visits) 0 6px, transparent 6px 11px)
+
+    @include layout.below-narrow
+      margin-top: 72px
+      padding: 22px 16px 14px
+
+      .plate-stamp
+        right: 14px
+
+      .plate-caption
+        padding-right: calc(var(--stamp) + 4px)
+
+        h2
+          font-size: 22px
+
+      .legend
+        gap: 16px

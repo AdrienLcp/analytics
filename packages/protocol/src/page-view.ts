@@ -4,6 +4,8 @@ import { siteIdSchema } from './site'
 
 export const THEMES = ['light', 'dark'] as const
 
+export type Theme = (typeof THEMES)[number]
+
 export const DEVICES = ['mobile', 'tablet', 'desktop'] as const
 
 export type Device = (typeof DEVICES)[number]

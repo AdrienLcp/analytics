@@ -1,0 +1,52 @@
+// Pure module: mixins only. What the breakdown lists and the empty plate's
+// pending lists share, so the two read as the same section.
+
+@use '@/presentation/styles/layout'
+@use '@/presentation/styles/typography'
+
+/// The twelve columns the lists under a plate sit in.
+@mixin grid
+  @include layout.grid
+
+  margin-top: 48px
+  row-gap: 72px
+
+/// Half the grid; all of it on a small screen.
+@mixin half
+  grid-column: span 6
+
+  @include layout.below-medium
+    grid-column: 1 / -1
+
+/// A third of the grid; half below a wide screen, all of it on a small one.
+@mixin third
+  grid-column: span 4
+
+  @include layout.below-wide
+    grid-column: span 6
+
+  @include layout.below-medium
+    grid-column: 1 / -1
+
+/// One list's frame: the rule above it, its title, and what it counts.
+@mixin list
+  border-top: 1px solid var(--ink)
+  min-width: 0
+  padding-top: 16px
+
+  .list-head
+    align-items: baseline
+    display: flex
+    gap: 16px
+    justify-content: space-between
+
+  h3
+    font-size: 22px
+    font-weight: 400
+    line-height: 1.2
+
+  .total
+    @include typography.label
+
+    color: var(--ink-2)
+    text-align: right

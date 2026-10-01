@@ -1,0 +1,75 @@
+@use '@/presentation/styles/layout'
+@use '@/presentation/styles/typography'
+
+@layer components
+  .credits
+    border-bottom: 1px solid var(--hair)
+    border-top: 1px solid var(--ink)
+    display: grid
+    grid-template-columns: repeat(4, minmax(0, 1fr))
+    margin-top: 40px
+
+    .credit
+      border-left: 1px solid var(--hair)
+      display: grid
+      grid-row: span 2
+      grid-template-rows: subgrid
+      min-width: 0
+      padding: 20px 24px 26px
+
+      &:first-child
+        border-left: 0
+        padding-left: 0
+
+    dt
+      @include typography.label
+
+      color: var(--ink-2)
+
+    dd
+      font-size: clamp(40px, 4.4vw, 60px)
+      letter-spacing: -0.02em
+      line-height: 1
+      margin-top: 14px
+
+    small
+      color: var(--ink-2)
+      display: block
+      font-size: 15px
+      letter-spacing: 0
+      line-height: 1.4
+      margin-top: 12px
+
+    .swatch
+      display: inline-block
+      height: 2px
+      margin-right: 8px
+      transform: translateY(-1px)
+      vertical-align: middle
+      width: 14px
+
+      &.page-views
+        background: var(--page-views)
+
+      &.visits
+        background: var(--visits)
+
+    .visually-hidden
+      @include layout.visually-hidden
+
+    @include layout.below-medium
+      grid-template-columns: repeat(2, minmax(0, 1fr))
+
+      .credit:nth-child(3)
+        border-left: 0
+        padding-left: 0
+
+      .credit:nth-child(n + 3)
+        border-top: 1px solid var(--hair)
+
+    @include layout.below-narrow
+      .credit
+        padding: 16px 14px 20px
+
+      small
+        font-size: 14px

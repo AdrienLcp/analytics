@@ -1,0 +1,13 @@
+@use '@/presentation/styles/layout'
+
+@layer components
+  .site-stats-page
+    @include layout.wrap
+
+    .plate
+      @media (prefers-reduced-motion: no-preference)
+        animation: plate-rise var(--transition-base, 0) var(--ease-out)
+
+    &.is-loading .plate
+      opacity: 0.55
+      transition: opacity var(--transition-fast, 0) var(--ease-out) 120ms

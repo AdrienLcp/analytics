@@ -1,5 +1,6 @@
 import { API_ROUTES } from '@analytics/protocol/routes'
 import { isSiteId } from '@analytics/protocol/site-ids'
+import { TRACKER_SITE_DATA_KEY } from '@analytics/protocol/tracker-script'
 
 import { onPathChange } from './navigation'
 import { pageViewBeacon } from './page-view-beacon'
@@ -11,7 +12,7 @@ import { shouldTrack } from './should-track'
  * beacons go back to the origin the script came from.
  */
 const startTracking = (script: HTMLScriptElement) => {
-  const site = script.dataset.site
+  const site = script.dataset[TRACKER_SITE_DATA_KEY]
   if (site === undefined || !isSiteId(site) || !shouldTrack()) return
 
   const collectUrl = new URL(API_ROUTES.collect, script.src).href

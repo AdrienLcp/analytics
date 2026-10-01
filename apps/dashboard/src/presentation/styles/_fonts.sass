@@ -1,0 +1,12 @@
+// Side-effect module: emits top-level CSS. Loaded once, from globals.sass.
+//
+// Familjen Grotesk and Geist Mono, both SIL Open Font License 1.1, self-hosted
+// from public/fonts beside their licences. The annual sets everything at 400.
+
+@use '@adrienlcp/styles/fonts'
+
+@layer base
+  @include fonts.font-face('Familjen Grotesk', '/fonts/familjen-grotesk-latin.woff2', fonts.$latin)
+  @include fonts.font-face('Familjen Grotesk', '/fonts/familjen-grotesk-latin-ext.woff2', fonts.$latin-ext)
+  @include fonts.font-face('Geist Mono', '/fonts/geist-mono-latin.woff2', fonts.$latin)
+  @include fonts.font-face('Geist Mono', '/fonts/geist-mono-latin-ext.woff2', fonts.$latin-ext)

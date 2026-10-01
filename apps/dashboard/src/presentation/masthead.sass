@@ -1,0 +1,62 @@
+@use './styles/focus'
+@use './styles/layout'
+@use './styles/typography'
+
+@layer components
+  .masthead
+    @include layout.wrap
+    @include typography.label
+
+    align-items: baseline
+    color: var(--ink-2)
+    display: flex
+    flex-wrap: wrap
+    gap: 24px
+    padding-block: 22px
+
+    .name
+      align-items: center
+      color: var(--ink)
+      display: inline-flex
+      gap: 10px
+
+      svg
+        height: 14px
+        width: 14px
+
+    .spacer
+      flex: 1
+
+    .source
+      @include focus.ring
+
+      color: var(--ink-2)
+      text-decoration: underline
+      text-decoration-color: var(--ink-3)
+      text-decoration-thickness: 1px
+      text-underline-offset: 0.24em
+
+      &[data-hovered]
+        color: var(--ink)
+        text-decoration-color: var(--ink)
+
+    .skip-link
+      background: var(--ink)
+      color: var(--on-ink)
+      left: var(--side)
+      padding: 10px 14px
+      position: fixed
+      text-decoration: none
+      top: 0
+      transform: translateY(-120%)
+      z-index: 40
+
+      &:focus-visible
+        transform: none
+
+    @include layout.below-narrow
+      gap: 6px 16px
+      padding-block: 16px
+
+      .owner
+        display: none

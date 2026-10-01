@@ -1,4 +1,5 @@
-const API_PREFIX = '/api'
+/** Everything under it runs on the Worker; every other path is a static asset or the dashboard. */
+export const API_PREFIX = '/api'
 
 /**
  * Every path either end of the wire names: the API registers the pattern, the

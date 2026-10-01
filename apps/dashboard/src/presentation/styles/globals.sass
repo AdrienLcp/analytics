@@ -1,0 +1,68 @@
+// The `@layer reset, tokens, base, components` order is declared in index.html.
+
+@use '@adrienlcp/styles/reset.css'
+@use '@adrienlcp/styles/reduced-motion.css'
+@use './fonts'
+@use './layout'
+@use './tokens'
+
+@layer base
+  html
+    overflow-x: clip
+    scrollbar-color: var(--hair) var(--ground)
+    scrollbar-width: thin
+
+  // The paper is warm at the top-left corner and green at the bottom-right,
+  // as a printed sheet catches light; fixed, so the page scrolls over it.
+  body
+    background: radial-gradient(110% 70% at 0% 0%, var(--edge-warm) 0%, transparent 60%), radial-gradient(110% 70% at 100% 100%, var(--edge-green) 0%, transparent 60%), var(--ground)
+    background-attachment: fixed
+    color: var(--ink)
+    font: 400 17px/1.55 var(--font-sans)
+    font-variant-numeric: tabular-nums
+    min-height: 100dvh
+    overflow-x: clip
+    text-rendering: optimizeLegibility
+
+    @include layout.below-narrow
+      font-size: 16px
+
+  ::selection
+    background: var(--seal)
+    color: var(--seal-ink)
+
+  :focus
+    outline: none
+
+  :focus-visible
+    outline: 2px solid var(--ink)
+    outline-offset: 3px
+
+  a
+    color: inherit
+    text-decoration-color: var(--ink-3)
+    text-decoration-thickness: 1px
+    text-underline-offset: 0.24em
+
+    &:hover
+      text-decoration-color: var(--ink)
+
+  strong, b
+    color: var(--ink)
+    font-weight: 400
+
+@keyframes plate-rise
+  from
+    opacity: 0.35
+    transform: translateY(6px)
+  to
+    opacity: 1
+    transform: none
+
+@keyframes stamp-turn
+  to
+    transform: rotate(360deg)
+
+@keyframes plate-breathe
+  50%
+    opacity: 0.45
