@@ -30,7 +30,7 @@ describe('classifyReferrer', () => {
     ).toEqual({ isEntry: true, referrerHost: 'google.com' })
   })
 
-  it('[referrer] treats an unparseable referrer as a direct visit', () => {
+  it('[referrer] treats an unparsable referrer as a direct visit', () => {
     expect(classifyReferrer({ referrer: 'not a url', siteHosts })).toEqual({
       isEntry: true,
       referrerHost: null

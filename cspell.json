@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "ignorePaths": [
+    "dist",
+    "node_modules",
+    "pnpm-lock.yaml",
+    "apps/api/public",
+    "apps/api/worker-configuration.d.ts"
+  ],
+  "import": ["@cspell/dict-fr-fr/cspell-ext.json"],
+  "language": "en,en-GB",
+  "overrides": [
+    {
+      "filename": "**/i18n/dictionary-fr.ts",
+      "language": "en,en-GB,fr"
+    }
+  ],
+  "useGitignore": true,
+  "version": "0.2",
+  "words": [
+    "adrienlcp",
+    "crosshairs",
+    "dasharray",
+    "displayname",
+    "Écossais",
+    "facebookexternalhit",
+    "Familjen",
+    "figcaption",
+    "Français",
+    "Googlebot",
+    "Grotesk",
+    "ingilizce",
+    "İngilizce",
+    "KHTML",
+    "Lacourpaille",
+    "lede",
+    "ledes",
+    "linecap",
+    "linejoin",
+    "linkedin",
+    "minmax",
+    "Neue",
+    "nowrap",
+    "nums",
+    "oklch",
+    "revalidator",
+    "subgrid",
+    "taverla",
+    "tnum"
+  ]
+}

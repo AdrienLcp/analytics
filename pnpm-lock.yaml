@@ -175,6 +175,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.5.14
         version: 2.5.14
+      '@cspell/dict-fr-fr':
+        specifier: ^2.3.2
+        version: 2.3.2
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
@@ -436,6 +439,9 @@ packages:
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
+
+  '@cspell/dict-fr-fr@2.3.2':
+    resolution: {integrity: sha512-cPNjlavSiMfH/bB/Zl5GEF+94s6C77mdvghvVsclco1Ly0VWN3EpH5L9EE3bDGLDpE7m9EnYfRs8TOfZugGrUg==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -1845,6 +1851,8 @@ snapshots:
 
   '@cloudflare/workerd-windows-64@1.20260926.1':
     optional: true
+
+  '@cspell/dict-fr-fr@2.3.2': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
