@@ -25,7 +25,6 @@
     "dev:dashboard": "pnpm --filter @analytics/dashboard dev",
     "lint": "biome check --write",
     "lint:ci": "biome ci",
-    "preinstall": "git config core.hooksPath .githooks || true",
     "test": "pnpm -r test",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit && pnpm -r typecheck",
