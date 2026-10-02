@@ -1,4 +1,5 @@
 import type { PageViewBeacon } from '@analytics/protocol/page-view'
+import type { WebVitalsBeacon } from '@analytics/protocol/web-vitals'
 
 /**
  * A string body goes out as `text/plain`, which needs no CORS preflight. The
@@ -7,16 +8,16 @@ import type { PageViewBeacon } from '@analytics/protocol/page-view'
  */
 export const sendBeacon = ({
   beacon,
-  collectUrl
+  url
 }: {
-  beacon: PageViewBeacon
-  collectUrl: string
+  beacon: PageViewBeacon | WebVitalsBeacon
+  url: string
 }): void => {
   const body = JSON.stringify(beacon)
 
-  if (navigator.sendBeacon?.(collectUrl, body)) return
+  if (navigator.sendBeacon?.(url, body)) return
 
-  fetch(collectUrl, {
+  fetch(url, {
     body,
     keepalive: true,
     method: 'POST',

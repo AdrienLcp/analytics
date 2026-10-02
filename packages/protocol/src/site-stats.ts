@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { webVitalsSummarySchema } from './web-vitals'
+
 export const STATS_PERIODS = ['7d', '30d', '12m'] as const
 
 export const statsPeriodSchema = z.enum(STATS_PERIODS)
@@ -44,7 +46,8 @@ export const siteStatsResponseSchema = z.object({
   breakdowns: siteStatsBreakdownsSchema,
   period: statsPeriodSchema,
   series: z.array(trafficBucketSchema),
-  totals: trafficSchema
+  totals: trafficSchema,
+  webVitals: webVitalsSummarySchema
 })
 
 export type SiteStatsResponse = z.infer<typeof siteStatsResponseSchema>

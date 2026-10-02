@@ -6,6 +6,7 @@ import { onPathChange } from './navigation'
 import { pageViewBeacon } from './page-view-beacon'
 import { sendBeacon } from './send-beacon'
 import { shouldTrack } from './should-track'
+import { reportWebVitalsOnHide } from './web-vitals'
 
 /**
  * Loaded by `<script defer data-site="portfolio" src=".../tracker.js">`. The
@@ -16,6 +17,8 @@ const startTracking = (script: HTMLScriptElement) => {
   if (site === undefined || !isSiteId(site) || !shouldTrack()) return
 
   const collectUrl = new URL(API_ROUTES.collect, script.src).href
+  const webVitalsUrl = new URL(API_ROUTES.webVitals, script.src).href
+  const loadedPath = location.pathname
   let trackedPath: string | null = null
 
   const track = () => {
@@ -26,12 +29,27 @@ const startTracking = (script: HTMLScriptElement) => {
         ? document.referrer || null
         : `${location.origin}${trackedPath}`
 
-    sendBeacon({ beacon: pageViewBeacon({ referrer, site }), collectUrl })
+    sendBeacon({
+      beacon: pageViewBeacon({ referrer, site }),
+      url: collectUrl
+    })
     trackedPath = location.pathname
   }
 
   track()
   onPathChange(track)
+
+  reportWebVitalsOnHide((measurements) => {
+    sendBeacon({
+      beacon: {
+        ...measurements,
+        path: loadedPath,
+        site,
+        viewportWidth: Math.round(window.innerWidth)
+      },
+      url: webVitalsUrl
+    })
+  })
 }
 
 if (document.currentScript instanceof HTMLScriptElement) {

@@ -7,5 +7,6 @@ export const API_PREFIX = '/api'
  */
 export const API_ROUTES = {
   collect: `${API_PREFIX}/collect`,
-  siteStats: `${API_PREFIX}/sites/:site/stats`
+  siteStats: `${API_PREFIX}/sites/:site/stats`,
+  webVitals: `${API_PREFIX}/vitals`
 } as const

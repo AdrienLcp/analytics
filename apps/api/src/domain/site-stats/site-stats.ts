@@ -5,6 +5,7 @@ import type {
   Traffic,
   TrafficBucket
 } from '@analytics/protocol/site-stats'
+import type { WebVitalsSummary } from '@analytics/protocol/web-vitals'
 
 import type { StatsWindow } from './stats-window'
 
@@ -15,11 +16,13 @@ export const toSiteStats = ({
   breakdowns,
   period,
   traffic,
+  webVitals,
   window
 }: {
   breakdowns: SiteStatsBreakdowns
   period: StatsPeriod
   traffic: readonly TrafficBucket[]
+  webVitals: WebVitalsSummary
   window: StatsWindow
 }): SiteStatsResponse => {
   const trafficByBucket = new Map(traffic.map((row) => [row.bucket, row]))
@@ -35,5 +38,5 @@ export const toSiteStats = ({
     NO_TRAFFIC
   )
 
-  return { breakdowns, period, series, totals }
+  return { breakdowns, period, series, totals, webVitals }
 }

@@ -11,9 +11,8 @@ import {
   recordPageView
 } from '@/domain/page-view/page-view-service'
 import { now } from '@/infrastructure/clock'
+import { MAX_BEACON_BYTES, parseJson } from '@/infrastructure/http/beacon-body'
 import type { WorkerEnv } from '@/infrastructure/http/worker-env'
-
-const MAX_BEACON_BYTES = 4096
 
 const recordPageViewErrorStatus = {
   foreign_origin: 403,
@@ -23,14 +22,6 @@ const recordPageViewErrorStatus = {
 const invalidBeacon: ApiErrorResponse = {
   code: 'invalid_beacon',
   message: 'The beacon is not a page view'
-}
-
-const parseJson = (text: string): unknown => {
-  try {
-    return JSON.parse(text)
-  } catch {
-    return null
-  }
 }
 
 /** Set by Cloudflare's edge on every request; absent when the Worker runs locally. */

@@ -3,7 +3,6 @@ import type { SiteId } from '@analytics/protocol/site-ids'
 
 import { currentTheme } from './current-theme'
 
-/** `location.pathname` alone: a query string or a hash can carry a token or an email. */
 export const pageViewBeacon = ({
   referrer,
   site

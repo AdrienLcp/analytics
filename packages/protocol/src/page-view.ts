@@ -16,6 +16,11 @@ const MAX_REFERRER_LENGTH = 2048
 const MAX_LOCALE_LENGTH = 35
 const MAX_VIEWPORT_WIDTH = 20_000
 
+/** `location.pathname` only: a query string or a hash can carry a token or an email. */
+export const pagePathSchema = z.string().startsWith('/').max(MAX_PATH_LENGTH)
+
+export const viewportWidthSchema = z.int().min(0).max(MAX_VIEWPORT_WIDTH)
+
 /**
  * What the tracker sends for one page view. Nothing in it identifies a person:
  * the path carries no query string, and the referrer is cut down to its host
@@ -23,11 +28,11 @@ const MAX_VIEWPORT_WIDTH = 20_000
  */
 export const pageViewBeaconSchema = z.object({
   locale: z.string().max(MAX_LOCALE_LENGTH).nullable(),
-  path: z.string().startsWith('/').max(MAX_PATH_LENGTH),
+  path: pagePathSchema,
   referrer: z.string().max(MAX_REFERRER_LENGTH).nullable(),
   site: siteIdSchema,
   theme: z.enum(THEMES),
-  viewportWidth: z.int().min(0).max(MAX_VIEWPORT_WIDTH)
+  viewportWidth: viewportWidthSchema
 })
 
 export type PageViewBeacon = z.infer<typeof pageViewBeaconSchema>
