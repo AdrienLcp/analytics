@@ -121,6 +121,9 @@ export const EN_DICTIONARY = defineDictionary({
       pathNote: 'Without its query string.',
       referrer: 'Referrer host',
       referrerNote: 'linkedin.com, never the full link.',
+      speed: 'Page speed',
+      speedNote:
+        'Three timings per page load, added to a running count per day and never kept per visit.',
       theme: 'Theme',
       themeNote: 'Light or dark.',
       title: 'Recorded with each page view'
@@ -298,6 +301,73 @@ export const EN_DICTIONARY = defineDictionary({
         to: { month: 'short', timeZone: UTC, year: 'numeric' }
       }
     })
+  },
+  speed: {
+    abbr: defineTranslation('{metric:enum}', {
+      enum: { metric: { cls: 'CLS', inp: 'INP', lcp: 'LCP' } }
+    }),
+    label: 'Page speed',
+    lede: 'Measured by the visitors’ own browsers when they left a page, and read at the value three page loads in four stay under.',
+    ledeEmpty:
+      'Browsers report these timings when a visitor leaves a page. None has for this site in the period yet.',
+    name: defineTranslation('{metric:enum}', {
+      enum: {
+        metric: {
+          cls: 'Layout shift',
+          inp: 'Response to input',
+          lcp: 'Largest paint'
+        }
+      }
+    }),
+    note: defineTranslation(
+      '{question}, for three page loads in four. From <b>{samples:plural}</b>.',
+      {
+        plural: {
+          samples: { one: '{?} page load', other: '{?} page loads' }
+        }
+      }
+    ),
+    noteEmpty: '{question}. No browser has reported it yet.',
+    question: defineTranslation('{metric:enum}', {
+      enum: {
+        metric: {
+          cls: 'How much the page jumped while it loaded',
+          inp: 'How long a tap or click waited for the page to answer',
+          lcp: 'How long until the main content showed'
+        }
+      }
+    }),
+    tick: {
+      cls: '{value:number}',
+      inp: '{value:number} ms',
+      lcp: '{value:number} s'
+    },
+    title: 'How fast it felt',
+    value: {
+      cls: defineTranslation('{value:number}', {
+        number: {
+          value: { maximumFractionDigits: 2, minimumFractionDigits: 2 }
+        }
+      }),
+      inp: defineTranslation('{value:number} ms', {
+        number: { value: { maximumFractionDigits: 0 } }
+      }),
+      lcp: defineTranslation('{value:number} s', {
+        number: {
+          value: { maximumFractionDigits: 1, minimumFractionDigits: 1 }
+        }
+      })
+    },
+    verdict: defineTranslation('{rating:enum}', {
+      enum: {
+        rating: {
+          good: 'Good',
+          'needs-improvement': 'Needs improvement',
+          poor: 'Poor'
+        }
+      }
+    }),
+    verdictEmpty: 'Not measured yet'
   },
   table: {
     caption: 'Page views and visits, {range}',

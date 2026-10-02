@@ -1,0 +1,49 @@
+@use '@/presentation/styles/layout'
+@use 'credit-layout'
+
+@layer components
+  .speed-credits
+    @include credit-layout.row
+
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+
+    .credit
+      @include credit-layout.credit(4)
+
+    dt
+      @include credit-layout.name
+
+    abbr
+      color: var(--ink-3)
+      margin-left: 8px
+      text-decoration: none
+
+    .value
+      @include credit-layout.figure
+
+    .verdict
+      font-size: 22px
+      line-height: 1.2
+      margin-top: 10px
+
+      &.unmeasured
+        color: var(--ink-3)
+
+    small
+      @include credit-layout.footnote
+
+      margin-top: 14px
+
+    .visually-hidden
+      @include layout.visually-hidden
+
+    @include layout.below-medium
+      grid-template-columns: minmax(0, 1fr)
+
+      .credit
+        border-left: 0
+        border-top: 1px solid var(--hair)
+        padding-inline: 0
+
+        &:first-child
+          border-top: 0

@@ -234,6 +234,9 @@ The chart's frame: a 1px `hair` border, padding 32px 32px 20px, four registratio
 ### Credits
 The four figures beneath a plate: ruled in full `ink` above and `hair` below, separated by `hair` vertical rules, label-type name, Figure-type value, Body Small footnote. Each credit spans two rows of a **subgrid** so every value and footnote aligns across the row regardless of label length. Four across, two across below 860px.
 
+### Speed credits
+The three Core Web Vitals (LCP, INP, CLS) as a second row of credits after the lists, under their own section head: the same rules and subgrid, four rows per credit. Label-type name with its abbreviation in `ink-3`, the p75 as the Figure, a 22px verdict in words (Good, Needs improvement, Poor; "Not measured yet" in `ink-3`), then a threshold scale and a Body Small note naming the question and the number of page loads, the count in `ink`. The scale is a 6px band from 0 to a fixed end per metric: good in `ink-3` at 0.35, needs improvement hatched in `ink-3`, poor solid `ink-3`, the two thresholds as 11px mono ticks under their edges, and a 2px × 18px `ink` marker at the p75, pinned to the end past it. With no sample the band is dotted (`dot`) and carries no marker. Ink only: the verdict is a word, never a colour. Three across, one per row below 860px with a `hair` rule between rows.
+
 ### Breakdown lists
 Each list opens with a full-ink rule, a 22px title and a label-type total on the same baseline. Rows are a three-column grid (key, count, share at 4.6em) divided by `hair` rules, with a 6px share bar beneath in periwinkle (`ink-3` for the "other" row). Row hover underlines the key in `hair`.
 

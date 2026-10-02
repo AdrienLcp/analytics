@@ -1,43 +1,24 @@
 @use '@/presentation/styles/layout'
-@use '@/presentation/styles/typography'
+@use 'credit-layout'
 
 @layer components
   .credits
-    border-bottom: 1px solid var(--hair)
-    border-top: 1px solid var(--ink)
-    display: grid
+    @include credit-layout.row
+
     grid-template-columns: repeat(4, minmax(0, 1fr))
-    margin-top: 40px
 
     .credit
-      border-left: 1px solid var(--hair)
-      display: grid
-      grid-row: span 2
-      grid-template-rows: subgrid
-      min-width: 0
-      padding: 20px 24px 26px
-
-      &:first-child
-        border-left: 0
-        padding-left: 0
+      @include credit-layout.credit(2)
 
     dt
-      @include typography.label
-
-      color: var(--ink-2)
+      @include credit-layout.name
 
     dd
-      font-size: clamp(40px, 4.4vw, 60px)
-      letter-spacing: -0.02em
-      line-height: 1
-      margin-top: 14px
+      @include credit-layout.figure
 
     small
-      color: var(--ink-2)
-      display: block
-      font-size: 15px
-      letter-spacing: 0
-      line-height: 1.4
+      @include credit-layout.footnote
+
       margin-top: 12px
 
     .swatch
@@ -70,6 +51,3 @@
     @include layout.below-narrow
       .credit
         padding: 16px 14px 20px
-
-      small
-        font-size: 14px

@@ -1,0 +1,51 @@
+@layer components
+  .threshold-scale
+    margin-top: 22px
+    position: relative
+
+    .bands
+      display: flex
+      height: 6px
+
+    .band
+      height: 100%
+
+      &.good
+        background: var(--ink-3)
+        opacity: 0.35
+        width: calc(var(--good) * 100%)
+
+      &.needs-improvement
+        background: repeating-linear-gradient(135deg, var(--ink-3) 0 1px, transparent 1px 4px)
+        width: calc((var(--poor) - var(--good)) * 100%)
+
+      &.poor
+        background: var(--ink-3)
+        flex: 1
+
+    &.unmeasured .band
+      background: radial-gradient(circle, var(--dot) 1px, transparent 1.4px) 0 50% / 6px 6px
+      opacity: 1
+
+    .marker
+      background: var(--ink)
+      height: 18px
+      left: calc(var(--at) * 100%)
+      position: absolute
+      top: -6px
+      transform: translateX(-1px)
+      width: 2px
+
+    .ticks
+      color: var(--ink-3)
+      font: 400 11px/1.3 var(--font-mono)
+      height: 18px
+      letter-spacing: 0.06em
+      margin-top: 6px
+      position: relative
+
+      span
+        left: calc(var(--at) * 100%)
+        position: absolute
+        transform: translateX(-50%)
+        white-space: nowrap

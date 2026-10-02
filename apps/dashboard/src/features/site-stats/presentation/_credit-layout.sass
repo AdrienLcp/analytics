@@ -1,0 +1,50 @@
+// Pure module: mixins only. What the totals under the title and the speed
+// credits share, so the two rows read as one set of printed credits.
+
+@use '@/presentation/styles/layout'
+@use '@/presentation/styles/typography'
+
+/// The row: a full-ink rule above, a hair rule below.
+@mixin row
+  border-bottom: 1px solid var(--hair)
+  border-top: 1px solid var(--ink)
+  display: grid
+  margin-top: 40px
+
+/// One credit, spanning `$rows` rows of a subgrid so every part lines up
+/// across the row whatever the length of its label.
+@mixin credit($rows)
+  border-left: 1px solid var(--hair)
+  display: grid
+  grid-row: span $rows
+  grid-template-rows: subgrid
+  min-width: 0
+  padding: 20px 24px 26px
+
+  &:first-child
+    border-left: 0
+    padding-left: 0
+
+/// The credit's name, in the caption voice.
+@mixin name
+  @include typography.label
+
+  color: var(--ink-2)
+
+/// The figure itself.
+@mixin figure
+  font-size: clamp(40px, 4.4vw, 60px)
+  letter-spacing: -0.02em
+  line-height: 1
+  margin-top: 14px
+
+/// The line under the figure.
+@mixin footnote
+  color: var(--ink-2)
+  display: block
+  font-size: 15px
+  letter-spacing: 0
+  line-height: 1.4
+
+  @include layout.below-narrow
+    font-size: 14px

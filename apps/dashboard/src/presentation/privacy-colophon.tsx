@@ -26,7 +26,8 @@ const RECORDED: readonly ColophonEntry[] = [
     note: 'colophon.recorded.languageNote'
   },
   { name: 'colophon.recorded.theme', note: 'colophon.recorded.themeNote' },
-  { name: 'colophon.recorded.device', note: 'colophon.recorded.deviceNote' }
+  { name: 'colophon.recorded.device', note: 'colophon.recorded.deviceNote' },
+  { name: 'colophon.recorded.speed', note: 'colophon.recorded.speedNote' }
 ]
 
 const NEVER_RECORDED: readonly ColophonEntry[] = [
@@ -44,7 +45,7 @@ const NEVER_RECORDED: readonly ColophonEntry[] = [
 /**
  * The privacy claim, stated as plainly for what is dropped as for what is
  * kept. Every line has to stay true to the tracker and the Worker: a column
- * added to `page_views` is a line added here.
+ * added to `page_views` or `web_vital_buckets` is a line added here.
  */
 export const PrivacyColophon: React.FC = () => {
   const translate = useTranslate()

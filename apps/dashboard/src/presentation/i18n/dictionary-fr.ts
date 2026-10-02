@@ -118,6 +118,9 @@ export const FR_DICTIONARY = defineDictionary({
       pathNote: 'Sans ses paramètres d’URL.',
       referrer: 'Domaine de provenance',
       referrerNote: 'linkedin.com, jamais le lien complet.',
+      speed: 'Vitesse des pages',
+      speedNote:
+        'Trois mesures par chargement de page, ajoutées à un décompte par jour et jamais gardées visite par visite.',
       theme: 'Thème',
       themeNote: 'Clair ou sombre.',
       title: 'Enregistré à chaque page vue'
@@ -299,6 +302,76 @@ export const FR_DICTIONARY = defineDictionary({
         to: { month: 'short', timeZone: UTC, year: 'numeric' }
       }
     })
+  },
+  speed: {
+    abbr: defineTranslation('{metric:enum}', {
+      enum: { metric: { cls: 'CLS', inp: 'INP', lcp: 'LCP' } }
+    }),
+    label: 'Vitesse des pages',
+    lede: 'Mesuré par les navigateurs des visiteurs au moment de quitter une page, et lu à la valeur sous laquelle restent trois chargements sur quatre.',
+    ledeEmpty:
+      'Les navigateurs envoient ces mesures quand un visiteur quitte une page. Aucun ne l’a encore fait pour ce site sur la période.',
+    name: defineTranslation('{metric:enum}', {
+      enum: {
+        metric: {
+          cls: 'Décalage de mise en page',
+          inp: 'Réponse aux interactions',
+          lcp: 'Plus grand affichage'
+        }
+      }
+    }),
+    note: defineTranslation(
+      '{question}, pour trois chargements sur quatre. D’après <b>{samples:plural}</b>.',
+      {
+        plural: {
+          samples: {
+            one: '{?} chargement de page',
+            other: '{?} chargements de page'
+          }
+        }
+      }
+    ),
+    noteEmpty: '{question}. Aucun navigateur ne l’a encore mesuré.',
+    question: defineTranslation('{metric:enum}', {
+      enum: {
+        metric: {
+          cls: 'De combien la page a bougé pendant son chargement',
+          inp: 'Combien de temps un appui ou un clic a attendu la réponse de la page',
+          lcp: 'Combien de temps avant que le contenu principal s’affiche'
+        }
+      }
+    }),
+    tick: {
+      cls: '{value:number}',
+      inp: '{value:number} ms',
+      lcp: '{value:number} s'
+    },
+    title: 'La vitesse ressentie',
+    value: {
+      cls: defineTranslation('{value:number}', {
+        number: {
+          value: { maximumFractionDigits: 2, minimumFractionDigits: 2 }
+        }
+      }),
+      inp: defineTranslation('{value:number} ms', {
+        number: { value: { maximumFractionDigits: 0 } }
+      }),
+      lcp: defineTranslation('{value:number} s', {
+        number: {
+          value: { maximumFractionDigits: 1, minimumFractionDigits: 1 }
+        }
+      })
+    },
+    verdict: defineTranslation('{rating:enum}', {
+      enum: {
+        rating: {
+          good: 'Bon',
+          'needs-improvement': 'À améliorer',
+          poor: 'Mauvais'
+        }
+      }
+    }),
+    verdictEmpty: 'Pas encore mesuré'
   },
   table: {
     caption: 'Pages vues et visites, {range}',

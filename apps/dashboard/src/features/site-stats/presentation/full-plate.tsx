@@ -12,12 +12,14 @@ import { RichText, strong } from '@/presentation/i18n/rich-text'
 
 import { bucketStart, PERIOD_UNIT } from '../domain/bucket'
 import { busiestBucket, pagesPerVisit } from '../domain/traffic-summary'
+import { hasWebVitalSamples } from '../domain/web-vital-rating'
 import { Breakdowns } from './breakdowns'
 import { Credits } from './credits'
 import { PlateFrame } from './plate-frame'
 import { PlateHead } from './plate-head'
 import { rangeLabel } from './plate-range'
 import { SectionHead } from './section-head'
+import { SpeedCredits } from './speed-credits'
 import { TrafficChart } from './traffic-chart'
 import { TrafficTable } from './traffic-table'
 
@@ -27,7 +29,10 @@ type FullPlateProps = {
   stats: SiteStatsResponse
 }
 
-/** A site with figures: the head, the credits, the plate, and the lists. */
+/**
+ * A site with figures: the head, the credits, the plate, the lists, and how
+ * fast its pages felt.
+ */
 export const FullPlate: React.FC<FullPlateProps> = ({
   period,
   site,
@@ -35,6 +40,7 @@ export const FullPlate: React.FC<FullPlateProps> = ({
 }) => {
   const translate = useTranslate()
   const breakdownsTitleId = useId()
+  const speedTitleId = useId()
   const unit = PERIOD_UNIT[period]
   const { series, totals } = stats
   const range = rangeLabel({ series, translate, unit })
@@ -121,6 +127,18 @@ export const FullPlate: React.FC<FullPlateProps> = ({
           title={translate('breakdowns.title', { count: totals.pageViews })}
         />
         <Breakdowns breakdowns={stats.breakdowns} totals={totals} />
+      </section>
+      <section aria-labelledby={speedTitleId}>
+        <SectionHead
+          id={speedTitleId}
+          lede={translate(
+            hasWebVitalSamples(stats.webVitals)
+              ? 'speed.lede'
+              : 'speed.ledeEmpty'
+          )}
+          title={translate('speed.title')}
+        />
+        <SpeedCredits webVitals={stats.webVitals} />
       </section>
     </>
   )
