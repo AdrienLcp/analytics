@@ -1,6 +1,8 @@
 import type { Device, PageViewBeacon } from '@analytics/protocol/page-view'
 import type { SiteId } from '@analytics/protocol/site-ids'
 
+import { toIsoString } from '@/infrastructure/dates'
+
 import { deviceForViewport } from './device'
 import { classifyReferrer } from './referrer'
 
@@ -35,5 +37,5 @@ export const toPageView = ({
   path: beacon.path,
   site: beacon.site,
   theme: beacon.theme,
-  viewedAt: viewedAt.toString({ smallestUnit: 'millisecond' })
+  viewedAt: toIsoString(viewedAt)
 })

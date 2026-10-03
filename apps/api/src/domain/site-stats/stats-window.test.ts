@@ -17,6 +17,7 @@ describe('statsWindowFor', () => {
         '2026-09-30'
       ],
       since: '2026-09-24T00:00:00.000Z',
+      sinceDay: '2026-09-24',
       unit: 'day'
     })
   })
@@ -41,5 +42,6 @@ describe('statsWindowFor', () => {
     expect(window.buckets[0]).toBe('2025-10')
     expect(window.buckets.at(-1)).toBe('2026-09')
     expect(window.since).toBe('2025-10-01T00:00:00.000Z')
+    expect(window.sinceDay).toBe('2025-10-01')
   })
 })

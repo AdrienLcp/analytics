@@ -1,5 +1,7 @@
 import type { StatsPeriod } from '@analytics/protocol/site-stats'
 
+import { toIsoString } from '@/infrastructure/dates'
+
 export type BucketUnit = 'day' | 'month'
 
 /** How many leading characters of an ISO 8601 date or timestamp name its bucket. */
@@ -13,6 +15,8 @@ export type StatsWindow = {
   buckets: string[]
   /** ISO 8601 start of the first bucket. */
   since: string
+  /** The `YYYY-MM-DD` day the first bucket starts on. */
+  sinceDay: string
   unit: BucketUnit
 }
 
@@ -52,12 +56,10 @@ export const statsWindowFor = ({
 
   return {
     buckets: starts.map((start) =>
-      start.toString().slice(0, BUCKET_KEY_LENGTH[unit])
+      unit === 'day' ? start.toString() : start.toPlainYearMonth().toString()
     ),
-    since: first
-      .toZonedDateTime('UTC')
-      .toInstant()
-      .toString({ smallestUnit: 'millisecond' }),
+    since: toIsoString(first.toZonedDateTime('UTC').toInstant()),
+    sinceDay: first.toString(),
     unit
   }
 }

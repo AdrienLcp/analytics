@@ -8,7 +8,7 @@ import {
 import { isBotUserAgent } from '@/domain/page-view/bot-user-agent'
 import { deviceForViewport } from '@/domain/page-view/device'
 import { isOriginOfSite } from '@/domain/site/site-origins'
-import { BUCKET_KEY_LENGTH } from '@/domain/site-stats/stats-window'
+import { toUtcDay } from '@/infrastructure/dates'
 
 import { bucketOfMeasurement } from './web-vital-buckets'
 import { incrementWebVitalBuckets } from './web-vitals-store'
@@ -51,7 +51,7 @@ export const recordWebVitals = async ({
   const stored = await incrementWebVitalBuckets({
     buckets,
     database,
-    day: receivedAt.toString().slice(0, BUCKET_KEY_LENGTH.day),
+    day: toUtcDay(receivedAt),
     device: deviceForViewport(beacon.viewportWidth),
     path: beacon.path,
     site: beacon.site

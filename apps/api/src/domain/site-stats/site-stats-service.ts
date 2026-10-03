@@ -11,7 +11,7 @@ import { readWebVitalBuckets } from '@/domain/web-vitals/web-vitals-store'
 
 import { toSiteStats } from './site-stats'
 import { readSiteTraffic } from './site-stats-store'
-import { BUCKET_KEY_LENGTH, statsWindowFor } from './stats-window'
+import { statsWindowFor } from './stats-window'
 
 export const readSiteStats = async ({
   database,
@@ -29,7 +29,7 @@ export const readSiteStats = async ({
     readSiteTraffic({ database, site, window }),
     readWebVitalBuckets({
       database,
-      sinceDay: window.since.slice(0, BUCKET_KEY_LENGTH.day),
+      sinceDay: window.sinceDay,
       site
     })
   ])
