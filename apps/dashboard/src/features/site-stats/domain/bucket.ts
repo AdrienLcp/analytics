@@ -1,5 +1,7 @@
 import type { StatsPeriod } from '@analytics/protocol/site-stats'
 
+import { startOfUtcDay } from '@/infrastructure/dates'
+
 export type BucketUnit = 'day' | 'month'
 
 /** 7 and 30 days are read day by day, 12 months month by month. */
@@ -20,5 +22,4 @@ export const bucketStart = ({
 }: {
   bucket: string
   unit: BucketUnit
-}): Date =>
-  new Date(unit === 'day' ? `${bucket}T00:00:00Z` : `${bucket}-01T00:00:00Z`)
+}) => startOfUtcDay(unit === 'day' ? bucket : `${bucket}-01`)

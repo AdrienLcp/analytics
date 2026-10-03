@@ -63,11 +63,7 @@
       }
     },
     {
-      "includes": [
-        "**/infrastructure/clock.ts",
-        "**/infrastructure/dates.ts",
-        "**/site-stats/domain/bucket.ts"
-      ],
+      "includes": ["**/infrastructure/clock.ts", "**/infrastructure/dates.ts"],
       "linter": {
         "rules": {
           "style": {
