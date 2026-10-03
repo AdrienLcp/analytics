@@ -4,7 +4,7 @@
 @layer components
   .plate-notice
     .snippet
-      margin: 22px 0 0
+      margin: var(--space-2xl) 0 0
 
       pre
         background: var(--ground)
@@ -29,7 +29,6 @@
       bottom: var(--space-2xs)
       color: var(--ink-2)
       left: 0
-      letter-spacing: normal
       line-height: 1
       padding: var(--space-5xs) var(--space-3xs) var(--space-5xs) 0
       position: absolute
@@ -58,7 +57,7 @@
       background-image: var(--dot-screen)
       background-size: 8px 6px
       height: var(--bar)
-      margin-top: 18px
+      margin-top: var(--space-l)
 
     .description
       @include breakdown-layout.ruled-row
