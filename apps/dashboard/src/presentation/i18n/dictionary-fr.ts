@@ -120,7 +120,7 @@ export const FR_DICTIONARY = defineDictionary({
       referrerNote: 'linkedin.com, jamais le lien complet.',
       speed: 'Vitesse des pages',
       speedNote:
-        'Trois mesures par chargement de page, ajoutées à un décompte par jour et jamais gardées visite par visite.',
+        'Trois mesures par page vue, envoyées à part quand on quitte la page, ajoutées à un décompte par jour et jamais gardées visite par visite.',
       theme: 'Thème',
       themeNote: 'Clair ou sombre.',
       title: 'Enregistré à chaque page vue'

@@ -123,7 +123,7 @@ export const EN_DICTIONARY = defineDictionary({
       referrerNote: 'linkedin.com, never the full link.',
       speed: 'Page speed',
       speedNote:
-        'Three timings per page load, added to a running count per day and never kept per visit.',
+        'Three timings per page view, sent on their own once the page is left, added to a running count per day and never kept per visit.',
       theme: 'Theme',
       themeNote: 'Light or dark.',
       title: 'Recorded with each page view'
