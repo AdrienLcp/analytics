@@ -30,7 +30,7 @@
     "test": "pnpm -r test",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit && pnpm -r typecheck",
-    "validate": "pnpm build && pnpm lint:ci && pnpm spell && pnpm test"
+    "validate": "pnpm lint:ci && pnpm spell && pnpm build && pnpm test"
   },
   "type": "module",
   "version": "0.1.0"
