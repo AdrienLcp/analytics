@@ -21,3 +21,10 @@ export const isServedPublicly = (): boolean =>
 /** The `?analytics=` value on this page: `'off'`, `'on'`, anything else, or `null`. */
 export const optOutQuery = (): string | null =>
   new URLSearchParams(location.search).get(OPT_OUT_QUERY_PARAMETER)
+
+/** The theme the site stamped on `<html data-theme>`, whatever it is, or `undefined`. */
+export const stampedTheme = (): string | undefined =>
+  document.documentElement.dataset.theme
+
+export const prefersDarkScheme = (): boolean =>
+  matchMedia('(prefers-color-scheme: dark)').matches
