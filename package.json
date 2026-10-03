@@ -6,6 +6,7 @@
     "@biomejs/biome": "2.5.14",
     "@cspell/dict-fr-fr": "^2.3.2",
     "@vitest/coverage-v8": "~5.0.2",
+    "cspell": "^10.3.6",
     "typescript": "^7.0.2",
     "vitest": "~5.0.2"
   },
@@ -25,10 +26,11 @@
     "dev:dashboard": "pnpm --filter @analytics/dashboard dev",
     "lint": "biome check --write",
     "lint:ci": "biome ci",
+    "spell": "cspell --no-progress --gitignore \"**\"",
     "test": "pnpm -r test",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit && pnpm -r typecheck",
-    "validate": "pnpm build && pnpm lint:ci && pnpm test"
+    "validate": "pnpm build && pnpm lint:ci && pnpm spell && pnpm test"
   },
   "type": "module",
   "version": "0.1.0"
