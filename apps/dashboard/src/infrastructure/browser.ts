@@ -9,3 +9,8 @@ export const currentPath = (): string => location.pathname
 
 /** Where this page is served from, which also serves the API and the tracker. */
 export const currentOrigin = (): string => location.origin
+
+/** A full reload, which fetches the current deploy's chunks again. */
+export const reloadPage = (): void => {
+  location.reload()
+}

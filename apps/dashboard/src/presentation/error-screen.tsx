@@ -1,5 +1,6 @@
 import type React from 'react'
 
+import { reloadPage } from '@/infrastructure/browser'
 import { useRouteFailure } from '@/infrastructure/router/navigation'
 import { Button } from '@/presentation/components/button'
 import { Main } from '@/presentation/components/main'
@@ -8,10 +9,6 @@ import { useTranslate } from '@/presentation/i18n/i18n-provider'
 import { AppShell } from './app-shell'
 
 import './error-screen.sass'
-
-const reload = (): void => {
-  window.location.reload()
-}
 
 /**
  * The root route's boundary: a render that throws lands here instead of on a
@@ -32,7 +29,7 @@ export const ErrorScreen: React.FC = () => {
       <Main className='error-screen'>
         <h1>{translate('error.screen.title')}</h1>
         <p>{translate('error.screen.description')}</p>
-        <Button className='reload' onPress={reload}>
+        <Button className='reload' onPress={reloadPage}>
           {translate('error.screen.reload')}
         </Button>
       </Main>
