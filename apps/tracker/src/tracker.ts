@@ -2,6 +2,7 @@ import { API_ROUTES } from '@analytics/protocol/routes'
 import { isSiteId } from '@analytics/protocol/site-ids'
 import { TRACKER_SITE_DATA_KEY } from '@analytics/protocol/tracker-script'
 
+import { currentOrigin, currentPath, viewportWidth } from './browser'
 import { onPathChange } from './navigation'
 import { pageViewBeacon } from './page-view-beacon'
 import { sendBeacon } from './send-beacon'
@@ -18,22 +19,22 @@ const startTracking = (script: HTMLScriptElement) => {
 
   const collectUrl = new URL(API_ROUTES.collect, script.src).href
   const webVitalsUrl = new URL(API_ROUTES.webVitals, script.src).href
-  const loadedPath = location.pathname
+  const loadedPath = currentPath()
   let trackedPath: string | null = null
 
   const track = () => {
-    if (location.pathname === trackedPath) return
+    if (currentPath() === trackedPath) return
 
     const referrer =
       trackedPath === null
         ? document.referrer || null
-        : `${location.origin}${trackedPath}`
+        : `${currentOrigin()}${trackedPath}`
 
     sendBeacon({
       beacon: pageViewBeacon({ referrer, site }),
       url: collectUrl
     })
-    trackedPath = location.pathname
+    trackedPath = currentPath()
   }
 
   track()
@@ -45,7 +46,7 @@ const startTracking = (script: HTMLScriptElement) => {
         ...measurements,
         path: loadedPath,
         site,
-        viewportWidth: Math.round(window.innerWidth)
+        viewportWidth: viewportWidth()
       },
       url: webVitalsUrl
     })
