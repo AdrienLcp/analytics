@@ -1,3 +1,5 @@
+@use '@/presentation/styles/typography'
+
 @layer components
   .threshold-scale
     margin-top: 22px
@@ -5,7 +7,7 @@
 
     .bands
       display: flex
-      height: 6px
+      height: var(--bar)
 
     .band
       height: 100%
@@ -24,7 +26,7 @@
         flex: 1
 
     &.unmeasured .band
-      background: radial-gradient(circle, var(--dot) 1px, transparent 1.4px) 0 50% / 6px 6px
+      background: var(--dot-screen) 0 50% / 6px 6px
       opacity: 1
 
     .marker
@@ -32,16 +34,16 @@
       height: 18px
       left: calc(var(--at) * 100%)
       position: absolute
-      top: -6px
+      top: calc(var(--bar) * -1)
       transform: translateX(-1px)
-      width: 2px
+      width: var(--stroke-bold)
 
     .ticks
+      @include typography.axis
+
       color: var(--ink-3)
-      font: 400 11px/1.3 var(--font-mono)
       height: 18px
-      letter-spacing: 0.06em
-      margin-top: 6px
+      margin-top: var(--space-3xs)
       position: relative
 
       span

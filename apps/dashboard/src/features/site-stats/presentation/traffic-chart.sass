@@ -2,7 +2,7 @@
 
 @layer components
   .traffic-chart
-    margin-top: 28px
+    margin-top: var(--space-3xl)
     outline-offset: 6px
     position: relative
     touch-action: pan-y
@@ -13,15 +13,14 @@
       width: 100%
 
     text
+      @include typography.axis
+
       fill: var(--ink-2)
-      font-family: var(--font-mono)
-      font-size: 11px
-      letter-spacing: 0.06em
 
     .end-label,
     .end-value
       font-family: var(--font-sans)
-      font-size: 14px
+      font-size: var(--text-s)
       letter-spacing: 0
 
     .end-value
@@ -85,26 +84,26 @@
 
     .chart-tip
       background: var(--ink)
-      box-shadow: 0 10px 28px -12px oklch(0% 0 0 / 0.35)
+      box-shadow: var(--shadow-lift)
       color: var(--on-ink)
       left: 0
       min-width: 168px
       opacity: 0
-      padding: 12px 14px
+      padding: var(--space-s) var(--space-m)
       pointer-events: none
       position: absolute
-      top: 20px
-      transform: translate(calc(var(--tip-x) + 16px), 4px)
+      top: var(--space-xl)
+      transform: translate(calc(var(--tip-x) + var(--space-l)), var(--space-4xs))
       transition: opacity var(--transition-fast, 0) var(--ease-out), transform var(--transition-fast, 0) var(--ease-out)
       z-index: 3
 
       &.is-shown
         opacity: 1
-        transform: translate(calc(var(--tip-x) + 16px), 0)
+        transform: translate(calc(var(--tip-x) + var(--space-l)), 0)
 
       &.is-flipped,
       &.is-flipped.is-shown
-        transform: translate(calc(var(--tip-x) - 100% - 16px), 0)
+        transform: translate(calc(var(--tip-x) - 100% - var(--space-l)), 0)
 
     .tip-date
       @include typography.label
@@ -113,17 +112,17 @@
 
     dl
       align-items: center
-      column-gap: 10px
+      column-gap: var(--space-xs)
       display: grid
-      font-size: 15px
+      font-size: var(--text-m)
       grid-template-columns: 1fr auto
-      margin-top: 8px
-      row-gap: 4px
+      margin-top: var(--space-2xs)
+      row-gap: var(--space-4xs)
 
     dt
       align-items: center
       display: flex
-      gap: 8px
+      gap: var(--space-2xs)
 
     dd
       text-align: right
@@ -131,8 +130,8 @@
     i
       border-radius: 50%
       display: inline-block
-      height: 10px
-      width: 10px
+      height: var(--icon-xs)
+      width: var(--icon-xs)
 
       &.page-views
         background: var(--page-views)

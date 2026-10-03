@@ -9,19 +9,16 @@
     color: var(--ink-2)
     display: flex
     flex-wrap: wrap
-    gap: 12px 32px
-    margin-top: 120px
-    padding-block: 18px 40px
+    gap: var(--space-s) var(--space-4xl)
+    margin-top: var(--space-section)
+    padding-block: 18px var(--space-5xl)
     position: relative
 
     &::before
-      border-top: 1px solid var(--hair)
+      border-top: var(--hairline)
       content: ''
       inset: 0 var(--side) auto
       position: absolute
 
     .spacer
       flex: 1
-
-    @include layout.below-narrow
-      margin-top: 88px

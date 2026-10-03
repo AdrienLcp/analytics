@@ -5,6 +5,7 @@
 @use './fonts'
 @use './layout'
 @use './tokens'
+@use './typography'
 
 @layer base
   html
@@ -18,14 +19,14 @@
     background: radial-gradient(110% 70% at 0% 0%, var(--edge-warm) 0%, transparent 60%), radial-gradient(110% 70% at 100% 100%, var(--edge-green) 0%, transparent 60%), var(--ground)
     background-attachment: fixed
     color: var(--ink)
-    font: 400 17px/1.55 var(--font-sans)
+    font: 400 var(--text-body)/1.55 var(--font-sans)
     font-variant-numeric: tabular-nums
     min-height: 100dvh
     overflow-x: clip
     text-rendering: optimizeLegibility
 
     @include layout.below-narrow
-      font-size: 16px
+      font-size: var(--text-base)
 
   ::selection
     background: var(--seal)
@@ -35,14 +36,14 @@
     outline: none
 
   :focus-visible
-    outline: 2px solid var(--ink)
-    outline-offset: 3px
+    outline: var(--outline-thick) solid var(--ink)
+    outline-offset: var(--outline-offset)
 
   a
+    @include typography.underline
+
     color: inherit
     text-decoration-color: var(--ink-3)
-    text-decoration-thickness: 1px
-    text-underline-offset: 0.24em
 
     &:hover
       text-decoration-color: var(--ink)

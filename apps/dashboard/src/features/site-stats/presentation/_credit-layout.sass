@@ -6,20 +6,20 @@
 
 /// The row: a full-ink rule above, a hair rule below.
 @mixin row
-  border-bottom: 1px solid var(--hair)
-  border-top: 1px solid var(--ink)
+  border-bottom: var(--hairline)
+  border-top: var(--hairline-strong)
   display: grid
-  margin-top: 40px
+  margin-top: var(--space-5xl)
 
 /// One credit, spanning `$rows` rows of a subgrid so every part lines up
 /// across the row whatever the length of its label.
 @mixin credit($rows)
-  border-left: 1px solid var(--hair)
+  border-left: var(--hairline)
   display: grid
   grid-row: span $rows
   grid-template-rows: subgrid
   min-width: 0
-  padding: 20px 24px 26px
+  padding: var(--space-xl) var(--space-2xl) 26px
 
   &:first-child
     border-left: 0
@@ -34,17 +34,17 @@
 /// The figure itself.
 @mixin figure
   font-size: clamp(40px, 4.4vw, 60px)
-  letter-spacing: -0.02em
+  letter-spacing: var(--tracking-tight)
   line-height: 1
-  margin-top: 14px
+  margin-top: var(--space-m)
 
 /// The line under the figure.
 @mixin footnote
   color: var(--ink-2)
   display: block
-  font-size: 15px
+  font-size: var(--text-m)
   letter-spacing: 0
   line-height: 1.4
 
   @include layout.below-narrow
-    font-size: 14px
+    font-size: var(--text-s)

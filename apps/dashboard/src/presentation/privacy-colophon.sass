@@ -8,10 +8,10 @@
     .colophon
       @include layout.grid
 
-      border-top: 1px solid var(--ink)
+      border-top: var(--hairline-strong)
       margin-top: 140px
-      padding-top: 24px
-      row-gap: 40px
+      padding-top: var(--space-2xl)
+      row-gap: var(--space-5xl)
 
     h2
       @include typography.section-title
@@ -24,28 +24,28 @@
     h3
       @include typography.label
 
-      border-bottom: 1px solid var(--ink)
+      border-bottom: var(--hairline-strong)
       color: var(--ink-2)
-      padding-bottom: 12px
+      padding-bottom: var(--space-s)
 
     li
-      border-bottom: 1px solid var(--hair)
+      border-bottom: var(--hairline)
       display: grid
-      gap: 12px
+      gap: var(--space-s)
       grid-template-columns: 22px minmax(0, 1fr)
       padding: 12px 0 13px
 
       svg
-        height: 14px
+        height: var(--icon-s)
         margin-top: 5px
-        width: 14px
+        width: var(--icon-s)
 
     small
       color: var(--ink-2)
       display: block
-      font-size: 15px
+      font-size: var(--text-m)
       line-height: 1.45
-      margin-top: 2px
+      margin-top: var(--space-5xs)
 
     .definition
       color: var(--ink-2)

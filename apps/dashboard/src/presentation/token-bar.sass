@@ -6,7 +6,7 @@
 @layer components
   .token-bar
     background: var(--ground)
-    border-block: 1px solid var(--hair)
+    border-block: var(--hairline)
     position: sticky
     top: 0
     z-index: 30
@@ -16,13 +16,13 @@
 
       align-items: center
       display: flex
-      gap: 40px
-      min-height: 72px
+      gap: var(--space-5xl)
+      min-height: var(--space-8xl)
 
     .group
       align-items: center
       display: flex
-      gap: 14px
+      gap: var(--space-m)
 
     .group-label
       @include typography.label
@@ -31,7 +31,7 @@
 
     .tokens
       display: flex
-      gap: 6px
+      gap: var(--space-3xs)
 
     .token
       @include token.token
@@ -44,12 +44,12 @@
     @include layout.below-medium
       .bar-inner
         flex-wrap: wrap
-        gap: 10px 24px
-        padding-block: 12px
+        gap: var(--space-xs) var(--space-2xl)
+        padding-block: var(--space-s)
 
     @include layout.below-narrow
       .bar-inner
-        gap: 8px
+        gap: var(--space-2xs)
 
       .group
         gap: 0
@@ -67,18 +67,18 @@
 
       .tokens
         flex: 1
-        gap: 4px
+        gap: var(--space-4xs)
 
       .token
         flex: 1 1 auto
-        height: 40px
+        height: var(--control-l)
         letter-spacing: 0.1em
         min-width: 0
-        padding: 0 8px
+        padding: 0 var(--space-2xs)
 
       .group.language .tokens
         flex: 0 0 auto
 
       .group.language .token
-        flex: 0 0 44px
+        flex: 0 0 var(--control-touch)
         padding: 0

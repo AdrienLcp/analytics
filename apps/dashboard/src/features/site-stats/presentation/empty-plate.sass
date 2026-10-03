@@ -8,11 +8,11 @@
 
       pre
         background: var(--ground)
-        border: 1px solid var(--hair)
+        border: var(--hairline)
         color: var(--ink)
-        font: 400 13px/1.6 var(--font-mono)
+        font: 400 var(--text-xs)/1.6 var(--font-mono)
         overflow-wrap: anywhere
-        padding: 14px 16px
+        padding: var(--space-m) var(--space-l)
         user-select: all
         white-space: pre-wrap
 
@@ -20,24 +20,27 @@
         @include typography.label
 
         color: var(--ink-2)
-        margin-top: 10px
+        margin-top: var(--space-xs)
 
     .empty-zero
+      @include typography.axis
+
       background: var(--ground)
-      bottom: 8px
+      bottom: var(--space-2xs)
       color: var(--ink-2)
-      font: 400 11px/1 var(--font-mono)
       left: 0
-      padding: 2px 6px 2px 0
+      letter-spacing: normal
+      line-height: 1
+      padding: var(--space-5xs) var(--space-3xs) var(--space-5xs) 0
       position: absolute
 
     .empty-axis
+      @include typography.axis
+
       color: var(--ink-2)
       display: flex
-      font: 400 11px/1.3 var(--font-mono)
       justify-content: space-between
-      letter-spacing: 0.06em
-      margin-top: 10px
+      margin-top: var(--space-xs)
 
   .pending-lists
     @include breakdown-layout.grid
@@ -52,16 +55,14 @@
         @include breakdown-layout.third
 
     .pending-bar
-      background-image: radial-gradient(var(--dot) 1px, transparent 1.4px)
+      background-image: var(--dot-screen)
       background-size: 8px 6px
-      height: 6px
+      height: var(--bar)
       margin-top: 18px
 
     .description
-      border-bottom: 1px solid var(--hair)
+      @include breakdown-layout.ruled-row
+
       color: var(--ink-2)
-      column-gap: 16px
-      display: grid
       grid-template-columns: minmax(0, 1fr) auto
-      margin-top: 12px
-      padding: 11px 0 12px
+      margin-top: var(--space-s)

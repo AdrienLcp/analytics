@@ -8,8 +8,8 @@
 @mixin grid
   @include layout.grid
 
-  margin-top: 48px
-  row-gap: 72px
+  margin-top: var(--space-6xl)
+  row-gap: var(--space-8xl)
 
 /// Half the grid; all of it on a small screen.
 @mixin half
@@ -30,23 +30,28 @@
 
 /// One list's frame: the rule above it, its title, and what it counts.
 @mixin list
-  border-top: 1px solid var(--ink)
+  border-top: var(--hairline-strong)
   min-width: 0
-  padding-top: 16px
+  padding-top: var(--space-l)
 
   .list-head
     align-items: baseline
     display: flex
-    gap: 16px
+    gap: var(--space-l)
     justify-content: space-between
 
   h3
-    font-size: 22px
-    font-weight: 400
-    line-height: 1.2
+    @include typography.title-small
 
   .total
     @include typography.label
 
     color: var(--ink-2)
     text-align: right
+
+/// One line of a list, ruled under, its cells in columns.
+@mixin ruled-row
+  border-bottom: var(--hairline)
+  column-gap: var(--space-l)
+  display: grid
+  padding: 11px 0 12px

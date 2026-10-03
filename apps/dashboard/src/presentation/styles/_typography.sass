@@ -1,16 +1,45 @@
 // Pure module: mixins only.
 
+/// The chart's small mono voice: axis ticks, scale marks, counts on a plot.
+@mixin axis
+  font: 400 var(--text-2xs)/1.3 var(--font-mono)
+  letter-spacing: 0.06em
+
 /// The annual's caption voice: small mono capitals, widely tracked. For labels,
 /// axes and meta lines — never for a sentence someone has to read.
 @mixin label
-  font: 400 11px/1.3 var(--font-mono)
+  @include axis
+
   letter-spacing: 0.14em
   text-transform: uppercase
 
+/// What every headline shares: light weight, tight tracking, balanced lines.
+@mixin headline
+  font-weight: 400
+  letter-spacing: var(--tracking-tight)
+  text-wrap: balance
+
 /// A headline set like a section title in the annual: large, light, tight.
 @mixin section-title
+  @include headline
+
   font-size: clamp(36px, 4.4vw, 56px)
-  font-weight: 400
-  letter-spacing: -0.02em
   line-height: 1
-  text-wrap: balance
+
+/// The title of a page that has no plate to show: not found, or broken.
+@mixin screen-title
+  @include headline
+
+  font-size: clamp(44px, 6vw, 72px)
+  line-height: 1
+
+/// A list's or a figure's own title, under the section that holds it.
+@mixin title-small
+  font-size: var(--text-l)
+  font-weight: 400
+  line-height: 1.2
+
+/// The underline a link draws, thin and clear of the descenders.
+@mixin underline
+  text-decoration-thickness: var(--stroke-hair)
+  text-underline-offset: var(--underline-offset)

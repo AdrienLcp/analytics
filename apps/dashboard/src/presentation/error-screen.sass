@@ -1,6 +1,7 @@
 @use './styles/focus'
 @use './styles/layout'
 @use './styles/token'
+@use './styles/typography'
 
 @layer components
   .error-screen
@@ -9,18 +10,15 @@
     padding-top: 88px
 
     h1
-      font-size: clamp(44px, 6vw, 72px)
-      font-weight: 400
-      letter-spacing: -0.02em
-      line-height: 1
+      @include typography.screen-title
 
     p
       color: var(--ink-2)
-      margin-top: 20px
-      max-width: 46ch
+      margin-top: var(--space-xl)
+      max-width: var(--measure)
 
     .reload
       @include token.token
       @include focus.ring
 
-      margin-top: 28px
+      margin-top: var(--space-3xl)

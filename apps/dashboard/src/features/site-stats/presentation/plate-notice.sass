@@ -1,18 +1,19 @@
 @use '@/presentation/styles/layout'
+@use '@/presentation/styles/typography'
 
 @layer components
   .plate-notice
-    margin-top: 28px
+    margin-top: var(--space-3xl)
     position: relative
 
     .field
-      border-bottom: 1px solid var(--ink-3)
+      border-bottom: var(--stroke-hair) solid var(--ink-3)
       min-height: 380px
-      padding: 40px 0 56px
+      padding: var(--space-5xl) 0 var(--space-7xl)
       position: relative
 
       &::before
-        background-image: radial-gradient(var(--dot) 1px, transparent 1.4px)
+        background-image: var(--dot-screen)
         background-size: 14px 14px
         content: ''
         inset: 0
@@ -21,20 +22,19 @@
     .copy
       background: var(--ground)
       max-width: 620px
-      padding: 28px 32px 30px 0
+      padding: var(--space-3xl) var(--space-4xl) 30px 0
       position: relative
 
     h3
+      @include typography.headline
+
       font-size: clamp(30px, 3.4vw, 44px)
-      font-weight: 400
-      letter-spacing: -0.02em
       line-height: 1.05
-      text-wrap: balance
 
     p
       color: var(--ink-2)
-      margin-top: 16px
-      max-width: 46ch
+      margin-top: var(--space-l)
+      max-width: var(--measure)
 
     &.is-pending .field::before
       @media (prefers-reduced-motion: no-preference)
@@ -43,7 +43,7 @@
     @include layout.below-medium
       .field
         min-height: 0
-        padding: 24px 0 48px
+        padding: var(--space-2xl) 0 var(--space-6xl)
 
       .copy
-        padding: 20px 16px 22px 0
+        padding: var(--space-xl) var(--space-l) 22px 0

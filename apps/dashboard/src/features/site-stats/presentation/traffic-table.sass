@@ -4,9 +4,9 @@
 
 @layer components
   .traffic-table
-    border-top: 1px solid var(--hair)
+    border-top: var(--hairline)
     margin-top: 18px
-    padding-top: 14px
+    padding-top: var(--space-m)
 
     .toggle
       @include typography.label
@@ -16,13 +16,13 @@
       color: var(--ink-2)
       cursor: pointer
       display: inline-flex
-      gap: 10px
-      min-height: 24px
+      gap: var(--space-xs)
+      min-height: var(--space-2xl)
 
       svg
-        height: 10px
+        height: var(--icon-xs)
         transition: transform var(--transition-fast, 0) var(--ease-out)
-        width: 10px
+        width: var(--icon-xs)
 
       &[data-hovered]
         color: var(--ink)
@@ -31,13 +31,13 @@
       transform: rotate(90deg)
 
     .scroller
-      margin-top: 14px
+      margin-top: var(--space-m)
       max-height: 320px
       overflow: auto
 
     table
       border-collapse: collapse
-      font-size: 15px
+      font-size: var(--text-m)
       width: 100%
 
     caption
@@ -45,8 +45,8 @@
 
     th,
     td
-      border-bottom: 1px solid var(--hair)
-      padding: 7px 0 7px 16px
+      border-bottom: var(--hairline)
+      padding: 7px 0 7px var(--space-l)
       text-align: right
 
       &:first-child

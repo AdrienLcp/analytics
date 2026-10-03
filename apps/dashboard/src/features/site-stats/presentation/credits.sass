@@ -19,15 +19,15 @@
     small
       @include credit-layout.footnote
 
-      margin-top: 12px
+      margin-top: var(--space-s)
 
     .swatch
       display: inline-block
-      height: 2px
-      margin-right: 8px
+      height: var(--stroke-bold)
+      margin-right: var(--space-2xs)
       transform: translateY(-1px)
       vertical-align: middle
-      width: 14px
+      width: var(--icon-s)
 
       &.page-views
         background: var(--page-views)
@@ -46,8 +46,8 @@
         padding-left: 0
 
       .credit:nth-child(n + 3)
-        border-top: 1px solid var(--hair)
+        border-top: var(--hairline)
 
     @include layout.below-narrow
       .credit
-        padding: 16px 14px 20px
+        padding: var(--space-l) var(--space-m) var(--space-xl)
