@@ -26,7 +26,7 @@ export const toPageView = ({
   beacon: PageViewBeacon
   country: string | null
   siteHosts: readonly string[]
-  viewedAt: Date
+  viewedAt: Temporal.Instant
 }): PageView => ({
   ...classifyReferrer({ referrer: beacon.referrer, siteHosts }),
   country,
@@ -35,5 +35,5 @@ export const toPageView = ({
   path: beacon.path,
   site: beacon.site,
   theme: beacon.theme,
-  viewedAt: viewedAt.toISOString()
+  viewedAt: viewedAt.toString({ smallestUnit: 'millisecond' })
 })

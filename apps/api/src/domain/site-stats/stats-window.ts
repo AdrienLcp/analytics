@@ -2,7 +2,7 @@ import type { StatsPeriod } from '@analytics/protocol/site-stats'
 
 export type BucketUnit = 'day' | 'month'
 
-/** How many leading characters of an ISO 8601 timestamp name its bucket. */
+/** How many leading characters of an ISO 8601 date or timestamp name its bucket. */
 export const BUCKET_KEY_LENGTH = {
   day: 'YYYY-MM-DD'.length,
   month: 'YYYY-MM'.length
@@ -23,43 +23,41 @@ const PERIOD_SPAN = {
 } as const satisfies Record<StatsPeriod, { length: number; unit: BucketUnit }>
 
 const bucketStart = ({
-  now,
   offset,
+  today,
   unit
 }: {
-  now: Date
   offset: number
+  today: Temporal.PlainDate
   unit: BucketUnit
-}): Date =>
+}): Temporal.PlainDate =>
   unit === 'day'
-    ? new Date(
-        Date.UTC(
-          now.getUTCFullYear(),
-          now.getUTCMonth(),
-          now.getUTCDate() - offset
-        )
-      )
-    : new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - offset, 1))
+    ? today.subtract({ days: offset })
+    : today.with({ day: 1 }).subtract({ months: offset })
 
 /** Buckets are cut in UTC, so a day starts at midnight UTC whoever reads the stats. */
 export const statsWindowFor = ({
   now,
   period
 }: {
-  now: Date
+  now: Temporal.Instant
   period: StatsPeriod
 }): StatsWindow => {
   const { length, unit } = PERIOD_SPAN[period]
+  const today = now.toZonedDateTimeISO('UTC').toPlainDate()
   const starts = Array.from({ length }, (_, index) =>
-    bucketStart({ now, offset: length - 1 - index, unit })
+    bucketStart({ offset: length - 1 - index, today, unit })
   )
-  const first = starts[0] ?? now
+  const first = starts[0] ?? today
 
   return {
     buckets: starts.map((start) =>
-      start.toISOString().slice(0, BUCKET_KEY_LENGTH[unit])
+      start.toString().slice(0, BUCKET_KEY_LENGTH[unit])
     ),
-    since: first.toISOString(),
+    since: first
+      .toZonedDateTime('UTC')
+      .toInstant()
+      .toString({ smallestUnit: 'millisecond' }),
     unit
   }
 }

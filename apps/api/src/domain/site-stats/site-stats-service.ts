@@ -20,7 +20,7 @@ export const readSiteStats = async ({
   site
 }: {
   database: D1Database
-  now: Date
+  now: Temporal.Instant
   period: StatsPeriod
   site: SiteId
 }): Promise<Result<SiteStatsResponse, 'storage_unavailable'>> => {

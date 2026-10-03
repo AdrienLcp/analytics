@@ -24,7 +24,7 @@ export const recordPageView = async ({
   country: string | null
   database: D1Database
   origin: string | null
-  receivedAt: Date
+  receivedAt: Temporal.Instant
   userAgent: string | null
 }): Promise<Result<RecordPageViewOutcome, RecordPageViewError>> => {
   if (origin === null || !isOriginOfSite({ origin, site: beacon.site })) {

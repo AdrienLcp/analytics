@@ -30,7 +30,7 @@ export const recordWebVitals = async ({
   beacon: WebVitalsBeacon
   database: D1Database
   origin: string | null
-  receivedAt: Date
+  receivedAt: Temporal.Instant
   userAgent: string | null
 }): Promise<Result<RecordWebVitalsOutcome, RecordWebVitalsError>> => {
   if (origin === null || !isOriginOfSite({ origin, site: beacon.site })) {
@@ -51,7 +51,7 @@ export const recordWebVitals = async ({
   const stored = await incrementWebVitalBuckets({
     buckets,
     database,
-    day: receivedAt.toISOString().slice(0, BUCKET_KEY_LENGTH.day),
+    day: receivedAt.toString().slice(0, BUCKET_KEY_LENGTH.day),
     device: deviceForViewport(beacon.viewportWidth),
     path: beacon.path,
     site: beacon.site

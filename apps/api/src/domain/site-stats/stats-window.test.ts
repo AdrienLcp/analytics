@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { statsWindowFor } from './stats-window'
 
-const now = new Date('2026-09-30T15:42:00.000Z')
+const now = Temporal.Instant.from('2026-09-30T15:42:00.000Z')
 
 describe('statsWindowFor', () => {
   it('[stats-window] covers the last seven days, today included', () => {
@@ -27,8 +27,10 @@ describe('statsWindowFor', () => {
     expect(window.buckets).toHaveLength(30)
     expect(window.buckets[0]).toBe('2026-09-01')
     expect(
-      statsWindowFor({ now: new Date('2026-03-02T00:00:00Z'), period: '7d' })
-        .buckets[0]
+      statsWindowFor({
+        now: Temporal.Instant.from('2026-03-02T00:00:00Z'),
+        period: '7d'
+      }).buckets[0]
     ).toBe('2026-02-24')
   })
 
