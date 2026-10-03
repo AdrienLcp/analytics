@@ -39,12 +39,40 @@
       "!apps/api/worker-configuration.d.ts"
     ]
   },
+  "linter": {
+    "rules": {
+      "style": {
+        "noRestrictedGlobals": {
+          "level": "error",
+          "options": {
+            "deniedGlobals": {
+              "Date": "Read the time through infrastructure/clock.ts, parse or build a Date through infrastructure/dates.ts."
+            }
+          }
+        }
+      }
+    }
+  },
   "overrides": [
     {
       "includes": ["apps/dashboard/**"],
       "linter": {
         "domains": {
           "react": "recommended"
+        }
+      }
+    },
+    {
+      "includes": [
+        "**/infrastructure/clock.ts",
+        "**/infrastructure/dates.ts",
+        "**/site-stats/domain/bucket.ts"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedGlobals": "off"
+          }
         }
       }
     }
