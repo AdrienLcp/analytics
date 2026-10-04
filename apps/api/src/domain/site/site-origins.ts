@@ -8,7 +8,7 @@ import type { SiteId } from '@analytics/protocol/site-ids'
 const SITE_ORIGINS = {
   'on-record': ['https://on-record-203.pages.dev'],
   portfolio: ['https://portfolio-9qi.pages.dev'],
-  taverla: ['https://taverla.onrender.com']
+  taverla: ['https://taverla.adrienlcp.workers.dev']
 } as const satisfies Record<SiteId, readonly string[]>
 
 export const isOriginOfSite = ({
