@@ -50,7 +50,7 @@ export const routes: RouteObject[] = [
   {
     Component: RootRoute,
     children: [
-      { index: true, loader: openDefaultSite },
+      { Component: SiteStatsFallback, index: true, loader: openDefaultSite },
       ...SITE_IDS.map(siteRouteFor),
       { Component: NotFoundPage, path: '*' }
     ],
