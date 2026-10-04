@@ -12,6 +12,7 @@ const SITE_ORIGINS = {
     'https://www.adrienlacourpaille.dev',
     'https://portfolio-9qi.pages.dev'
   ],
+  scoreboard: ['https://scoreboard.adrienlcp.workers.dev'],
   taverla: ['https://taverla.adrienlcp.workers.dev']
 } as const satisfies Record<SiteId, readonly string[]>
 
