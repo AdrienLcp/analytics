@@ -1,3 +1,4 @@
+@use '@adrienlcp/styles/accessibility'
 @use '@/presentation/styles/layout'
 @use '@/presentation/styles/typography'
 @use 'credit-layout'
@@ -36,7 +37,7 @@
       margin-top: var(--space-m)
 
     .visually-hidden
-      @include layout.visually-hidden
+      @include accessibility.visually-hidden
 
     @include layout.below-medium
       grid-template-columns: minmax(0, 1fr)

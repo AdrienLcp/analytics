@@ -1,5 +1,5 @@
+@use '@adrienlcp/styles/accessibility'
 @use '@/presentation/styles/focus'
-@use '@/presentation/styles/layout'
 @use '@/presentation/styles/typography'
 
 @layer components
@@ -41,7 +41,7 @@
       width: 100%
 
     caption
-      @include layout.visually-hidden
+      @include accessibility.visually-hidden
 
     th,
     td
