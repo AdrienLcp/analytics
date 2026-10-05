@@ -8,6 +8,16 @@ type LayoutShift = PerformanceEntry & {
   value: number
 }
 
+const isLayoutShift = (entry: PerformanceEntry): entry is LayoutShift =>
+  'hadRecentInput' in entry &&
+  typeof entry.hadRecentInput === 'boolean' &&
+  'value' in entry &&
+  typeof entry.value === 'number'
+
+const isEventTiming = (
+  entry: PerformanceEntry
+): entry is PerformanceEventTiming => entry instanceof PerformanceEventTiming
+
 /** Missing from the DOM typings too: the `event` entry type's reporting floor. */
 type ObserverOptions = PerformanceObserverInit & { durationThreshold?: number }
 
@@ -55,7 +65,7 @@ const watchCumulativeLayoutShift = (): (() => number | null) => {
   let sessionEnd = 0
 
   const isSupported = observe('layout-shift', (entries) => {
-    for (const shift of entries as LayoutShift[]) {
+    for (const shift of entries.filter(isLayoutShift)) {
       if (shift.hadRecentInput) continue
 
       const startsSession =
@@ -83,7 +93,7 @@ const watchInteractionToNextPaint = (): (() => number | null) => {
   observe(
     'event',
     (entries) => {
-      for (const event of entries as PerformanceEventTiming[]) {
+      for (const event of entries.filter(isEventTiming)) {
         if (!event.interactionId) continue
 
         const slowest = durationByInteraction.get(event.interactionId) ?? 0
