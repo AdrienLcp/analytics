@@ -8,27 +8,30 @@
     position: relative
 
     .registration
+      --mark: 26px
+      --mark-overhang: calc(var(--mark) / -2)
+
       color: var(--ink-3)
-      height: 26px
+      height: var(--mark)
       pointer-events: none
       position: absolute
-      width: 26px
+      width: var(--mark)
 
       &.top-left
-        left: -13px
-        top: -13px
+        left: var(--mark-overhang)
+        top: var(--mark-overhang)
 
       &.top-right
-        right: -13px
-        top: -13px
+        right: var(--mark-overhang)
+        top: var(--mark-overhang)
 
       &.bottom-left
-        bottom: -13px
-        left: -13px
+        bottom: var(--mark-overhang)
+        left: var(--mark-overhang)
 
       &.bottom-right
-        bottom: -13px
-        right: -13px
+        bottom: var(--mark-overhang)
+        right: var(--mark-overhang)
 
     .plate-stamp
       height: var(--stamp)

@@ -1,6 +1,7 @@
 import type React from 'react'
 
 import { reloadPage } from '@/infrastructure/browser'
+import { reportRenderFailure } from '@/infrastructure/diagnostics'
 import { useRouteFailure } from '@/infrastructure/router/navigation'
 import { Button } from '@/presentation/components/button'
 import { Main } from '@/presentation/components/main'
@@ -19,10 +20,7 @@ export const ErrorScreen: React.FC = () => {
   const translate = useTranslate()
   const failure = useRouteFailure()
 
-  console.error(
-    'The dashboard hit an error it could not render through',
-    failure
-  )
+  reportRenderFailure(failure)
 
   return (
     <AppShell>

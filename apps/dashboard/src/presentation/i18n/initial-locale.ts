@@ -1,4 +1,5 @@
 import { preferredLocales } from '@/infrastructure/browser'
+import { warnOnFailure } from '@/infrastructure/diagnostics'
 import { readStoredLocale } from '@/infrastructure/storage/preferences-storage'
 
 import { i18n } from './i18n'
@@ -13,12 +14,10 @@ import type { Locale } from './locales'
 export const applyInitialLocale = (): Locale => {
   const stored = readStoredLocale()
 
-  if (stored.status === 'failure') {
-    console.warn(
-      'The stored language could not be read; following the browser instead',
-      stored.error
-    )
-  }
+  warnOnFailure(
+    stored,
+    'The stored language could not be read; following the browser instead'
+  )
 
   const locale =
     (stored.status === 'success' ? stored.data : null) ??
