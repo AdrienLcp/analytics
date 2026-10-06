@@ -17,13 +17,11 @@ declare module 'react-aria-components' {
   }
 }
 
-const ABSOLUTE_URL = /^[a-z][a-z\d+.-]*:/i
-
 /** react-router resolves every href against the route; an external one stays as written. */
 const useRouterHref = (href: string): string => {
   const routeHref = useHref(href)
 
-  return ABSOLUTE_URL.test(href) ? href : routeHref
+  return URL.canParse(href) ? href : routeHref
 }
 
 /**

@@ -4,10 +4,8 @@ export type ReferrerOrigin = {
   referrerHost: string | null
 }
 
-const parseHost = (referrer: string): string | null => {
-  if (!URL.canParse(referrer)) return null
-  return new URL(referrer).host.replace(/^www\./, '')
-}
+const parseHost = (referrer: string): string | null =>
+  URL.parse(referrer)?.host.replace(/^www\./, '') ?? null
 
 /**
  * A page view reached from another page of the same site continues a visit;

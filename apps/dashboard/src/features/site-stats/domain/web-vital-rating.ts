@@ -1,3 +1,5 @@
+import { CLSThresholds, INPThresholds, LCPThresholds } from 'web-vitals'
+
 import type {
   WebVitalMetric,
   WebVitalsSummary
@@ -15,14 +17,20 @@ type WebVitalThresholds = {
   scaleMax: number
 }
 
+const thresholds = (
+  [good, poor]: readonly [good: number, poor: number],
+  scaleMax: number
+): WebVitalThresholds => ({ good, poor, scaleMax })
+
 /**
- * Google's published thresholds: milliseconds for LCP and INP, a unitless
- * score for CLS. The scale ends far enough past "poor" to show how far past.
+ * Google's thresholds, as its `web-vitals` library publishes them: milliseconds
+ * for LCP and INP, a unitless score for CLS. The scale ends far enough past
+ * "poor" to show how far past.
  */
 export const WEB_VITAL_THRESHOLDS = {
-  cls: { good: 0.1, poor: 0.25, scaleMax: 0.4 },
-  inp: { good: 200, poor: 500, scaleMax: 800 },
-  lcp: { good: 2500, poor: 4000, scaleMax: 6000 }
+  cls: thresholds(CLSThresholds, 0.4),
+  inp: thresholds(INPThresholds, 800),
+  lcp: thresholds(LCPThresholds, 6000)
 } as const satisfies Record<WebVitalMetric, WebVitalThresholds>
 
 /** A value equal to a threshold falls on its better side. */

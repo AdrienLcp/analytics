@@ -3,6 +3,7 @@ import {
   type PathParam,
   useLoaderData,
   useLocation,
+  useMatch,
   useNavigation,
   useRevalidator,
   useRouteError
@@ -63,9 +64,9 @@ export const useLocationPeriod = (): StatsPeriod =>
 
 /** The site the address names, for chrome drawn outside the page. */
 export const useLocationSite = (): SiteId | null => {
-  const segment = useLocation().pathname.split('/')[1] ?? ''
+  const site = useMatch(paths.site)?.params.site
 
-  return isSiteId(segment) ? segment : null
+  return site !== undefined && isSiteId(site) ? site : null
 }
 
 /** The one `useLoaderData`: a feature pairs it with its own loader's type. */
