@@ -19,7 +19,6 @@ const startTracking = (script: HTMLScriptElement) => {
 
   const collectUrl = new URL(API_ROUTES.collect, script.src).href
   const webVitalsUrl = new URL(API_ROUTES.webVitals, script.src).href
-  const loadedPath = currentPath()
   let trackedPath: string | null = null
 
   const track = () => {
@@ -44,7 +43,6 @@ const startTracking = (script: HTMLScriptElement) => {
     sendBeacon({
       beacon: {
         ...measurements,
-        path: loadedPath,
         site,
         viewportWidth: viewportWidth()
       },
