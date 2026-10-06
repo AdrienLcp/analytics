@@ -3,11 +3,11 @@ import type React from 'react'
 import type { TrafficBucket } from '@analytics/protocol/site-stats'
 
 import { Button } from '@/presentation/components/button'
-import { ChevronIcon } from '@/presentation/components/chevron-icon'
 import {
   Disclosure,
   DisclosurePanel
 } from '@/presentation/components/disclosure'
+import { Icon } from '@/presentation/components/icon'
 import { useTranslate } from '@/presentation/i18n/i18n-provider'
 
 import type { BucketUnit } from '../domain/bucket'
@@ -33,7 +33,7 @@ export const TrafficTable: React.FC<TrafficTableProps> = ({
   return (
     <Disclosure className='traffic-table'>
       <Button className='toggle' slot='trigger'>
-        <ChevronIcon />
+        <Icon name='disclosure' />
         {translate('table.toggle')}
       </Button>
       <DisclosurePanel className='panel'>

@@ -1,8 +1,7 @@
 import type React from 'react'
 import { useId } from 'react'
 
-import { CheckIcon } from '@/presentation/components/check-icon'
-import { NeverIcon } from '@/presentation/components/never-icon'
+import { Icon } from '@/presentation/components/icon'
 import { useTranslate } from '@/presentation/i18n/i18n-provider'
 import { RichText, strong } from '@/presentation/i18n/rich-text'
 import type { PlainTranslationKey } from '@/presentation/i18n/translation'
@@ -60,7 +59,7 @@ export const PrivacyColophon: React.FC = () => {
           <ul>
             {RECORDED.map((entry) => (
               <li key={entry.name}>
-                <CheckIcon />
+                <Icon name='check' />
                 <span>
                   {translate(entry.name)}
                   <small>{translate(entry.note)}</small>
@@ -74,7 +73,7 @@ export const PrivacyColophon: React.FC = () => {
           <ul>
             {NEVER_RECORDED.map((entry) => (
               <li key={entry.name}>
-                <NeverIcon />
+                <Icon name='never' />
                 <span>
                   {translate(entry.name)}
                   <small>{translate(entry.note)}</small>
