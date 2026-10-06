@@ -8,13 +8,13 @@
     touch-action: pan-y
 
     svg
+      @include typography.axis
+
       display: block
       overflow: visible
       width: 100%
 
     text
-      @include typography.axis
-
       fill: var(--ink-2)
 
     .end-label,

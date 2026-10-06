@@ -1,3 +1,5 @@
+import { scaleBand, scaleLinear } from 'd3-scale'
+
 import type { BucketUnit } from './bucket'
 
 /** Below this width the chart drops its end labels and shortens. */
@@ -5,7 +7,8 @@ export const NARROW_CHART_WIDTH = 560
 
 const WIDE_HEIGHT = 330
 const NARROW_HEIGHT = 230
-const GRID_LINES = 4
+/** About as many grid steps as the value axis gets; d3 rounds to a readable step. */
+const GRID_STEPS = 4
 /** Room on the right for "1,234 page views" beside the last day. */
 const END_LABEL_ROOM = 104
 /** Room on the left for the value axis' figures. */
@@ -21,34 +24,6 @@ const MONTH_BAR_MIN_WIDTH = 3
 const MONTH_BAR_MAX_WIDTH = 22
 /** Kept free inside a month's band, around its two bars. */
 const MONTH_BAND_PADDING = 12
-const NICE_STEPS = [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]
-
-/**
- * The top of the value axis: the smallest round number whose quarter is a
- * readable whole step — nobody opens half a page — and which holds `maximum`.
- * An empty series still gets a scale, so its zero line sits where a real one
- * would.
- */
-export const niceMaximum = (maximum: number): number => {
-  if (maximum <= 0) return GRID_LINES
-
-  const rawStep = maximum / GRID_LINES
-  const magnitude = 10 ** Math.floor(Math.log10(rawStep))
-  const step =
-    NICE_STEPS.map((factor) => factor * magnitude).find(
-      (candidate) =>
-        candidate >= rawStep && candidate >= 1 && Number.isInteger(candidate)
-    ) ?? Math.ceil(rawStep)
-
-  return step * GRID_LINES
-}
-
-/** The values the dotted grid lines mark, zero first. */
-export const gridValues = (top: number): number[] =>
-  Array.from(
-    { length: GRID_LINES + 1 },
-    (_, index) => (top / GRID_LINES) * index
-  )
 
 /** A series short enough to read day by day, each day named. */
 export const isWeekSeries = (count: number): boolean => count <= LONGEST_WEEK
@@ -72,6 +47,9 @@ type TickSpacing = {
   pitch: number
 }
 
+const bucketIndexes = (count: number): number[] =>
+  Array.from({ length: count }, (_, index) => index)
+
 /**
  * Every `step`-th bucket, with the smallest step whose labels sit `minPitch`
  * apart, and the last bucket too when it is as far from the label before it.
@@ -93,7 +71,7 @@ const spacedTickIndexes = ({
   const last = count - 1
   const hasRoomForLast = (last % step) * pitch >= minPitch
 
-  return Array.from({ length: count }, (_, index) => index).filter(
+  return bucketIndexes(count).filter(
     (index) => index % step === 0 || (index === last && hasRoomForLast)
   )
 }
@@ -131,19 +109,83 @@ export type ChartLayout = {
   /** The width of one month's band; a day series uses points, not bands. */
   band: number
   bottom: number
+  /** The values the dotted grid lines mark, zero first. */
+  gridValues: number[]
   height: number
+  /** The bucket under a horizontal position, clamped to the series. */
+  indexAtX: (x: number) => number
   isNarrow: boolean
   left: number
   /** The distance between two neighbouring buckets. */
   pitch: number
   right: number
   top: number
-  /** The value at the top of the axis. */
-  topValue: number
   width: number
   xAt: (index: number) => number
   yAt: (value: number) => number
 }
+
+/**
+ * Days are points spread from edge to edge, a lone day in the middle; months
+ * are bands side by side, read at their centre.
+ */
+const bucketPositions = ({
+  count,
+  left,
+  right,
+  unit
+}: {
+  count: number
+  left: number
+  right: number
+  unit: BucketUnit
+}): Pick<ChartLayout, 'band' | 'indexAtX' | 'pitch' | 'xAt'> => {
+  const clamp = (index: number) => Math.max(0, Math.min(count - 1, index))
+
+  if (unit === 'month') {
+    const band = scaleBand<number>()
+      .domain(bucketIndexes(count))
+      .range([left, right])
+
+    return {
+      band: band.bandwidth(),
+      indexAtX: (x) => clamp(Math.floor((x - left) / band.step())),
+      pitch: band.step(),
+      xAt: (index) => (band(index) ?? left) + band.bandwidth() / 2
+    }
+  }
+
+  const point = scaleLinear()
+    .domain([0, Math.max(count - 1, 0)])
+    .range([left, right])
+
+  return {
+    band: (right - left) / Math.max(count, 1),
+    indexAtX: (x) => clamp(Math.round(point.invert(x))),
+    pitch: (right - left) / Math.max(count - 1, 1),
+    xAt: (index) => point(index)
+  }
+}
+
+/**
+ * Zero at the baseline, the top rounded up to a readable step. The domain
+ * never ends below one page view a step — nobody opens half a page — so an
+ * empty series still gets a scale and its zero line sits where a real one
+ * would.
+ */
+const valueScale = ({
+  bottom,
+  maximum,
+  top
+}: {
+  bottom: number
+  maximum: number
+  top: number
+}) =>
+  scaleLinear()
+    .domain([0, Math.max(maximum, GRID_STEPS)])
+    .nice(GRID_STEPS)
+    .range([bottom, top])
 
 /** Where every point of a series sits in a chart `width` pixels wide. */
 export const chartLayout = ({
@@ -164,51 +206,20 @@ export const chartLayout = ({
   const right =
     width - (isNarrow || unit === 'month' ? PLOT_RIGHT_MARGIN : END_LABEL_ROOM)
   const bottom = height - DATE_AXIS_ROOM
-  const innerWidth = right - left
-  const topValue = niceMaximum(maximum)
-  const band = innerWidth / Math.max(count, 1)
-  const pitch = unit === 'month' ? band : innerWidth / Math.max(count - 1, 1)
+  const value = valueScale({ bottom, maximum, top })
 
   return {
-    band,
+    ...bucketPositions({ count, left, right, unit }),
     bottom,
+    gridValues: value.ticks(GRID_STEPS),
     height,
     isNarrow,
     left,
-    pitch,
     right,
     top,
-    topValue,
     width,
-    xAt: (index) =>
-      unit === 'month'
-        ? left + band * index + band / 2
-        : left +
-          (count <= 1 ? innerWidth / 2 : (index / (count - 1)) * innerWidth),
-    yAt: (value) => bottom - (value / topValue) * (bottom - top)
+    yAt: (count) => value(count)
   }
-}
-
-/** The index under a horizontal position, clamped to the series. */
-export const indexAtX = ({
-  count,
-  layout,
-  unit,
-  x
-}: {
-  count: number
-  layout: ChartLayout
-  unit: BucketUnit
-  x: number
-}): number => {
-  const raw =
-    unit === 'month'
-      ? Math.floor((x - layout.left) / layout.band)
-      : Math.round(
-          ((x - layout.left) / (layout.right - layout.left)) * (count - 1)
-        )
-
-  return Math.max(0, Math.min(count - 1, raw))
 }
 
 /** How wide each of a month's two bars is, side by side in its band. */

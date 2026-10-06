@@ -9,9 +9,6 @@ import {
   monthTickIndexes
 } from '../domain/chart-layout'
 
-/** Geist Mono's 0.6em advance at the axis' 11px, plus its 0.06em tracking. */
-const AXIS_LABEL_CHARACTER_WIDTH = 7.3
-
 export type AxisTick = {
   /** Where the bucket sits in the series. */
   index: number
@@ -28,6 +25,7 @@ export const axisTicks = ({
   namesWeekdays,
   pitch,
   series,
+  textWidth,
   translate,
   unit
 }: {
@@ -35,6 +33,8 @@ export const axisTicks = ({
   /** The distance between two neighbouring buckets on the axis. */
   pitch: number
   series: readonly TrafficBucket[]
+  /** How wide a label draws, in the axis' font. */
+  textWidth: (label: string) => number
   translate: Translate
   unit: BucketUnit
 }): AxisTick[] => {
@@ -52,9 +52,7 @@ export const axisTicks = ({
   }
 
   const labels = series.map((bucket) => tickLabel(bucket.bucket))
-  const labelWidth =
-    Math.max(0, ...labels.map((label) => label.length)) *
-    AXIS_LABEL_CHARACTER_WIDTH
+  const labelWidth = Math.max(0, ...labels.map(textWidth))
   const indexes =
     unit === 'month'
       ? monthTickIndexes({ count, labelWidth, pitch })

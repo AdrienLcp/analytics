@@ -25,6 +25,7 @@ import { PlateNotice } from './plate-notice'
 import { rangeLabel } from './plate-range'
 import { SectionHead } from './section-head'
 import { useElementWidth } from './use-element-width'
+import { useTextWidth } from './use-text-width'
 
 import './empty-plate.sass'
 
@@ -83,10 +84,12 @@ export const EmptyPlate: React.FC<EmptyPlateProps> = ({
   const { series } = stats
   const count = series.length
   const [measureAxis, axisWidth] = useElementWidth<HTMLDivElement>()
+  const [readAxisFont, textWidth] = useTextWidth<HTMLDivElement>()
   const axis = axisTicks({
     namesWeekdays: false,
     pitch: axisWidth / Math.max(count - 1, 1),
     series,
+    textWidth,
     translate,
     unit
   })
@@ -139,7 +142,14 @@ export const EmptyPlate: React.FC<EmptyPlateProps> = ({
       <PlateFrame title={translate('plate.title', { unit })}>
         <PlateNotice
           axis={
-            <div aria-hidden='true' className='empty-axis' ref={measureAxis}>
+            <div
+              aria-hidden='true'
+              className='empty-axis'
+              ref={(axis) => {
+                readAxisFont(axis)
+                return measureAxis(axis)
+              }}
+            >
               {axis.map((tick) => (
                 <span key={tick.key}>{tick.label}</span>
               ))}

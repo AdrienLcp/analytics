@@ -5,12 +5,13 @@ import type { TrafficBucket } from '@analytics/protocol/site-stats'
 import { useTranslate } from '@/presentation/i18n/i18n-provider'
 
 import type { BucketUnit } from '../domain/bucket'
-import { type ChartLayout, gridValues } from '../domain/chart-layout'
+import type { ChartLayout } from '../domain/chart-layout'
 import { crispLine } from '../domain/chart-paths'
 import { axisTicks } from './axis-ticks'
 import { DailyLines } from './daily-lines'
 import { EndLabels } from './end-labels'
 import { MonthBars } from './month-bars'
+import { useTextWidth } from './use-text-width'
 
 const TICK_LENGTH = 5
 /** Drops a grid line's figure onto the line, centred on its x-height. */
@@ -37,6 +38,7 @@ export const ChartDrawing: React.FC<ChartDrawingProps> = ({
   unit
 }) => {
   const translate = useTranslate()
+  const [readAxisFont, textWidth] = useTextWidth<SVGSVGElement>()
   const { bottom, height, isNarrow, left, right, top, width, xAt, yAt } = layout
   const baseline = crispLine(yAt(0))
   const last = series.length - 1
@@ -45,6 +47,7 @@ export const ChartDrawing: React.FC<ChartDrawingProps> = ({
     namesWeekdays: true,
     pitch: layout.pitch,
     series,
+    textWidth,
     translate,
     unit
   })
@@ -60,9 +63,10 @@ export const ChartDrawing: React.FC<ChartDrawingProps> = ({
       aria-hidden='true'
       focusable='false'
       height={height}
+      ref={readAxisFont}
       viewBox={`0 0 ${width} ${height}`}
     >
-      {gridValues(layout.topValue).map((value, index) => {
+      {layout.gridValues.map((value, index) => {
         const y = crispLine(yAt(value))
 
         return (

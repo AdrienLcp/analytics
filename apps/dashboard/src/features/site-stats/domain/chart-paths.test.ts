@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
-import { barPath, crispLine, linePath, separatedLabels } from './chart-paths'
+import {
+  areaPath,
+  barPath,
+  crispLine,
+  linePath,
+  separatedLabels
+} from './chart-paths'
 
 describe('linePath', () => {
   it('[chart] moves to the first point and draws a line to each next one', () => {
@@ -10,11 +16,29 @@ describe('linePath', () => {
         [5.25, 2],
         [10, 0]
       ])
-    ).toBe('M0.0,10.0L5.3,2.0L10.0,0.0')
+    ).toBe('M0,10L5.3,2L10,0')
   })
 
   it('[chart] draws nothing for an empty series', () => {
     expect(linePath([])).toBe('')
+  })
+})
+
+describe('areaPath', () => {
+  it('[chart] closes the ground under a line along the baseline', () => {
+    expect(
+      areaPath({
+        baseline: 20.5,
+        points: [
+          [0, 10],
+          [10, 0]
+        ]
+      })
+    ).toBe('M0,10L10,0L10,20.5L0,20.5Z')
+  })
+
+  it('[chart] draws nothing for an empty series', () => {
+    expect(areaPath({ baseline: 20, points: [] })).toBe('')
   })
 })
 

@@ -3,7 +3,7 @@ import type React from 'react'
 import type { TrafficBucket } from '@analytics/protocol/site-stats'
 
 import type { ChartLayout } from '../domain/chart-layout'
-import { linePath } from '../domain/chart-paths'
+import { areaPath, linePath } from '../domain/chart-paths'
 
 const DOT_RADIUS = 4
 /** The dots on the day being read, a touch larger than the last day's. */
@@ -43,7 +43,7 @@ export const DailyLines: React.FC<DailyLinesProps> = ({
     <>
       <path
         className='page-views-area'
-        d={`${linePath(pageViewPoints)}L${xAt(last)},${baseline}L${xAt(0)},${baseline}Z`}
+        d={areaPath({ baseline, points: pageViewPoints })}
       />
       <path className='page-views-halo' d={linePath(pageViewPoints)} />
       <path className='page-views-line' d={linePath(pageViewPoints)} />

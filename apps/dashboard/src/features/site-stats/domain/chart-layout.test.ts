@@ -1,22 +1,79 @@
 import { describe, expect, it } from 'vitest'
 
 import { bucketStart } from './bucket'
-import { dayTickIndexes, monthTickIndexes, niceMaximum } from './chart-layout'
+import { chartLayout, dayTickIndexes, monthTickIndexes } from './chart-layout'
 
-describe('niceMaximum', () => {
+const gridValuesFor = (maximum: number): number[] =>
+  chartLayout({ count: 30, maximum, unit: 'day', width: 800 }).gridValues
+
+describe('value axis', () => {
   it('[chart] rounds the top of the axis up to a readable step', () => {
-    expect(niceMaximum(253)).toBe(320)
-    expect(niceMaximum(7)).toBe(8)
-    expect(niceMaximum(1)).toBe(4)
+    expect(gridValuesFor(253)).toEqual([0, 100, 200, 300])
+    expect(gridValuesFor(7)).toEqual([0, 2, 4, 6, 8])
+    expect(gridValuesFor(1)).toEqual([0, 1, 2, 3, 4])
   })
 
   it('[chart] keeps every grid step a whole number of page views', () => {
-    expect(niceMaximum(5)).toBe(8)
-    expect(niceMaximum(13)).toBe(16)
+    expect(gridValuesFor(5)).toEqual([0, 1, 2, 3, 4, 5])
+    expect(gridValuesFor(13)).toEqual([0, 5, 10, 15])
   })
 
   it('[chart] still draws a scale for an empty series', () => {
-    expect(niceMaximum(0)).toBe(4)
+    expect(gridValuesFor(0)).toEqual([0, 1, 2, 3, 4])
+  })
+
+  it('[chart] puts zero on the baseline and the top value on the top line', () => {
+    const layout = chartLayout({
+      count: 30,
+      maximum: 7,
+      unit: 'day',
+      width: 800
+    })
+
+    expect(layout.yAt(0)).toBe(layout.bottom)
+    expect(layout.yAt(8)).toBe(layout.top)
+  })
+})
+
+describe('bucket positions', () => {
+  it('[chart] spreads days from edge to edge and reads the nearest one back', () => {
+    const layout = chartLayout({
+      count: 5,
+      maximum: 4,
+      unit: 'day',
+      width: 800
+    })
+
+    expect(layout.xAt(0)).toBe(layout.left)
+    expect(layout.xAt(4)).toBe(layout.right)
+    expect(layout.indexAtX(layout.xAt(2) + layout.pitch * 0.4)).toBe(2)
+    expect(layout.indexAtX(-100)).toBe(0)
+    expect(layout.indexAtX(10_000)).toBe(4)
+  })
+
+  it('[chart] centres a lone day', () => {
+    const layout = chartLayout({
+      count: 1,
+      maximum: 4,
+      unit: 'day',
+      width: 800
+    })
+
+    expect(layout.xAt(0)).toBe((layout.left + layout.right) / 2)
+  })
+
+  it('[chart] centres each month in its band and reads the band back', () => {
+    const layout = chartLayout({
+      count: 4,
+      maximum: 4,
+      unit: 'month',
+      width: 400
+    })
+
+    expect(layout.band).toBe((layout.right - layout.left) / 4)
+    expect(layout.xAt(1)).toBe(layout.left + layout.band * 1.5)
+    expect(layout.indexAtX(layout.left + layout.band * 1.99)).toBe(1)
+    expect(layout.indexAtX(layout.right + 50)).toBe(3)
   })
 })
 

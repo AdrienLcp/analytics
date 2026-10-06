@@ -1,3 +1,5 @@
+import { area, line } from 'd3-shape'
+
 export type ChartPoint = readonly [x: number, y: number]
 
 const MONTH_BAR_RADIUS = 4
@@ -9,14 +11,29 @@ const MONTH_BAR_RADIUS = 4
 export const crispLine = (position: number): number =>
   Math.round(position) + 0.5
 
-/** An SVG path through every point, in order. */
+/** Tenths of a pixel are as fine as a screen draws. */
+const PATH_DIGITS = 1
+
+/** An SVG path through every point, in order; nothing for an empty series. */
 export const linePath = (points: readonly ChartPoint[]): string =>
+  line<ChartPoint>()
+    .x(([x]) => x)
+    .y(([, y]) => y)
+    .digits(PATH_DIGITS)(points) ?? ''
+
+/** The ground under a line, closed along `baseline`; nothing for an empty series. */
+export const areaPath = ({
+  baseline,
   points
-    .map(
-      ([x, y], index) =>
-        `${index === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`
-    )
-    .join('')
+}: {
+  baseline: number
+  points: readonly ChartPoint[]
+}): string =>
+  area<ChartPoint>()
+    .x(([x]) => x)
+    .y0(baseline)
+    .y1(([, y]) => y)
+    .digits(PATH_DIGITS)(points) ?? ''
 
 /** A bar with its two top corners rounded, standing on the zero line. */
 export const barPath = ({

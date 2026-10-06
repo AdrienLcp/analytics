@@ -6,7 +6,7 @@ import type { TrafficBucket } from '@analytics/protocol/site-stats'
 import { useTranslate } from '@/presentation/i18n/i18n-provider'
 
 import type { BucketUnit } from '../domain/bucket'
-import { chartLayout, indexAtX } from '../domain/chart-layout'
+import { chartLayout } from '../domain/chart-layout'
 import { bucketLabel } from './bucket-label'
 import { ChartDrawing } from './chart-drawing'
 import { ChartTip } from './chart-tip'
@@ -61,9 +61,7 @@ export const TrafficChart: React.FC<TrafficChartProps> = ({
     if (layout === null || count === 0) return
 
     const bounds = event.currentTarget.getBoundingClientRect()
-    setActiveIndex(
-      indexAtX({ count, layout, unit, x: event.clientX - bounds.left })
-    )
+    setActiveIndex(layout.indexAtX(event.clientX - bounds.left))
   }
 
   const step = (event: React.KeyboardEvent<HTMLDivElement>) => {
