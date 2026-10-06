@@ -4,6 +4,7 @@
     "@analytics/protocol": "workspace:*",
     "@hono/zod-validator": "^0.9.1",
     "hono": "^4.13.10",
+    "isbot": "^5.2.2",
     "temporal-polyfill": "^1.0.5",
     "zod": "^4.6.5"
   },
