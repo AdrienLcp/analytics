@@ -5,7 +5,7 @@ import { createTestHarness } from 'wrangler'
 import type { PageViewBeacon } from '@analytics/protocol/page-view'
 import type { WebVitalsBeacon } from '@analytics/protocol/web-vitals'
 
-export const PORTFOLIO_ORIGIN = 'https://portfolio-9qi.pages.dev'
+export const PORTFOLIO_ORIGIN = 'https://adrienlcp.com'
 export const BROWSER_USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
 

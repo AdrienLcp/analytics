@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest'
 
 import { classifyReferrer } from './referrer'
 
-const siteHosts = ['portfolio-9qi.pages.dev']
+const siteHosts = [
+  'adrienlcp.com',
+  'www.adrienlcp.com',
+  'adrienlacourpaille.dev'
+]
 
 describe('classifyReferrer', () => {
   it('[referrer] starts a direct visit when there is no referrer', () => {
@@ -15,7 +19,16 @@ describe('classifyReferrer', () => {
   it('[referrer] continues the visit from a page of the same site', () => {
     expect(
       classifyReferrer({
-        referrer: 'https://portfolio-9qi.pages.dev/en/cv',
+        referrer: 'https://adrienlcp.com/en/cv',
+        siteHosts
+      })
+    ).toEqual({ isEntry: false, referrerHost: null })
+  })
+
+  it('[referrer] continues the visit from a host the site moved away from', () => {
+    expect(
+      classifyReferrer({
+        referrer: 'https://www.adrienlacourpaille.dev/en/cv',
         siteHosts
       })
     ).toEqual({ isEntry: false, referrerHost: null })

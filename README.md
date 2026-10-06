@@ -1,7 +1,8 @@
 # Analytics
 
 Privacy-first, self-hosted page analytics on Cloudflare Workers and D1. It
-counts page views and visits for my own sites, and the dashboard is public.
+counts page views and visits for my own sites, and the dashboard is public at
+https://analytics.adrienlcp.com.
 
 - **Nothing identifies a visitor.** No cookie, no IP address, no user agent,
   no fingerprint and no hash of any of them is stored. A row holds a path, the
@@ -16,7 +17,7 @@ counts page views and visits for my own sites, and the dashboard is public.
 ## Add it to a site
 
 ```html
-<script defer data-site="portfolio" src="https://<worker-host>/tracker.js"></script>
+<script defer data-site="portfolio" src="https://analytics.adrienlcp.com/tracker.js"></script>
 ```
 
 The site must be listed in `packages/protocol/src/site-ids.ts` and its

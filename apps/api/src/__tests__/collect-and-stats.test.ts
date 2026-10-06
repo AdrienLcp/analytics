@@ -5,7 +5,7 @@ import {
   siteStatsResponseSchema
 } from '@analytics/protocol/site-stats'
 
-import { aBeacon, createApiHarness } from './api-harness'
+import { aBeacon, createApiHarness, PORTFOLIO_ORIGIN } from './api-harness'
 
 const api = createApiHarness()
 
@@ -36,7 +36,7 @@ describe('collecting page views', () => {
     await api.sendBeacon(
       aBeacon({
         path: '/en/projects',
-        referrer: 'https://portfolio-9qi.pages.dev/'
+        referrer: 'https://adrienlcp.com/'
       })
     )
 
@@ -65,6 +65,16 @@ describe('collecting page views', () => {
     expect(stats.totals.pageViews).toBe(0)
   })
 
+  it('[collect] still counts a beacon from a host the site moved away from', async () => {
+    const response = await api.sendBeacon(aBeacon(), {
+      origin: 'https://adrienlacourpaille.dev'
+    })
+    expect(response.status).toBe(202)
+
+    const stats = await readStats()
+    expect(stats.totals.pageViews).toBe(1)
+  })
+
   it('[collect] accepts a crawler without counting it', async () => {
     const response = await api.sendBeacon(aBeacon(), {
       userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1)'
@@ -78,7 +88,7 @@ describe('collecting page views', () => {
   it('[collect] rejects a body that is not a page view', async () => {
     const malformed = await api.request('/api/collect', {
       body: '{not json',
-      headers: { Origin: 'https://portfolio-9qi.pages.dev' },
+      headers: { Origin: PORTFOLIO_ORIGIN },
       method: 'POST'
     })
     expect(malformed.status).toBe(400)

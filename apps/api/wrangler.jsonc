@@ -21,5 +21,12 @@
   "name": "analytics",
   "observability": {
     "enabled": true
-  }
+  },
+  "routes": [
+    {
+      "custom_domain": true,
+      "pattern": "analytics.adrienlcp.com"
+    }
+  ],
+  "workers_dev": true
 }
