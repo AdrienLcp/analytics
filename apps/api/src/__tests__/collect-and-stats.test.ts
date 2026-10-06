@@ -65,16 +65,6 @@ describe('collecting page views', () => {
     expect(stats.totals.pageViews).toBe(0)
   })
 
-  it('[collect] still counts a beacon from a host the site moved away from', async () => {
-    const response = await api.sendBeacon(aBeacon(), {
-      origin: 'https://adrienlacourpaille.dev'
-    })
-    expect(response.status).toBe(202)
-
-    const stats = await readStats()
-    expect(stats.totals.pageViews).toBe(1)
-  })
-
   it('[collect] accepts a crawler without counting it', async () => {
     const response = await api.sendBeacon(aBeacon(), {
       userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1)'

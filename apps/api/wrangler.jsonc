@@ -28,5 +28,5 @@
       "pattern": "analytics.adrienlcp.com"
     }
   ],
-  "workers_dev": true
+  "workers_dev": false
 }
