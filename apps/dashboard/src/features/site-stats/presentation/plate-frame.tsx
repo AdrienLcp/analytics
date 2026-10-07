@@ -1,3 +1,4 @@
+import { classNames } from '@adrienlcp/react'
 import type React from 'react'
 import { useId } from 'react'
 
@@ -32,7 +33,10 @@ export const PlateFrame: React.FC<PlateFrameProps> = ({ children, title }) => {
   return (
     <figure aria-labelledby={titleId} className='plate-frame'>
       {CORNERS.map((corner) => (
-        <RegistrationMark className={`registration ${corner}`} key={corner} />
+        <RegistrationMark
+          className={classNames('registration', corner)}
+          key={corner}
+        />
       ))}
       <PlateStamp />
       <figcaption className='plate-caption'>

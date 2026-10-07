@@ -1,3 +1,4 @@
+import { classNames } from '@adrienlcp/react'
 import type React from 'react'
 
 import './plate-notice.sass'
@@ -25,7 +26,7 @@ export const PlateNotice: React.FC<PlateNoticeProps> = ({
   isPending = false,
   title
 }) => (
-  <div className={isPending ? 'plate-notice is-pending' : 'plate-notice'}>
+  <div className={classNames('plate-notice', isPending && 'is-pending')}>
     <div className='field'>
       <div className='copy'>
         <h3>{title}</h3>

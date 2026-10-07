@@ -1,3 +1,4 @@
+import { classNames } from '@adrienlcp/react'
 import type React from 'react'
 import { useId } from 'react'
 
@@ -49,7 +50,7 @@ export const BreakdownList: React.FC<BreakdownListProps> = ({
   return (
     <section
       aria-labelledby={titleId}
-      className={`breakdown-list${className === undefined ? '' : ` ${className}`}`}
+      className={classNames('breakdown-list', className)}
     >
       <div className='list-head'>
         <h3 id={titleId}>{title}</h3>
@@ -69,14 +70,14 @@ export const BreakdownList: React.FC<BreakdownListProps> = ({
       <ol className='rows'>
         {rows.map((row, index) => (
           <li
-            className={row.isOther ? 'row other' : 'row'}
+            className={classNames('row', row.isOther && 'other')}
             key={row.isOther ? 'other' : row.key}
           >
             <span className='key'>
               {markerFor === undefined ? null : (
                 <span
                   aria-hidden='true'
-                  className={`marker ${markerOf(row, index)}`}
+                  className={classNames('marker', markerOf(row, index))}
                 />
               )}
               {row.isOther ? otherLabel : labelFor(row.key)}

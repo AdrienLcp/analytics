@@ -1,3 +1,4 @@
+import { classNames } from '@adrienlcp/react'
 import type React from 'react'
 
 import type { WebVitalMetric } from '@analytics/protocol/web-vitals'
@@ -31,9 +32,7 @@ export const ThresholdScale: React.FC<ThresholdScaleProps> = ({
   return (
     <div
       aria-hidden='true'
-      className={
-        value === null ? 'threshold-scale unmeasured' : 'threshold-scale'
-      }
+      className={classNames('threshold-scale', value === null && 'unmeasured')}
       style={{ '--good': goodShare, '--poor': poorShare }}
     >
       <div className='bands'>

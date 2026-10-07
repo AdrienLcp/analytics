@@ -1,3 +1,4 @@
+import { classNames } from '@adrienlcp/react'
 import type React from 'react'
 
 import type { TrafficBucket } from '@analytics/protocol/site-stats'
@@ -31,7 +32,11 @@ export const ChartTip: React.FC<ChartTipProps> = ({
   return (
     <div
       aria-hidden='true'
-      className={`chart-tip${bucket === undefined ? '' : ' is-shown'}${isFlipped ? ' is-flipped' : ''}`}
+      className={classNames(
+        'chart-tip',
+        bucket !== undefined && 'is-shown',
+        isFlipped && 'is-flipped'
+      )}
       style={{ '--tip-x': `${x}px` }}
     >
       {bucket === undefined ? null : (

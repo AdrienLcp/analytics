@@ -1,3 +1,4 @@
+import { classNames } from '@adrienlcp/react'
 import type React from 'react'
 
 import {
@@ -47,7 +48,7 @@ export const SiteStatsPage: React.FC = () => {
   return (
     <Main
       aria-busy={isLoading}
-      className={isLoading ? 'site-stats-page is-loading' : 'site-stats-page'}
+      className={classNames('site-stats-page', isLoading && 'is-loading')}
     >
       <div className='plate' key={site}>
         {plate()}

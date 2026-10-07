@@ -1,3 +1,4 @@
+import { classNames } from '@adrienlcp/react'
 import type React from 'react'
 
 import { useTranslate } from '@/presentation/i18n/i18n-provider'
@@ -28,7 +29,10 @@ export const Credits: React.FC<CreditsProps> = ({ credits }) => {
         <div className='credit' key={credit.label}>
           <dt>
             {credit.series === undefined ? null : (
-              <span aria-hidden='true' className={`swatch ${credit.series}`} />
+              <span
+                aria-hidden='true'
+                className={classNames('swatch', credit.series)}
+              />
             )}
             {credit.label}
           </dt>

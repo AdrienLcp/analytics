@@ -1,3 +1,4 @@
+import { classNames } from '@adrienlcp/react'
 import type React from 'react'
 import { useId } from 'react'
 
@@ -183,7 +184,10 @@ export const EmptyPlate: React.FC<EmptyPlateProps> = ({
         />
         <div className='pending-lists'>
           {PENDING_LISTS.map((list) => (
-            <section className={`pending-list ${list.span}`} key={list.title}>
+            <section
+              className={classNames('pending-list', list.span)}
+              key={list.title}
+            >
               <div className='list-head'>
                 <h3>{translate(list.title)}</h3>
                 <span className='total'>{translate('empty.recorded')}</span>
