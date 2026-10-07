@@ -39,6 +39,11 @@
         color: var(--ink)
         text-decoration-color: var(--ink)
 
+      &[data-pressed]
+        background: var(--seal)
+        color: var(--seal-ink)
+        text-decoration-color: var(--ink)
+
     .skip-link
       background: var(--ink)
       color: var(--on-ink)
@@ -52,6 +57,10 @@
 
       &:focus-visible
         transform: none
+
+      &:active
+        background: var(--seal)
+        color: var(--seal-ink)
 
     @include layout.below-narrow
       gap: var(--space-3xs) var(--space-l)

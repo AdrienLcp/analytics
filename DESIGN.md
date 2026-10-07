@@ -217,6 +217,7 @@ Square-cut, ruled, typographic.
 - **Default:** transparent with a `hair` border, `ink` text.
 - **Hover:** `seal` fill, `ink` border.
 - **Current:** `ink` fill and border, `on-ink` text; marked by `aria-current="page"` or `data-selected`.
+- **Pressed:** inked like the current choice while held, so a tap on a phone shows at once.
 - **Focus:** the shared ink ring (2px, 3px offset).
 - **Transition:** background and border at 160ms, `cubic-bezier(0.16, 1, 0.3, 1)`.
 - The same control serves as the retry and reload buttons on error screens.
@@ -244,7 +245,7 @@ Each list opens with a full-ink rule, a 22px title and a label-type total on the
 A real empty state, never sample figures: a dot-screen field (`dot`, 14px grid) behind a `ground`-backed copy block with a Headline-sized heading and the install snippet in a ruled mono block. Pending lists show dotted placeholder bars; while loading, the field breathes (2.4s) when motion is allowed.
 
 ### Navigation
-- **Masthead:** label type in `ink-2`, the registration mark and owner name in `ink`, a source link underlined in `ink-3` that goes to `ink` on hover. The owner name hides on a phone.
+- **Masthead:** label type in `ink-2`, the registration mark and owner name in `ink`, a source link underlined in `ink-3` that goes to `ink` on hover. Held down, a text link or the table's toggle sits on a `seal` tint. The owner name hides on a phone.
 - **Token bar:** sticky, `ground` fill, `hair` rules above and below, 72px tall, groups labelled in label type.
 - **Skip link:** `ink` block, revealed on focus.
 

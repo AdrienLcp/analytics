@@ -3,7 +3,8 @@
 @use './typography'
 
 /// A square-cut control in the token bar: ruled while off, filled in ink while
-/// it is the current choice, the stamp's periwinkle under the pointer.
+/// it is the current choice or held down, the stamp's periwinkle under the
+/// pointer.
 @mixin token
   @include typography.label
 
@@ -25,6 +26,9 @@
     background: var(--seal)
     border-color: var(--ink)
     color: var(--seal-ink)
+
+  &[data-pressed]
+    @include token-current
 
 /// The current choice, whichever attribute the control marks it with.
 @mixin token-current
