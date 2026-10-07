@@ -82,6 +82,7 @@ describe('collecting page views', () => {
       method: 'POST'
     })
     expect(malformed.status).toBe(400)
+    expect(await malformed.json()).toMatchObject({ code: 'invalid_input' })
 
     const withQuery = await api.sendBeacon(aBeacon({ path: 'en/cv' }))
     expect(withQuery.status).toBe(400)
@@ -101,9 +102,19 @@ describe('reading stats', () => {
   })
 
   it('[stats] refuses an unknown site or period', async () => {
-    expect((await api.request('/api/sites/nope/stats')).status).toBe(400)
+    const unknownSite = await api.request('/api/sites/nope/stats')
+    expect(unknownSite.status).toBe(400)
+    expect(await unknownSite.json()).toMatchObject({ code: 'invalid_input' })
     expect(
       (await api.request('/api/sites/portfolio/stats?period=1h')).status
     ).toBe(400)
+  })
+})
+
+describe('answering what is not a route', () => {
+  it('[api] answers an unknown API path with a not_found body', async () => {
+    const response = await api.request('/api/nowhere')
+    expect(response.status).toBe(404)
+    expect(await response.json()).toMatchObject({ code: 'not_found' })
   })
 })

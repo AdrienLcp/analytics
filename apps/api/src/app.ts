@@ -1,23 +1,41 @@
 import { Hono } from 'hono'
 
+import { createPageViewStore } from '@/domain/page-view/page-view-store'
+import { createSiteTrafficStore } from '@/domain/site-stats/site-stats-store'
+import { createWebVitalsStore } from '@/domain/web-vitals/web-vitals-store'
 import { registerCollectRoute } from '@/infrastructure/http/collect-route'
+import {
+  answerUnexpected,
+  notFoundBody
+} from '@/infrastructure/http/error-responses'
 import { registerSiteStatsRoute } from '@/infrastructure/http/site-stats-route'
 import { registerWebVitalsRoute } from '@/infrastructure/http/web-vitals-route'
-import type { WorkerEnv } from '@/infrastructure/http/worker-env'
-import { logger } from '@/infrastructure/logging/logger'
+import type { Stores, WorkerApp } from '@/infrastructure/http/worker-env'
 
-/** Built once per isolate by `index.ts`, and on demand by the tests, which hand it a local D1. */
-export const createApp = () => {
-  const app = new Hono<WorkerEnv>()
+const storesOf = (env: Env): Stores => ({
+  pageViews: createPageViewStore(env.DB),
+  siteTraffic: createSiteTrafficStore(env.DB),
+  webVitals: createWebVitalsStore(env.DB)
+})
+
+/**
+ * The composition root: the only reader of `env`, it builds every store per
+ * request. Built once per isolate by `index.ts`, and by the tests.
+ */
+export const createApp = (): WorkerApp => {
+  const app: WorkerApp = new Hono()
+
+  app.use(async (context, next) => {
+    context.set('stores', storesOf(context.env))
+    await next()
+  })
 
   registerCollectRoute(app)
   registerSiteStatsRoute(app)
   registerWebVitalsRoute(app)
 
-  app.onError((error, context) => {
-    logger.error('Unhandled error', { error: String(error) })
-    return context.json({ code: 'internal', message: 'Unexpected error' }, 500)
-  })
+  app.notFound((context) => context.json(notFoundBody, 404))
+  app.onError(answerUnexpected)
 
   return app
 }

@@ -1,6 +1,6 @@
 import { zValidator } from '@hono/zod-validator'
-import type { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import type { ContentfulStatusCode } from 'hono/utils/http-status'
 import { z } from 'zod'
 
 import { API_ROUTES } from '@analytics/protocol/routes'
@@ -10,38 +10,38 @@ import {
   siteStatsQuerySchema
 } from '@analytics/protocol/site-stats'
 
-import { readSiteStats } from '@/domain/site-stats/site-stats-service'
+import {
+  type ReadSiteStatsError,
+  readSiteStats
+} from '@/domain/site-stats/site-stats-service'
 import { now } from '@/infrastructure/clock'
-import type { WorkerEnv } from '@/infrastructure/http/worker-env'
+import { invalidInput } from '@/infrastructure/http/error-responses'
+import type { WorkerApp } from '@/infrastructure/http/worker-env'
 
 /** Short enough that a visitor reloading the dashboard sees their own page view. */
 const STATS_MAX_AGE_SECONDS = 60
 
-const invalidRequest: ApiErrorResponse = {
-  code: 'invalid_request',
-  message: 'Unknown site or period'
-}
+const readSiteStatsErrorStatus = {
+  storage_unavailable: 503
+} as const satisfies Record<ReadSiteStatsError, ContentfulStatusCode>
 
 /**
  * Public on purpose: the dashboard is a live demo, and the numbers hold nothing
  * about anyone, so any page may read them.
  */
-export const registerSiteStatsRoute = (app: Hono<WorkerEnv>) => {
+export const registerSiteStatsRoute = (app: WorkerApp) => {
   app.get(
     API_ROUTES.siteStats,
     cors({ origin: '*' }),
-    zValidator('param', z.object({ site: siteIdSchema }), (parsed, context) =>
-      parsed.success ? undefined : context.json(invalidRequest, 400)
-    ),
-    zValidator('query', siteStatsQuerySchema, (parsed, context) =>
-      parsed.success ? undefined : context.json(invalidRequest, 400)
-    ),
+    zValidator('param', z.object({ site: siteIdSchema }), invalidInput),
+    zValidator('query', siteStatsQuerySchema, invalidInput),
     async (context) => {
       const stats = await readSiteStats({
-        database: context.env.DB,
         now: now(),
         period: context.req.valid('query').period,
-        site: context.req.valid('param').site
+        site: context.req.valid('param').site,
+        siteTraffic: context.var.stores.siteTraffic,
+        webVitals: context.var.stores.webVitals
       })
 
       if (stats.status === 'failure') {
@@ -50,7 +50,7 @@ export const registerSiteStatsRoute = (app: Hono<WorkerEnv>) => {
           message: 'The stats are unavailable right now'
         }
 
-        return context.json(error, 503)
+        return context.json(error, readSiteStatsErrorStatus[stats.error])
       }
 
       context.header(

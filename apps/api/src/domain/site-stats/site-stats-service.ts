@@ -7,41 +7,41 @@ import type {
 } from '@analytics/protocol/site-stats'
 
 import { summarizeWebVitals } from '@/domain/web-vitals/web-vital-buckets'
-import { readWebVitalBuckets } from '@/domain/web-vitals/web-vitals-store'
+import type { WebVitalsStore } from '@/domain/web-vitals/web-vitals-store'
 
 import { toSiteStats } from './site-stats'
-import { readSiteTraffic } from './site-stats-store'
+import type { SiteTrafficStore } from './site-stats-store'
 import { statsWindowFor } from './stats-window'
 
+export type ReadSiteStatsError = 'storage_unavailable'
+
 export const readSiteStats = async ({
-  database,
   now,
   period,
-  site
+  site,
+  siteTraffic,
+  webVitals
 }: {
-  database: D1Database
   now: Temporal.Instant
   period: StatsPeriod
   site: SiteId
-}): Promise<Result<SiteStatsResponse, 'storage_unavailable'>> => {
+  siteTraffic: SiteTrafficStore
+  webVitals: WebVitalsStore
+}): Promise<Result<SiteStatsResponse, ReadSiteStatsError>> => {
   const window = statsWindowFor({ now, period })
-  const [read, webVitals] = await Promise.all([
-    readSiteTraffic({ database, site, window }),
-    readWebVitalBuckets({
-      database,
-      sinceDay: window.sinceDay,
-      site
-    })
+  const [read, measured] = await Promise.all([
+    siteTraffic.read({ site, window }),
+    webVitals.read({ sinceDay: window.sinceDay, site })
   ])
   if (read.status === 'failure') return read
-  if (webVitals.status === 'failure') return webVitals
+  if (measured.status === 'failure') return measured
 
   return Result.success(
     toSiteStats({
       breakdowns: read.data.breakdowns,
       period,
       traffic: read.data.traffic,
-      webVitals: summarizeWebVitals(webVitals.data),
+      webVitals: summarizeWebVitals(measured.data),
       window
     })
   )

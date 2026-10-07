@@ -11,7 +11,7 @@ import { isOriginOfSite } from '@/domain/site/site-origins'
 import { toUtcDay } from '@/infrastructure/dates'
 
 import { bucketOfMeasurement } from './web-vital-buckets'
-import { incrementWebVitalBuckets } from './web-vitals-store'
+import type { WebVitalsStore } from './web-vitals-store'
 
 export type RecordWebVitalsError = 'foreign_origin' | 'storage_unavailable'
 
@@ -22,16 +22,16 @@ export type RecordWebVitalsOutcome =
 
 export const recordWebVitals = async ({
   beacon,
-  database,
   origin,
   receivedAt,
-  userAgent
+  userAgent,
+  webVitals
 }: {
   beacon: WebVitalsBeacon
-  database: D1Database
   origin: string | null
   receivedAt: Temporal.Instant
   userAgent: string | null
+  webVitals: WebVitalsStore
 }): Promise<Result<RecordWebVitalsOutcome, RecordWebVitalsError>> => {
   if (origin === null || !isOriginOfSite({ origin, site: beacon.site })) {
     return Result.failure('foreign_origin')
@@ -48,9 +48,8 @@ export const recordWebVitals = async ({
 
   if (buckets.length === 0) return Result.success('nothing_measured')
 
-  const stored = await incrementWebVitalBuckets({
+  const stored = await webVitals.increment({
     buckets,
-    database,
     day: toUtcDay(receivedAt),
     device: deviceForViewport(beacon.viewportWidth),
     path: beacon.path,

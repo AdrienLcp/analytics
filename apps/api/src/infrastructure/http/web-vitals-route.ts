@@ -1,5 +1,5 @@
-import type { Hono } from 'hono'
 import { bodyLimit } from 'hono/body-limit'
+import type { ContentfulStatusCode } from 'hono/utils/http-status'
 
 import { API_ROUTES } from '@analytics/protocol/routes'
 import type { ApiErrorResponse } from '@analytics/protocol/site-stats'
@@ -11,20 +11,16 @@ import {
 } from '@/domain/web-vitals/web-vitals-service'
 import { now } from '@/infrastructure/clock'
 import { MAX_BEACON_BYTES, parseJson } from '@/infrastructure/http/beacon-body'
-import type { WorkerEnv } from '@/infrastructure/http/worker-env'
+import { invalidInputBody } from '@/infrastructure/http/error-responses'
+import type { WorkerApp } from '@/infrastructure/http/worker-env'
 
 const recordWebVitalsErrorStatus = {
   foreign_origin: 403,
   storage_unavailable: 503
-} as const satisfies Record<RecordWebVitalsError, number>
-
-const invalidBeacon: ApiErrorResponse = {
-  code: 'invalid_beacon',
-  message: 'The beacon is not a Web Vitals report'
-}
+} as const satisfies Record<RecordWebVitalsError, ContentfulStatusCode>
 
 /** Sent like a page view: a `text/plain` beacon nobody reads the answer to. */
-export const registerWebVitalsRoute = (app: Hono<WorkerEnv>) => {
+export const registerWebVitalsRoute = (app: WorkerApp) => {
   app.post(
     API_ROUTES.webVitals,
     bodyLimit({ maxSize: MAX_BEACON_BYTES }),
@@ -32,14 +28,14 @@ export const registerWebVitalsRoute = (app: Hono<WorkerEnv>) => {
       const beacon = webVitalsBeaconSchema.safeParse(
         parseJson(await context.req.text())
       )
-      if (!beacon.success) return context.json(invalidBeacon, 400)
+      if (!beacon.success) return context.json(invalidInputBody, 400)
 
       const recorded = await recordWebVitals({
         beacon: beacon.data,
-        database: context.env.DB,
         origin: context.req.header('Origin') ?? null,
         receivedAt: now(),
-        userAgent: context.req.header('User-Agent') ?? null
+        userAgent: context.req.header('User-Agent') ?? null,
+        webVitals: context.var.stores.webVitals
       })
 
       if (recorded.status === 'failure') {

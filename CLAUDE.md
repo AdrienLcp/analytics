@@ -5,14 +5,17 @@ Personal project (`github.com/AdrienLcp`): conventions come from
 
 ## Where it departs from toolkit
 
-- **Hono, not Express.** The API runs on Cloudflare Workers, where Express does
-  not run. The layering of `backend.md` holds: `domain/<feature>/` with
-  service, store and rules; routes in `infrastructure/http/`.
-- **No `env.ts`.** A Worker has no `process.env`: bindings arrive per request
-  as `context.env`, typed by the generated `worker-configuration.d.ts`. Rerun
-  `pnpm --filter @analytics/api cf-typegen` after changing `wrangler.jsonc`.
-- **The D1 binding is handed to each store call**, since it only exists inside
-  a request.
+The API follows `backend.md` and `workers.md` as written: `app.ts` builds the
+stores from `context.env` per request, routes read them from `context.var`, and
+`build` fails on a stale `worker-configuration.d.ts` — rerun
+`pnpm --filter @analytics/api cf-typegen` after changing `wrangler.jsonc` or
+bumping wrangler.
+
+- **The beacon routes read their body as text**: `navigator.sendBeacon` posts
+  `text/plain`, which no `zValidator` target reads, so the handler
+  `safeParse`s it and answers the shared `invalid_input` body itself.
+- **The tracker keeps a local `try/catch`** where `Result` would outweigh the
+  script (`errors.md`, embedded scripts).
 
 ## Build order
 
