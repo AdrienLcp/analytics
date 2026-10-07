@@ -17,8 +17,10 @@
 
       align-items: center
       display: flex
-      gap: var(--space-5xl)
+      flex-wrap: wrap
+      gap: var(--space-xs) var(--space-5xl)
       min-height: var(--token-bar-height)
+      padding-block: var(--space-s)
 
     .group
       align-items: center
@@ -44,9 +46,7 @@
 
     @include layout.below-medium
       .bar-inner
-        flex-wrap: wrap
-        gap: var(--space-xs) var(--space-2xl)
-        padding-block: var(--space-s)
+        column-gap: var(--space-2xl)
 
     @include layout.below-narrow
       .bar-inner

@@ -188,7 +188,7 @@ A centred measure (max 1440px) with a side margin (`side`) and a twelve-column g
 
 - **Wide (> 1100px):** side 56px, gutter 40px. Titles take columns 1-7 or 1-8; their lede sits beside them in columns 9-12, aligned to the baseline end.
 - **Below 1100px:** side 40px, gutter 28px. Titles go full width, the lede drops beneath at 8 columns; third-width lists become half-width.
-- **Below 860px:** side 24px, gutter 20px, stamp 104px. Credits fold to two per row, the token bar wraps, every list goes full width.
+- **Below 860px:** side 24px, gutter 20px, stamp 104px. Credits fold to two per row and every list goes full width. The token bar wraps its groups onto a second row wherever they do not fit on one.
 - **Below 560px:** side 16px, stamp 88px, body 16px. Token-bar controls stretch to fill the row at 40px tall; group labels become visually hidden.
 
 Vertical rhythm is large and repeated: 88px above a plate head and a plate frame, 120px above a section head and the footer, 140px above the colophon (each shrinking by roughly a quarter on a phone). Inside sections, 12-28px steps.
