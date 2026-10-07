@@ -24,6 +24,9 @@ const useRouterHref = (href: string): string => {
   return URL.canParse(href) ? href : routeHref
 }
 
+/** Handed to `RouterProvider` from module scope: the React Compiler skips a component that passes a hook as a value. */
+const hrefResolution = { useHref: useRouterHref }
+
 /**
  * A navigation superseded by the next one rejects with `AbortError`: expected
  * control flow when the period is switched twice in a row, not a failure.
@@ -47,7 +50,7 @@ export const RootRoute: React.FC = () => {
           })
         ).catch(ignoreSupersededNavigation)
       }}
-      useHref={useRouterHref}
+      {...hrefResolution}
     >
       <AppShell>
         <Outlet />
