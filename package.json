@@ -3,12 +3,12 @@
   "devDependencies": {
     "@adrienlcp/biome-config": "^0.2.1",
     "@adrienlcp/tsconfig": "^0.1.1",
-    "@biomejs/biome": "2.5.14",
+    "@biomejs/biome": "2.5.15",
     "@cspell/dict-fr-fr": "^2.3.2",
-    "@vitest/coverage-v8": "~5.0.2",
+    "@vitest/coverage-v8": "~5.0.3",
     "cspell": "^10.3.6",
     "typescript": "^7.0.2",
-    "vitest": "~5.0.2"
+    "vitest": "~5.0.3"
   },
   "engines": {
     "node": ">=26.0.0",
