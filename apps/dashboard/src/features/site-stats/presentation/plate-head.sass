@@ -9,11 +9,9 @@
     padding-top: var(--space-page-top)
 
     h1
-      @include typography.headline
+      @include typography.display
 
-      font-size: clamp(56px, 8.2vw, 92px)
       grid-column: 1 / span 8
-      line-height: 0.94
       overflow-wrap: anywhere
 
     .lede
@@ -40,7 +38,7 @@
       .lede
         grid-column: 1 / span 8
         margin-top: var(--space-2xl)
-        max-width: 56ch
+        max-width: var(--measure-lede-wide)
 
     @include layout.below-medium
       .lede

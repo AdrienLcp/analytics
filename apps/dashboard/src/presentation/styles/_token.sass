@@ -6,7 +6,7 @@
 /// it is the current choice or held down, the stamp's periwinkle under the
 /// pointer.
 @mixin token
-  @include typography.label
+  @include typography.control-label
 
   align-items: center
   background: transparent
@@ -16,10 +16,9 @@
   display: inline-flex
   height: var(--control-m)
   justify-content: center
-  line-height: 1
   padding: 0 var(--space-m)
   text-decoration: none
-  transition: background-color var(--transition-fast, 0) var(--ease-out), border-color var(--transition-fast, 0) var(--ease-out)
+  transition: background-color var(--transition-fast, 0s) var(--ease-out), border-color var(--transition-fast, 0s) var(--ease-out)
   white-space: nowrap
 
   &[data-hovered]

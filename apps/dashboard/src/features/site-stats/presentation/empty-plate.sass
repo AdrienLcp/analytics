@@ -7,10 +7,11 @@
       margin: var(--space-2xl) 0 0
 
       pre
+        @include typography.snippet
+
         background: var(--ground)
         border: var(--hairline)
         color: var(--ink)
-        font: 400 var(--text-xs)/1.6 var(--font-mono)
         overflow-wrap: anywhere
         padding: var(--space-m) var(--space-l)
         user-select: all
@@ -23,13 +24,12 @@
         margin-top: var(--space-xs)
 
     .empty-zero
-      @include typography.axis
+      @include typography.axis-solid
 
       background: var(--ground)
       bottom: var(--space-2xs)
       color: var(--ink-2)
       left: 0
-      line-height: 1
       padding: var(--space-5xs) var(--space-3xs) var(--space-5xs) 0
       position: absolute
 

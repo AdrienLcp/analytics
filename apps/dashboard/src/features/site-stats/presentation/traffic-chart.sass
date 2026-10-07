@@ -19,9 +19,7 @@
 
     .end-label,
     .end-value
-      font-family: var(--font-sans)
-      font-size: var(--text-s)
-      letter-spacing: 0
+      @include typography.plot-figure
 
     .end-value
       fill: var(--ink)
@@ -80,21 +78,21 @@
 
     .active-band
       fill: var(--seal)
-      opacity: 0.55
+      opacity: var(--opacity-dimmed)
 
     .chart-tip
       background: var(--ink)
       box-shadow: var(--shadow-lift)
       color: var(--on-ink)
       left: 0
-      min-width: 168px
+      min-width: 10.5rem
       opacity: 0
       padding: var(--space-s) var(--space-m)
       pointer-events: none
       position: absolute
       top: var(--space-xl)
       transform: translate(calc(var(--tip-x) + var(--space-l)), var(--space-4xs))
-      transition: opacity var(--transition-fast, 0) var(--ease-out), transform var(--transition-fast, 0) var(--ease-out)
+      transition: opacity var(--transition-fast, 0s) var(--ease-out), transform var(--transition-fast, 0s) var(--ease-out)
       z-index: 3
 
       &.is-shown

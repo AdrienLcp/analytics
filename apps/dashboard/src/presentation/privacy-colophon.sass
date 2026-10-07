@@ -9,7 +9,7 @@
       @include layout.grid
 
       border-top: var(--hairline-strong)
-      margin-top: 140px
+      margin-top: var(--space-colophon)
       padding-top: var(--space-2xl)
       row-gap: var(--space-5xl)
 
@@ -37,20 +37,19 @@
 
       svg
         height: var(--icon-s)
-        margin-top: 5px
+        margin-top: 0.3125rem
         width: var(--icon-s)
 
     small
       color: var(--ink-2)
       display: block
-      font-size: var(--text-m)
-      line-height: 1.45
+      @include typography.colophon-note
       margin-top: var(--space-5xs)
 
     .definition
       color: var(--ink-2)
       grid-column: 5 / span 8
-      max-width: 70ch
+      max-width: var(--measure-colophon)
 
     @include layout.below-wide
       h2,
@@ -63,7 +62,3 @@
     @include layout.below-medium
       .list
         grid-column: 1 / -1
-
-    @include layout.below-narrow
-      .colophon
-        margin-top: 100px

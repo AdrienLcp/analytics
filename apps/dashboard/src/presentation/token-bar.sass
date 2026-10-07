@@ -18,7 +18,7 @@
       align-items: center
       display: flex
       gap: var(--space-5xl)
-      min-height: var(--space-8xl)
+      min-height: var(--token-bar-height)
 
     .group
       align-items: center
@@ -72,8 +72,9 @@
 
       .token
         flex: 1 1 auto
+        @include typography.control-label-compact
+
         height: var(--control-l)
-        letter-spacing: 0.1em
         min-width: 0
         padding: 0 var(--space-2xs)
 

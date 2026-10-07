@@ -2,6 +2,7 @@
 
 @use '@adrienlcp/styles/reset.css'
 @use '@adrienlcp/styles/reduced-motion.css'
+@use './focus'
 @use './fonts'
 @use './layout'
 @use './tokens'
@@ -18,9 +19,9 @@
   body
     background: radial-gradient(110% 70% at 0% 0%, var(--edge-warm) 0%, transparent 60%), radial-gradient(110% 70% at 100% 100%, var(--edge-green) 0%, transparent 60%), var(--ground)
     background-attachment: fixed
+    @include typography.body
+
     color: var(--ink)
-    font: 400 var(--text-body)/1.55 var(--font-sans)
-    font-variant-numeric: tabular-nums
     min-height: 100dvh
     overflow-x: clip
     text-rendering: optimizeLegibility
@@ -35,9 +36,8 @@
   :focus
     outline: none
 
-  :focus-visible
-    outline: var(--ring)
-    outline-offset: var(--ring-offset)
+  *
+    @include focus.ring
 
   a
     @include typography.underline
@@ -54,11 +54,11 @@
 
   strong, b
     color: var(--ink)
-    font-weight: 400
+    font-weight: inherit
 
 @keyframes plate-rise
   from
-    opacity: 0.35
+    opacity: var(--opacity-faint)
     transform: translateY(6px)
   to
     opacity: 1

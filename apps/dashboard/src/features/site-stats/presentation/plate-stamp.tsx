@@ -4,6 +4,8 @@ import { useId } from 'react'
 import { useTranslate } from '@/presentation/i18n/i18n-provider'
 
 const RING_TEXT_LENGTH = 312
+const RING_FONT_SIZE = 9.4
+const RING_LETTER_SPACING = 1.1
 
 /**
  * The annual's seal, pressed over the plate's top edge: the privacy promise
@@ -31,7 +33,7 @@ export const PlateStamp: React.FC = () => {
         />
       </defs>
       <g className='ring'>
-        <text>
+        <text fontSize={RING_FONT_SIZE} letterSpacing={RING_LETTER_SPACING}>
           <textPath
             href={`#${ringId}`}
             lengthAdjust='spacing'

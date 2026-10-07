@@ -1,17 +1,60 @@
-// Pure module: mixins only.
+// Pure module: mixins only. The one place a weight, a line-height or a
+// tracking is written: a component includes a voice, never sets one.
+
+/// Running text: the body's voice, every number in a column lined up.
+@mixin body
+  font: 400 var(--text-body)/1.55 var(--font-sans)
+  font-variant-numeric: tabular-nums
+
+/// The line under a figure, a legend, a note.
+@mixin body-small
+  font-size: var(--text-m)
+  letter-spacing: 0
+  line-height: 1.4
+
+/// A note in the closing colophon, a touch more open than a footnote.
+@mixin colophon-note
+  font-size: var(--text-m)
+  line-height: 1.45
 
 /// The chart's small mono voice: axis ticks, scale marks, counts on a plot.
 @mixin axis
   font: 400 var(--text-2xs)/1.3 var(--font-mono)
-  letter-spacing: 0.06em
+  letter-spacing: var(--tracking-axis)
+
+/// The axis voice set solid, for a mark that sits on a line of the plot.
+@mixin axis-solid
+  @include axis
+
+  line-height: 1
 
 /// The annual's caption voice: small mono capitals, widely tracked. For labels,
 /// axes and meta lines — never for a sentence someone has to read.
 @mixin label
   @include axis
 
-  letter-spacing: 0.14em
+  letter-spacing: var(--tracking-caps)
   text-transform: uppercase
+
+/// The caption voice set solid, centred in a control of fixed height.
+@mixin control-label
+  @include label
+
+  line-height: 1
+
+/// The control label tracked tighter, for a token squeezed on a phone.
+@mixin control-label-compact
+  letter-spacing: var(--tracking-caps-compact)
+
+/// A snippet to copy, in the mono face at reading size.
+@mixin snippet
+  font: 400 var(--text-xs)/1.6 var(--font-mono)
+
+/// A figure written on the plot itself, in the body face.
+@mixin plot-figure
+  font-family: var(--font-sans)
+  font-size: var(--text-s)
+  letter-spacing: 0
 
 /// What every headline shares: light weight, tight tracking, balanced lines.
 @mixin headline
@@ -19,19 +62,46 @@
   letter-spacing: var(--tracking-tight)
   text-wrap: balance
 
+/// The site's name heading its plate, the largest type on the page.
+@mixin display
+  @include headline
+
+  font-size: var(--text-display)
+  line-height: 0.94
+
 /// A headline set like a section title in the annual: large, light, tight.
 @mixin section-title
   @include headline
 
-  font-size: clamp(36px, 4.4vw, 56px)
+  font-size: var(--text-headline)
   line-height: 1
 
 /// The title of a page that has no plate to show: not found, or broken.
 @mixin screen-title
   @include headline
 
-  font-size: clamp(44px, 6vw, 72px)
+  font-size: var(--text-screen-title)
   line-height: 1
+
+/// The heading of a notice set in a plate's field: empty, or still waiting.
+@mixin notice-title
+  @include headline
+
+  font-size: var(--text-notice)
+  line-height: 1.05
+
+/// One of the credits' figures beneath a plate.
+@mixin figure
+  font-size: var(--text-figure)
+  letter-spacing: var(--tracking-tight)
+  line-height: 1
+
+/// The plate's own caption, beside its legend.
+@mixin plate-caption
+  font-size: var(--text-xl)
+  font-weight: 400
+  letter-spacing: var(--tracking-snug)
+  line-height: 1.15
 
 /// A list's or a figure's own title, under the section that holds it.
 @mixin title-small

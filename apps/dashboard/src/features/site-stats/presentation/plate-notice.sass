@@ -8,7 +8,7 @@
 
     .field
       border-bottom: var(--stroke-hair) solid var(--ink-3)
-      min-height: 380px
+      min-height: 23.75rem
       padding: var(--space-5xl) 0 var(--space-7xl)
       position: relative
 
@@ -21,15 +21,12 @@
 
     .copy
       background: var(--ground)
-      max-width: 620px
+      max-width: 38.75rem
       padding: var(--space-3xl) var(--space-4xl) var(--space-3xl) 0
       position: relative
 
     h3
-      @include typography.headline
-
-      font-size: clamp(30px, 3.4vw, 44px)
-      line-height: 1.05
+      @include typography.notice-title
 
     p
       color: var(--ink-2)

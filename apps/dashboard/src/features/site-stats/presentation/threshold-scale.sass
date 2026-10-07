@@ -2,6 +2,8 @@
 
 @layer components
   .threshold-scale
+    --mark-height: 1.125rem
+
     margin-top: var(--space-2xl)
     position: relative
 
@@ -14,7 +16,7 @@
 
       &.good
         background: var(--ink-3)
-        opacity: 0.35
+        opacity: var(--opacity-faint)
         width: calc(var(--good) * 100%)
 
       &.needs-improvement
@@ -31,18 +33,18 @@
 
     .marker
       background: var(--ink)
-      height: 18px
+      height: var(--mark-height)
       left: calc(var(--at) * 100%)
       position: absolute
       top: calc(var(--bar) * -1)
-      transform: translateX(-1px)
+      transform: translateX(calc(var(--stroke-bold) / -2))
       width: var(--stroke-bold)
 
     .ticks
       @include typography.axis
 
       color: var(--ink-3)
-      height: 18px
+      height: var(--mark-height)
       margin-top: var(--space-3xs)
       position: relative
 

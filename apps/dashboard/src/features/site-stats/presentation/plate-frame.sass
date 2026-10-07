@@ -1,9 +1,10 @@
 @use '@/presentation/styles/layout'
+@use '@/presentation/styles/typography'
 
 @layer components
   .plate-frame
     border: var(--hairline)
-    margin: var(--space-9xl) 0 0
+    margin: var(--space-plate) 0 0
     padding: var(--space-4xl) var(--space-4xl) var(--space-xl)
     position: relative
 
@@ -48,7 +49,7 @@
       .rule
         fill: none
         stroke: var(--seal-ink)
-        stroke-opacity: 0.35
+        stroke-opacity: var(--opacity-faint)
 
       .ring
         transform-origin: 50% 50%
@@ -59,8 +60,6 @@
       text
         fill: var(--seal-ink)
         font-family: var(--font-mono)
-        font-size: 9.4px
-        letter-spacing: 1.1px
         text-transform: uppercase
 
       .mark
@@ -76,10 +75,7 @@
       padding-right: calc(var(--stamp) + var(--space-5xl))
 
       h2
-        font-size: var(--text-xl)
-        font-weight: 400
-        letter-spacing: -0.01em
-        line-height: 1.15
+        @include typography.plate-caption
 
     .legend
       color: var(--ink-2)
@@ -104,7 +100,6 @@
           background: repeating-linear-gradient(to right, var(--visits) 0 6px, transparent 6px 11px)
 
     @include layout.below-narrow
-      margin-top: var(--space-8xl)
       padding: var(--space-2xl) var(--space-l) var(--space-m)
 
       .plate-stamp
