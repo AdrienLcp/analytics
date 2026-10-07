@@ -52,10 +52,8 @@
         stroke-opacity: var(--opacity-faint)
 
       .ring
+        animation: stamp-turn 48s linear infinite
         transform-origin: 50% 50%
-
-        @media (prefers-reduced-motion: no-preference)
-          animation: stamp-turn 48s linear infinite
 
       text
         fill: var(--seal-ink)

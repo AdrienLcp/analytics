@@ -122,7 +122,7 @@ The privacy claim is part of the visual system: the page ends on a colophon of w
 - Two data colours only: periwinkle for page views, terracotta for visits.
 - Everything set at weight 400; hierarchy comes from size, tracking and ink strength.
 - Square corners everywhere except the rounded ends of data bars.
-- One periwinkle stamp per plate, rotating once every 48s when motion is allowed.
+- One periwinkle stamp per plate, rotating once every 48s; still under reduced motion.
 
 ## Colors
 
@@ -242,7 +242,7 @@ The three Core Web Vitals (LCP, INP, CLS) as a second row of credits after the l
 Each list opens with a full-ink rule, a 22px title and a label-type total on the same baseline. Rows are a three-column grid (key, count, share at 4.6em) divided by `hair` rules, with a 6px share bar beneath in periwinkle (`ink-3` for the "other" row). Row hover underlines the key in `hair`.
 
 ### Empty and pending states
-A real empty state, never sample figures: a dot-screen field (`dot`, 14px grid) behind a `ground`-backed copy block with a Headline-sized heading and the install snippet in a ruled mono block. Pending lists show dotted placeholder bars; while loading, the field breathes (2.4s) when motion is allowed.
+A real empty state, never sample figures: a dot-screen field (`dot`, 14px grid) behind a `ground`-backed copy block with a Headline-sized heading and the install snippet in a ruled mono block. Pending lists show dotted placeholder bars; while loading, the field breathes (2.4s), and holds still under reduced motion: the dotted bars and the copy say it is waiting.
 
 ### Navigation
 - **Masthead:** label type in `ink-2`, the registration mark and owner name in `ink`, a source link underlined in `ink-3` that goes to `ink` on hover. Held down, a text link or the table's toggle sits on a `seal` tint. The owner name hides on a phone.
@@ -261,7 +261,7 @@ The page's closing section: a full-ink rule, a Headline title in four columns, t
 - **Do** set every weight at 400 and build hierarchy from size, tracking and `ink`/`ink-2`/`ink-3`.
 - **Do** let the axis tick count follow the available width.
 - **Do** align repeated figure blocks with subgrid rather than fixed heights.
-- **Do** gate every animation (stamp rotation, plate rise, breathing field) behind `prefers-reduced-motion: no-preference`.
+- **Do** leave reduced motion to `@adrienlcp/styles/reduced-motion.css`: it ends the stamp rotation, the plate rise and the breathing field at once, so no component gates its own animation.
 - **Do** show the honest number, including zero, and a real empty state when there is no data.
 
 ### Don't:
