@@ -1,6 +1,6 @@
+import { reloadPage } from '@adrienlcp/browser'
 import type React from 'react'
 
-import { reloadPage } from '@/infrastructure/browser'
 import { reportRenderFailure } from '@/infrastructure/diagnostics'
 import { useRouteFailure } from '@/infrastructure/router/navigation'
 import { Button } from '@/presentation/components/button'

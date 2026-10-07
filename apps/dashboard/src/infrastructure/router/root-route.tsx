@@ -1,3 +1,4 @@
+import { prefersReducedMotion } from '@adrienlcp/browser'
 import type React from 'react'
 import {
   type NavigateOptions,
@@ -7,7 +8,6 @@ import {
   useNavigate
 } from 'react-router'
 
-import { prefersReducedMotion } from '@/infrastructure/browser'
 import { AppShell } from '@/presentation/app-shell'
 import { RouterProvider } from '@/presentation/components/router-provider'
 
