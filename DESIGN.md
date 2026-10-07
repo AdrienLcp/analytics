@@ -21,68 +21,68 @@ colors:
 typography:
   display:
     fontFamily: "Familjen Grotesk, Helvetica Neue, sans-serif"
-    fontSize: "clamp(56px, 8.2vw, 92px)"
+    fontSize: "clamp(3.5rem, 2.75rem + 3.75vw, 5.75rem)"
     fontWeight: 400
     lineHeight: 0.94
     letterSpacing: "-0.02em"
   headline:
     fontFamily: "Familjen Grotesk, Helvetica Neue, sans-serif"
-    fontSize: "clamp(36px, 4.4vw, 56px)"
+    fontSize: "clamp(2.25rem, 1.8333rem + 2.0833vw, 3.5rem)"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "-0.02em"
   figure:
     fontFamily: "Familjen Grotesk, Helvetica Neue, sans-serif"
-    fontSize: "clamp(40px, 4.4vw, 60px)"
+    fontSize: "clamp(2.5rem, 2.0833rem + 2.0833vw, 3.75rem)"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "-0.02em"
     fontFeature: "tnum"
   title:
     fontFamily: "Familjen Grotesk, Helvetica Neue, sans-serif"
-    fontSize: "22px"
+    fontSize: "1.375rem"
     fontWeight: 400
     lineHeight: 1.2
   body:
     fontFamily: "Familjen Grotesk, Helvetica Neue, sans-serif"
-    fontSize: "17px"
+    fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.55
     fontFeature: "tnum"
   body-small:
     fontFamily: "Familjen Grotesk, Helvetica Neue, sans-serif"
-    fontSize: "15px"
+    fontSize: "0.9375rem"
     fontWeight: 400
     lineHeight: 1.4
   label:
     fontFamily: "Geist Mono, ui-monospace, SFMono-Regular, monospace"
-    fontSize: "11px"
+    fontSize: "0.6875rem"
     fontWeight: 400
     lineHeight: 1.3
     letterSpacing: "0.14em"
   axis:
     fontFamily: "Geist Mono, ui-monospace, SFMono-Regular, monospace"
-    fontSize: "11px"
+    fontSize: "0.6875rem"
     fontWeight: 400
     letterSpacing: "0.06em"
 rounded:
   none: "0"
   bar-end: "3px"
 spacing:
-  side: "56px"
-  gutter: "40px"
+  side: "3.5rem"
+  gutter: "2.5rem"
   stamp: "132px"
-  wrap-max-width: "1440px"
-  section: "120px"
-  plate: "88px"
+  wrap-max-width: "90rem"
+  section: "7.5rem"
+  plate: "5.5rem"
 components:
   token:
     backgroundColor: "transparent"
     textColor: "{colors.ink}"
     typography: "{typography.label}"
     rounded: "{rounded.none}"
-    padding: "0 14px"
-    height: "34px"
+    padding: "0 0.875rem"
+    height: "2.125rem"
   token-hover:
     backgroundColor: "{colors.seal}"
     textColor: "{colors.ink}"
@@ -93,15 +93,15 @@ components:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.on-ink}"
     rounded: "{rounded.none}"
-    padding: "12px 14px"
-    width: "168px"
+    padding: "0.75rem 0.875rem"
+    width: "10.5rem"
   credit:
     textColor: "{colors.ink}"
     typography: "{typography.figure}"
-    padding: "20px 24px 26px"
+    padding: "1.25rem 1.5rem 1.5rem"
   plate-frame:
     rounded: "{rounded.none}"
-    padding: "32px 32px 20px"
+    padding: "2rem 2rem 1.25rem"
 ---
 
 # Design System: Analytics
@@ -159,12 +159,14 @@ A near-monochrome print palette, ink on paper, with two data hues and a pale per
 **Body Font:** Familjen Grotesk
 **Label/Mono Font:** Geist Mono (with ui-monospace, SFMono-Regular, monospace)
 
+**Sizes:** every text size and spacing is set in rem, so it follows the reader's font size and zoom; the px figures in this document are their size at the default 16px. The display sizes grow with the screen through `sizes.fluid()` between those bounds, from a 320px to a 1280px wide window; body and UI text stay fixed. The steps are `--text-2xs` (11px), `xs` (14px), `s` (15px), `m` (17px, the body), `l` (22px) and `xl` (26px).
+
 **Character:** A slightly quirky grotesk at a single weight carries everything that is read; a mono at caption size carries everything that is scanned. Both are self-hosted, preloaded, OFL-licensed.
 
 ### Hierarchy
-- **Display** (400, clamp(56px, 8.2vw, 92px), 0.94, -0.02em): the site name heading a plate. Balanced wrap, breaks anywhere rather than overflow.
-- **Headline** (400, clamp(36px, 4.4vw, 56px), 1, -0.02em): section titles and the colophon title. Error and not-found headings sit between Display and Headline (clamp(44px, 6vw, 72px)).
-- **Figure** (400, clamp(40px, 4.4vw, 60px), 1, -0.02em, tabular): the four credit figures beneath a plate.
+- **Display** (400, 56-92px, growing with the screen, 0.94, -0.02em): the site name heading a plate. Balanced wrap, breaks anywhere rather than overflow.
+- **Headline** (400, 36-56px, growing with the screen, 1, -0.02em): section titles and the colophon title. Error and not-found headings sit between Display and Headline (44-72px), the empty plate's heading below it (30-44px).
+- **Figure** (400, 40-60px, growing with the screen, 1, -0.02em, tabular): the four credit figures beneath a plate.
 - **Title** (400, 22-26px, 1.15-1.2): breakdown list titles (22px) and the plate caption (26px, 22px on a phone).
 - **Body** (400, 17px, 1.55; 16px below 560px): running text, ledes (max 38ch beside a title, 46ch in notices, 70ch in the colophon).
 - **Body Small** (400, 15px, 1.4): credit footnotes, legends, tooltip rows, the data table, colophon notes.

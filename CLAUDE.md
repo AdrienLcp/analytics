@@ -16,6 +16,17 @@ bumping wrangler.
   `safeParse`s it and answers the shared `invalid_input` body itself.
 - **The tracker keeps a local `try/catch`** where `Result` would outweigh the
   script (`errors.md`, embedded scripts).
+- **No `@adrienlcp/theme-preference`.** The dashboard has no theme switch: the
+  palette follows the system through `light-dark()` and nothing is ever
+  stamped on `<html>`, so there is no choice to store or stamp.
+- **`--text-m`, the body, is a step smaller on a phone** (17px, 16px below
+  35rem), redefined on `:root` as DESIGN.md pins it.
+- **A breakdown row underlines on `:hover`**: the row is a plain `li`, not a
+  react-aria element, so there is no `[data-hovered]` to read.
+- **The sections answer `body`'s width**: `layout.below-wide`, `-medium` and
+  `-narrow` are container queries on `body` at the twelve-column grid's steps;
+  the `:root` tokens read the same steps off the viewport
+  (`layout.screen-below-*`).
 
 ## Build order
 

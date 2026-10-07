@@ -3,6 +3,7 @@
 // The palette follows the system theme through `light-dark()`: the dashboard
 // offers no theme switch of its own, so nothing is ever stamped on `<html>`.
 
+@use '@adrienlcp/styles/sizes'
 @use '@adrienlcp/styles/tokens'
 
 @use './layout'
@@ -48,20 +49,19 @@
     --font-sans: 'Familjen Grotesk', 'Familjen Grotesk fallback', 'Helvetica Neue', sans-serif
     --font-mono: 'Geist Mono', 'Geist Mono fallback', ui-monospace, 'SFMono-Regular', monospace
 
+    // The body is --text-m, a step smaller on a phone
     --text-2xs: 0.6875rem
-    --text-xs: 0.8125rem
-    --text-s: 0.875rem
-    --text-m: 0.9375rem
-    --text-base: 1rem
-    --text-body: 1.0625rem
+    --text-xs: 0.875rem
+    --text-s: 0.9375rem
+    --text-m: 1.0625rem
     --text-l: 1.375rem
     --text-xl: 1.625rem
-    // Display sizes, by role
-    --text-display: clamp(3.5rem, 8.2vw, 5.75rem)
-    --text-screen-title: clamp(2.75rem, 6vw, 4.5rem)
-    --text-headline: clamp(2.25rem, 4.4vw, 3.5rem)
-    --text-figure: clamp(2.5rem, 4.4vw, 3.75rem)
-    --text-notice: clamp(1.875rem, 3.4vw, 2.75rem)
+    // Display sizes, by role, growing with the screen
+    --text-display: #{sizes.fluid(3.5rem, 5.75rem)}
+    --text-screen-title: #{sizes.fluid(2.75rem, 4.5rem)}
+    --text-headline: #{sizes.fluid(2.25rem, 3.5rem)}
+    --text-figure: #{sizes.fluid(2.5rem, 3.75rem)}
+    --text-notice: #{sizes.fluid(1.875rem, 2.75rem)}
 
     --tracking-snug: -0.01em
     --tracking-axis: 0.06em
@@ -133,6 +133,7 @@
     @include layout.screen-below-narrow
       --side: 1rem
       --stamp: 88px
+      --text-m: 1rem
       --space-page-top: 3.5rem
       --space-plate: 4.5rem
       --space-section: 5.5rem

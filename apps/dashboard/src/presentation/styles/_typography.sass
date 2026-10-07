@@ -3,19 +3,14 @@
 
 /// Running text: the body's voice, every number in a column lined up.
 @mixin body
-  font: 400 var(--text-body)/1.55 var(--font-sans)
+  font: 400 var(--text-m)/1.55 var(--font-sans)
   font-variant-numeric: tabular-nums
 
 /// The line under a figure, a legend, a note.
 @mixin body-small
-  font-size: var(--text-m)
+  font-size: var(--text-s)
   letter-spacing: 0
   line-height: 1.4
-
-/// A note in the closing colophon, a touch more open than a footnote.
-@mixin colophon-note
-  font-size: var(--text-m)
-  line-height: 1.45
 
 /// The chart's small mono voice: axis ticks, scale marks, counts on a plot.
 @mixin axis
@@ -53,7 +48,7 @@
 /// A figure written on the plot itself, in the body face.
 @mixin plot-figure
   font-family: var(--font-sans)
-  font-size: var(--text-s)
+  font-size: var(--text-xs)
   letter-spacing: 0
 
 /// What every headline shares: light weight, tight tracking, balanced lines.
