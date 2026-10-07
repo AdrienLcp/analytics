@@ -19,6 +19,7 @@
   body
     background: radial-gradient(110% 70% at 0% 0%, var(--edge-warm) 0%, transparent 60%), radial-gradient(110% 70% at 100% 100%, var(--edge-green) 0%, transparent 60%), var(--ground)
     background-attachment: fixed
+    @include layout.container
     @include typography.body
 
     color: var(--ink)
@@ -26,7 +27,7 @@
     overflow-x: clip
     text-rendering: optimizeLegibility
 
-    @include layout.below-narrow
+    @include layout.screen-below-narrow
       font-size: var(--text-base)
 
   ::selection

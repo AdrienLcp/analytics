@@ -1,22 +1,40 @@
 // Pure module: mixins only.
 
-/// Where the twelve columns stop holding a headline and its lede side by side.
-$wide-screen: 1100px
-/// Where the credits fold to two per row and the bar wraps.
-$medium-screen: 860px
-/// A phone held upright: one column, the controls fill the bar.
-$narrow-screen: 560px
+@forward '@adrienlcp/styles/containers'
+@use '@adrienlcp/styles/containers'
 
+/// Where the twelve columns stop holding a headline and its lede side by side.
+$wide-screen: 68.75rem
+/// Where the credits fold to two per row and the bar wraps.
+$medium-screen: 53.75rem
+/// A phone held upright: one column, the controls fill the bar.
+$narrow-screen: 35rem
+
+/// The page's width, read off `body`, the container every section sits in.
 @mixin below-wide
-  @media (width <= $wide-screen)
+  @include containers.container-narrow($wide-screen)
     @content
 
 @mixin below-medium
-  @media (width <= $medium-screen)
+  @include containers.container-narrow($medium-screen)
     @content
 
 @mixin below-narrow
-  @media (width <= $narrow-screen)
+  @include containers.container-narrow($narrow-screen)
+    @content
+
+/// The same steps read off the viewport, for what no container reaches: the
+/// tokens on `:root` and the body's own size.
+@mixin screen-below-wide
+  @media (width < $wide-screen)
+    @content
+
+@mixin screen-below-medium
+  @media (width < $medium-screen)
+    @content
+
+@mixin screen-below-narrow
+  @media (width < $narrow-screen)
     @content
 
 /// The page's measure, centred, with the side margin every section shares.
