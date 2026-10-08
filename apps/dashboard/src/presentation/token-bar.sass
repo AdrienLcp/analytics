@@ -7,6 +7,7 @@
   .token-bar
     background: var(--ground)
     border-block: var(--hairline)
+    container-type: scroll-state
     position: sticky
     top: 0
     z-index: 30
@@ -20,6 +21,16 @@
       gap: var(--space-xs) var(--space-5xl)
       min-height: var(--token-bar-height)
       padding-block: max(var(--space-s), var(--safe-area-top)) var(--space-s)
+
+    // The bar reaches the top edge only once stuck there; at rest the masthead
+    // above it already pays the inset. A browser that cannot tell keeps the inset.
+    @supports (container-type: scroll-state)
+      .bar-inner
+        padding-block-start: var(--space-s)
+
+    @container scroll-state(stuck: top)
+      .bar-inner
+        padding-block-start: max(var(--space-s), var(--safe-area-top))
 
     .group
       align-items: center
