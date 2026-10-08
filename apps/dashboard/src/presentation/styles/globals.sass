@@ -10,8 +10,8 @@
 
 @layer base
   html
-    overflow-x: clip
-    scrollbar-color: var(--rule) var(--ground)
+    scrollbar-color: var(--rule-strong) var(--ground)
+    scrollbar-gutter: stable
     scrollbar-width: thin
 
   // The paper is warm at the top-left corner and green at the bottom-right,
@@ -22,15 +22,21 @@
     @include layout.container
     @include typography.body
 
+    caret-color: var(--focus)
     color: var(--ink)
-    min-height: 100dvh
-    overflow-x: clip
+    font-synthesis: none
     text-rendering: optimizeLegibility
 
+  #root
+    display: flex
+    flex-direction: column
+    min-block-size: 100dvh
+    overflow-x: clip
+    padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left)
 
   ::selection
-    background: var(--seal)
-    color: var(--seal-ink)
+    background: var(--selection)
+    color: var(--ink)
 
   :focus
     outline: none
@@ -58,7 +64,7 @@
 @keyframes plate-rise
   from
     opacity: var(--opacity-faint)
-    transform: translateY(6px)
+    transform: translateY(var(--space-3xs))
   to
     opacity: 1
     transform: none

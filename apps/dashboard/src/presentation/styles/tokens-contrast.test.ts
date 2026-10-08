@@ -37,6 +37,11 @@ describe('colour tokens', () => {
           background: '--seal',
           foreground: '--seal-ink',
           minimum: WCAG_AA.text
+        },
+        {
+          background: '--selection',
+          foreground: '--ink',
+          minimum: WCAG_AA.text
         }
       ])
     ).toEqual([])

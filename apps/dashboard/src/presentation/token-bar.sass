@@ -1,5 +1,4 @@
 @use '@adrienlcp/styles/accessibility'
-@use './styles/focus'
 @use './styles/layout'
 @use './styles/token'
 @use './styles/typography'
@@ -20,7 +19,7 @@
       flex-wrap: wrap
       gap: var(--space-xs) var(--space-5xl)
       min-height: var(--token-bar-height)
-      padding-block: var(--space-s)
+      padding-block: max(var(--space-s), var(--safe-area-top)) var(--space-s)
 
     .group
       align-items: center
@@ -38,7 +37,6 @@
 
     .token
       @include token.token
-      @include focus.ring
 
       &[aria-current='page'],
       &[data-selected]

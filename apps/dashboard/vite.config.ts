@@ -6,8 +6,9 @@ import fontaine from 'fontaine/postcss'
 import { defineConfig } from 'vite'
 import { experimental_readRawConfig } from 'wrangler'
 
-import { API_PREFIX } from '../../packages/protocol/src/routes'
-import { REGIONAL_LOCALES } from './src/presentation/i18n/regional-locales'
+import { API_PREFIX } from '../../packages/protocol/src/routes.ts'
+import { arialMetricTwins } from './arial-metric-twins.ts'
+import { REGIONAL_LOCALES } from './src/presentation/i18n/regional-locales.ts'
 
 /** Where `pnpm dev` at the root serves the Worker: the port `wrangler.jsonc` sets. */
 const workerDevOrigin = (): string => {
@@ -43,7 +44,7 @@ export default defineConfig({
     outDir: resolve(import.meta.dirname, '../api/public')
   },
   css: {
-    postcss: { plugins: [metricMatchedFallbackFaces] }
+    postcss: { plugins: [metricMatchedFallbackFaces, arialMetricTwins] }
   },
   plugins: [
     react({ compiler: { logDiagnostics: true } }),

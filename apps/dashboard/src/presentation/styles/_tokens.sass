@@ -25,11 +25,13 @@
     --rule: light-dark(oklch(83% 0.005 78.3), oklch(34.8% 0.003 106.6))
     --rule-strong: var(--ink)
     --focus: var(--ink)
+    --shadow-ink: oklch(0% 0 0 / 0.35)
     --dot: light-dark(oklch(20.8% 0.005 248.1 / 0.17), oklch(93.7% 0.006 84.6 / 0.13))
 
     // The stamp
     --seal: light-dark(oklch(90.3% 0.03 283.7), oklch(31.3% 0.061 279.7))
     --seal-ink: var(--ink)
+    --selection: var(--seal)
 
     // The two series: periwinkle for page views, terracotta for visits
     --page-views: light-dark(oklch(50.8% 0.177 275.9), oklch(64.4% 0.153 279.1))
@@ -96,7 +98,7 @@
     --measure-lede-wide: 56ch
     --measure-colophon: 70ch
 
-    --control-height: 2.125rem
+    --control-height: max(var(--target), 2.125rem)
     --token-bar-height: 4.5rem
     --icon-xs: 0.625rem
     --icon-s: 0.875rem
@@ -105,7 +107,7 @@
     --radius-s: 3px
     // The printer's dot screen a blank or waiting figure is filled with
     --dot-screen: radial-gradient(var(--dot) 0.0625rem, transparent 0.0875rem)
-    --shadow-lift: 0 10px 28px -12px oklch(0% 0 0 / 0.35)
+    --shadow-overlay: 0 10px 28px -12px var(--shadow-ink)
     // Ink printed faint, and a figure dimmed while it waits
     --opacity-faint: 0.35
     --opacity-dimmed: 0.55
@@ -131,7 +133,7 @@
     @include layout.screen-below-narrow
       --side: 1rem
       --stamp: 5.5rem
-      --control-height: 2.5rem
+      --control-height: max(var(--target), 2.5rem)
       --text-m: 1rem
       --space-page-top: 3.5rem
       --space-plate: 4.5rem

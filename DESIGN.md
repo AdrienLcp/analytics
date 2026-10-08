@@ -189,7 +189,7 @@ A centred measure (max 1440px) with a side margin (`side`) and a twelve-column g
 - **Wide (> 1100px):** side 56px, gutter 40px. Titles take columns 1-7 or 1-8; their lede sits beside them in columns 9-12, aligned to the baseline end.
 - **Below 1100px:** side 40px, gutter 28px. Titles go full width, the lede drops beneath at 8 columns; third-width lists become half-width.
 - **Below 860px:** side 24px, gutter 20px, stamp 104px. Credits fold to two per row and every list goes full width. The token bar wraps its groups onto a second row wherever they do not fit on one.
-- **Below 560px:** side 16px, stamp 88px, body 16px. Token-bar controls stretch to fill the row at 40px tall; group labels become visually hidden.
+- **Below 560px:** side 16px, stamp 88px, body 16px. Token-bar controls stretch to fill the row, never below the 44px touch target; group labels become visually hidden.
 
 Vertical rhythm is large and repeated: 88px above a plate head and a plate frame, 120px above a section head and the footer, 140px above the colophon (each shrinking by roughly a quarter on a phone). Inside sections, 12-28px steps.
 
@@ -202,10 +202,10 @@ The token bar is the one sticky element: it holds site, period and language choi
 Flat. Depth is conveyed by rules, the dot-screen texture and the paper's two radial lights, never by shadow on a surface. The only shadow is on the chart tooltip, the one element that floats over content.
 
 ### Shadow Vocabulary
-- **Tooltip lift** (`box-shadow: 0 10px 28px -12px oklch(0% 0 0 / 0.35)`): the chart tooltip only.
+- **Overlay shadow** (`--shadow-overlay`: `0 10px 28px -12px` in `--shadow-ink`, `oklch(0% 0 0 / 0.35)`): the chart tooltip only.
 
 ### Named Rules
-**The Printed Sheet Rule.** Surfaces are paper; they do not lift. A new floating element (tooltip, popover) may borrow the tooltip lift; a container never does.
+**The Printed Sheet Rule.** Surfaces are paper; they do not lift. A new floating element (tooltip, popover) may borrow the overlay shadow; a container never does.
 
 ## Shapes
 
@@ -215,7 +215,7 @@ Square-cut. Tokens, the plate frame, code snippets, the tooltip and the table ca
 
 ### Tokens (buttons and toggles)
 Square-cut, ruled, typographic.
-- **Shape:** square (0), 34px tall (40px on a phone), 14px horizontal padding, label type.
+- **Shape:** square (0), 44px tall at the default text size, never below the 44px touch target (`max(var(--target), 2.125rem)`, `2.5rem` on a phone, so it grows with the reader's text size), 14px horizontal padding, label type.
 - **Default:** transparent with a `hair` border, `ink` text.
 - **Hover:** `seal` fill, `ink` border.
 - **Current:** `ink` fill and border, `on-ink` text; marked by `aria-current="page"` or `data-selected`.

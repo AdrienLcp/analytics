@@ -2,7 +2,7 @@ import { resolve } from 'node:path'
 
 import { defineConfig } from 'vite'
 
-import { TRACKER_FILE_NAME } from '../../packages/protocol/src/tracker-script'
+import { TRACKER_FILE_NAME } from '../../packages/protocol/src/tracker-script.ts'
 
 /**
  * Built straight into the API's static assets, next to the dashboard, which

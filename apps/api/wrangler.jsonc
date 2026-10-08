@@ -15,7 +15,7 @@
     }
   ],
   "dev": {
-    "port": 8790
+    "port": 8792
   },
   "main": "src/index.ts",
   "name": "analytics",

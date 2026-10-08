@@ -1,4 +1,4 @@
-import type { Locale } from './locales'
+import type { Locale } from './locales.ts'
 
 /**
  * The BCP 47 tag react-aria keys its own strings by. `vite.config.ts` reads
