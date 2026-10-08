@@ -21,8 +21,6 @@ bumping wrangler.
   stamped on `<html>`, so there is no choice to store or stamp.
 - **`--text-m`, the body, is a step smaller on a phone** (17px, 16px below
   35rem), redefined on `:root` as DESIGN.md pins it.
-- **A breakdown row underlines on `:hover`**: the row is a plain `li`, not a
-  react-aria element, so there is no `[data-hovered]` to read.
 - **The sections answer `body`'s width**: `layout.below-wide`, `-medium` and
   `-narrow` are container queries on `body` at the twelve-column grid's steps;
   the `:root` tokens read the same steps off the viewport

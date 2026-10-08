@@ -34,7 +34,7 @@
       max-width: var(--measure)
 
     &.is-pending .field::before
-      animation: plate-breathe 2.4s ease-in-out infinite
+      animation: plate-breathe calc(var(--transition-fast) * 15) ease-in-out infinite
 
     @include layout.below-medium
       .field

@@ -17,11 +17,12 @@
       &.other .key
         color: var(--ink-2)
 
-      &:hover .key
-        @include typography.underline
+      @media (hover: hover)
+        &:hover .key
+          @include typography.underline
 
-        text-decoration: underline
-        text-decoration-color: var(--rule)
+          text-decoration: underline
+          text-decoration-color: var(--rule)
 
     .key
       overflow: hidden

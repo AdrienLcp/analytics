@@ -35,7 +35,8 @@
   :focus
     outline: none
 
-  *
+  // A react-aria Group stamps data-focus-visible while a child holds the focus: only the child rings
+  :where(:not([role='group']))
     @include focus.ring
 
   a
@@ -43,8 +44,9 @@
 
     text-decoration-color: var(--ink-3)
 
-    &:hover
-      text-decoration-color: var(--ink)
+    @media (hover: hover)
+      &:hover
+        text-decoration-color: var(--ink)
 
     &:active
       background: var(--seal)
