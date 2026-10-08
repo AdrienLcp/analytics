@@ -93,10 +93,10 @@
     --space-section: 7.5rem
     --space-colophon: 8.75rem
 
-    --measure: 46ch
-    --measure-lede: 38ch
-    --measure-lede-wide: 56ch
-    --measure-colophon: 70ch
+    --measure: 26.07em
+    --measure-lede: 21.53em
+    --measure-lede-wide: 31.73em
+    --measure-colophon: 39.67em
 
     --control-height: max(var(--target), 2.125rem)
     --token-bar-height: 4.5rem
@@ -115,27 +115,23 @@
     --transition-fast: 160ms
     --transition-base: 520ms
 
-    // The page's measure: side margin, column gutter, and the stamp's size
-    --side: 3.5rem
-    --gutter: 2.5rem
+    // The page's measure: side gutter, column gap, and the stamp's size
+    --gutter: 3.5rem
+    --column-gap: 2.5rem
     --stamp: 8.25rem
     --wrap-max-width: 90rem
-    // Each section reaches both sides of the screen, so its margin is the larger
-    // of the measure's and the inset a notch or a rounded corner takes there.
-    --side-left: max(var(--side), var(--safe-area-left))
-    --side-right: max(var(--side), var(--safe-area-right))
 
     @include layout.screen-below-wide
-      --side: 2.5rem
-      --gutter: 1.75rem
+      --gutter: 2.5rem
+      --column-gap: 1.75rem
 
     @include layout.screen-below-medium
-      --side: 1.5rem
-      --gutter: 1.25rem
+      --gutter: 1.5rem
+      --column-gap: 1.25rem
       --stamp: 6.5rem
 
     @include layout.screen-below-narrow
-      --side: 1rem
+      --gutter: 1rem
       --stamp: 5.5rem
       --control-height: max(var(--target), 2.5rem)
       --text-m: 1rem

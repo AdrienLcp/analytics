@@ -37,16 +37,16 @@ $narrow-screen: 35rem
   @media (width < $narrow-screen)
     @content
 
-/// The page's measure, centred, with the side margin every section shares.
+/// The page's measure, centred, with the side gutter every section shares.
 @mixin wrap
   margin-inline: auto
   max-width: var(--wrap-max-width)
-  padding-left: var(--side-left)
-  padding-right: var(--side-right)
+  padding-left: var(--gutter-left)
+  padding-right: var(--gutter-right)
   width: 100%
 
 /// The annual's twelve columns.
 @mixin grid
-  column-gap: var(--gutter)
+  column-gap: var(--column-gap)
   display: grid
   grid-template-columns: repeat(12, minmax(0, 1fr))

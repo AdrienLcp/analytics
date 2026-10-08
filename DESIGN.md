@@ -69,8 +69,8 @@ rounded:
   none: "0"
   bar-end: "3px"
 spacing:
-  side: "3.5rem"
-  gutter: "2.5rem"
+  gutter: "3.5rem"
+  column-gap: "2.5rem"
   stamp: "132px"
   wrap-max-width: "90rem"
   section: "7.5rem"
@@ -168,7 +168,7 @@ A near-monochrome print palette, ink on paper, with two data hues and a pale per
 - **Headline** (400, 36-56px, growing with the screen, 1, -0.02em): section titles and the colophon title. Error and not-found headings sit between Display and Headline (44-72px), the empty plate's heading below it (30-44px).
 - **Figure** (400, 40-60px, growing with the screen, 1, -0.02em, tabular): the four credit figures beneath a plate.
 - **Title** (400, 22-26px, 1.15-1.2): breakdown list titles (22px) and the plate caption (26px, 22px on a phone).
-- **Body** (400, 17px, 1.55; 16px below 560px): running text, ledes (max 38ch beside a title, 46ch in notices, 70ch in the colophon).
+- **Body** (400, 17px, 1.55; 16px below 560px): running text, ledes (max 21.53em beside a title, 26.07em in notices, 39.67em in the colophon: 38, 46 and 70 of Familjen Grotesk's zeros).
 - **Body Small** (400, 15px, 1.4): credit footnotes, legends, tooltip rows, the data table, colophon notes.
 - **Label** (Geist Mono 400, 11px, 1.3, 0.14em, uppercase): masthead, footer, token bar, meta lines, list totals, column heads, credit names.
 - **Axis** (Geist Mono 400, 11px, 0.06em, not uppercased): chart axis values and dates.
@@ -184,12 +184,12 @@ The direction contract called for Geist Mono small caps; the build sets uppercas
 
 ## Layout
 
-A centred measure (max 1440px) with a side margin (`side`) and a twelve-column grid with a gutter (`gutter`), both stepping down at three breakpoints:
+A centred measure (max 1440px) with a side gutter (`gutter`) and a twelve-column grid with a column gap (`column-gap`), both stepping down at three breakpoints:
 
-- **Wide (> 1100px):** side 56px, gutter 40px. Titles take columns 1-7 or 1-8; their lede sits beside them in columns 9-12, aligned to the baseline end.
-- **Below 1100px:** side 40px, gutter 28px. Titles go full width, the lede drops beneath at 8 columns; third-width lists become half-width.
-- **Below 860px:** side 24px, gutter 20px, stamp 104px. Credits fold to two per row and every list goes full width. The token bar wraps its groups onto a second row wherever they do not fit on one.
-- **Below 560px:** side 16px, stamp 88px, body 16px. Token-bar controls stretch to fill the row, never below the 44px touch target; group labels become visually hidden.
+- **Wide (> 1100px):** gutter 56px, column gap 40px. Titles take columns 1-7 or 1-8; their lede sits beside them in columns 9-12, aligned to the baseline end.
+- **Below 1100px:** gutter 40px, column gap 28px. Titles go full width, the lede drops beneath at 8 columns; third-width lists become half-width.
+- **Below 860px:** gutter 24px, column gap 20px, stamp 104px. Credits fold to two per row and every list goes full width. The token bar wraps its groups onto a second row wherever they do not fit on one.
+- **Below 560px:** gutter 16px, stamp 88px, body 16px. Token-bar controls stretch to fill the row, never below the 44px touch target; group labels become visually hidden.
 
 Vertical rhythm is large and repeated: 88px above a plate head and a plate frame, 120px above a section head and the footer, 140px above the colophon (each shrinking by roughly a quarter on a phone). Inside sections, 12-28px steps.
 
