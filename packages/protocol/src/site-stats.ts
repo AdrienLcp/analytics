@@ -1,8 +1,7 @@
 import { z } from 'zod'
 
+import { STATS_PERIODS } from './stats-periods'
 import { webVitalsSummarySchema } from './web-vitals'
-
-export const STATS_PERIODS = ['7d', '30d', '12m'] as const
 
 export const statsPeriodSchema = z.enum(STATS_PERIODS)
 

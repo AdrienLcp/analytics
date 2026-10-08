@@ -2,7 +2,7 @@ import type React from 'react'
 import { useId } from 'react'
 
 import { SITE_IDS } from '@analytics/protocol/site-ids'
-import { STATS_PERIODS } from '@analytics/protocol/site-stats'
+import { STATS_PERIODS } from '@analytics/protocol/stats-periods'
 
 import {
   DEFAULT_SITE,

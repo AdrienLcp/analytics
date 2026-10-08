@@ -11,9 +11,9 @@ import {
 
 import { isSiteId, SITE_IDS, type SiteId } from '@analytics/protocol/site-ids'
 import {
-  type StatsPeriod,
-  statsPeriodSchema
-} from '@analytics/protocol/site-stats'
+  isStatsPeriod,
+  type StatsPeriod
+} from '@analytics/protocol/stats-periods'
 
 export const paths = {
   root: '/',
@@ -53,9 +53,9 @@ export const sitePathFor = ({
 
 /** An unknown or missing period reads as the default rather than as an error. */
 export const periodInSearch = (search: URLSearchParams): StatsPeriod => {
-  const period = statsPeriodSchema.safeParse(search.get(PERIOD_SEARCH_PARAM))
+  const period = search.get(PERIOD_SEARCH_PARAM)
 
-  return period.success ? period.data : DEFAULT_PERIOD
+  return isStatsPeriod(period) ? period : DEFAULT_PERIOD
 }
 
 /** The period the address names, for chrome drawn outside the page. */
