@@ -35,9 +35,7 @@
   :focus
     outline: none
 
-  // A react-aria Group stamps data-focus-visible while a child holds the focus: only the child rings
-  :where(:not([role='group']))
-    @include focus.ring
+  @include focus.ring-focusables
 
   a
     @include typography.underline
