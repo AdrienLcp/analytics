@@ -11,13 +11,13 @@
     flex-wrap: wrap
     gap: var(--space-s) var(--space-4xl)
     margin-top: var(--space-section)
-    padding-block: var(--space-l) var(--space-5xl)
+    padding-block: var(--space-l) max(var(--space-5xl), var(--safe-area-bottom))
     position: relative
 
     &::before
       border-top: var(--hairline)
       content: ''
-      inset: 0 var(--side) auto
+      inset: 0 var(--side-right) auto var(--side-left)
       position: absolute
 
     .spacer

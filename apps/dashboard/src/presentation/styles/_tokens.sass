@@ -120,6 +120,10 @@
     --gutter: 2.5rem
     --stamp: 8.25rem
     --wrap-max-width: 90rem
+    // Each section reaches both sides of the screen, so its margin is the larger
+    // of the measure's and the inset a notch or a rounded corner takes there.
+    --side-left: max(var(--side), var(--safe-area-left))
+    --side-right: max(var(--side), var(--safe-area-right))
 
     @include layout.screen-below-wide
       --side: 2.5rem

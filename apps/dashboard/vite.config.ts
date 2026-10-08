@@ -1,5 +1,6 @@
 import { resolve } from 'node:path'
 
+import { metricTwins } from '@adrienlcp/styles/metric-twins'
 import optimizeLocales from '@react-aria/optimize-locales-plugin'
 import react from '@vitejs/plugin-react'
 import fontaine from 'fontaine/postcss'
@@ -7,7 +8,6 @@ import { defineConfig } from 'vite'
 import { experimental_readRawConfig } from 'wrangler'
 
 import { API_PREFIX } from '../../packages/protocol/src/routes.ts'
-import { arialMetricTwins } from './arial-metric-twins.ts'
 import { REGIONAL_LOCALES } from './src/presentation/i18n/regional-locales.ts'
 
 /** Where `pnpm dev` at the root serves the Worker: the port `wrangler.jsonc` sets. */
@@ -44,7 +44,7 @@ export default defineConfig({
     outDir: resolve(import.meta.dirname, '../api/public')
   },
   css: {
-    postcss: { plugins: [metricMatchedFallbackFaces, arialMetricTwins] }
+    postcss: { plugins: [metricMatchedFallbackFaces, metricTwins()] }
   },
   plugins: [
     react({ compiler: { logDiagnostics: true } }),

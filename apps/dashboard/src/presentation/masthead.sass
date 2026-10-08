@@ -11,7 +11,7 @@
     display: flex
     flex-wrap: wrap
     gap: var(--space-2xl)
-    padding-block: var(--space-2xl)
+    padding-block: max(var(--space-2xl), var(--safe-area-top)) var(--space-2xl)
 
     .name
       align-items: center
@@ -45,7 +45,7 @@
     .skip-link
       background: var(--ink)
       color: var(--on-ink)
-      left: max(var(--side), var(--safe-area-left))
+      left: var(--side-left)
       padding: var(--space-xs) var(--space-m)
       position: fixed
       text-decoration: none
@@ -62,7 +62,7 @@
 
     @include layout.below-narrow
       gap: var(--space-3xs) var(--space-l)
-      padding-block: var(--space-l)
+      padding-block: max(var(--space-l), var(--safe-area-top)) var(--space-l)
 
       .owner
         display: none
