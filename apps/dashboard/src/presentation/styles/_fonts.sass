@@ -8,5 +8,6 @@
 @layer base
   @include fonts.font-face('Familjen Grotesk', '/fonts/familjen-grotesk-latin.woff2', fonts.$latin)
   @include fonts.font-face('Familjen Grotesk', '/fonts/familjen-grotesk-latin-ext.woff2', fonts.$latin-ext)
+  @include fonts.fallback-faces('Familjen Grotesk', (ascent: 1.025, descent: 0.225, cap-height: 0.65), 0.945863, (400: 1.0151), $figures: (400: 0.9283))
   @include fonts.font-face('Geist Mono', '/fonts/geist-mono-latin.woff2', fonts.$latin)
   @include fonts.font-face('Geist Mono', '/fonts/geist-mono-latin-ext.woff2', fonts.$latin-ext)

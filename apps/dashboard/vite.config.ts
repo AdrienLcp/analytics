@@ -27,11 +27,15 @@ const workerDevOrigin = (): string => {
 /**
  * Each face gets a fallback face of its own, a local font scaled to the same
  * metrics: text paints at once in it and keeps its place when the real face
- * swaps in.
+ * swaps in. Familjen Grotesk's are written in `_fonts.sass` instead: its
+ * tabular digits set narrower than its letters over Arial, and need a face of
+ * their own.
  */
 const metricMatchedFallbackFaces = fontaine({
-  fallbacks: { 'Familjen Grotesk': ['Arial'], 'Geist Mono': ['Courier New'] },
-  resolvePath: (path) => resolve(import.meta.dirname, 'public', `.${path}`)
+  fallbacks: { 'Geist Mono': ['Courier New'] },
+  resolvePath: (path) => resolve(import.meta.dirname, 'public', `.${path}`),
+  skipFontFaceGeneration: (fallbackName) =>
+    fallbackName === 'Familjen Grotesk fallback'
 })
 
 /**
