@@ -7,7 +7,8 @@ import fontaine from 'fontaine/postcss'
 import { defineConfig } from 'vite'
 import { experimental_readRawConfig } from 'wrangler'
 
-import { API_PREFIX } from '../../packages/protocol/src/routes.ts'
+import { API_PREFIX } from '@analytics/protocol/routes'
+
 import { REGIONAL_LOCALES } from './src/presentation/i18n/regional-locales.ts'
 
 /** Where `pnpm dev` at the root serves the Worker: the port `wrangler.jsonc` sets. */
