@@ -26,7 +26,7 @@ describe('collecting page views', () => {
 
     const stats = await readStats()
     expect(stats.totals).toEqual({ pageViews: 1, visits: 1 })
-    expect(stats.breakdowns.pages).toEqual([{ count: 1, key: '/en/cv' }])
+    expect(stats.breakdowns.pages).toEqual([{ count: 1, key: '/:locale/cv' }])
     expect(stats.breakdowns.devices).toEqual([{ count: 1, key: 'desktop' }])
     expect(stats.breakdowns.referrers).toEqual([])
   })
@@ -35,13 +35,31 @@ describe('collecting page views', () => {
     await api.sendBeacon(aBeacon())
     await api.sendBeacon(
       aBeacon({
-        path: '/en/projects',
-        referrer: 'https://adrienlcp.com/'
+        path: '/en/about',
+        referrer: 'https://adrienlcp.com'
       })
     )
 
     const stats = await readStats()
     expect(stats.totals).toEqual({ pageViews: 2, visits: 1 })
+  })
+
+  it('[collect] stores a raw path as its route, whatever the tracker sent', async () => {
+    await api.sendBeacon(aBeacon({ path: '/en/projects/scoreboard' }))
+    await api.sendBeacon(aBeacon({ path: '/:locale/projects/:slug' }))
+
+    const stats = await readStats()
+    expect(stats.breakdowns.pages).toEqual([
+      { count: 2, key: '/:locale/projects/:slug' }
+    ])
+  })
+
+  it('[collect] stores a path no route of the site matches as the unknown route', async () => {
+    await api.sendBeacon(aBeacon({ path: '/e/3f9a1c/umpire/481516' }))
+
+    const stats = await readStats()
+    expect(stats.totals.pageViews).toBe(1)
+    expect(stats.breakdowns.pages).toEqual([{ count: 1, key: '/*' }])
   })
 
   it('[collect] keeps only the host of an external referrer', async () => {

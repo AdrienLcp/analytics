@@ -18,6 +18,10 @@
     {
       "filename": "**/i18n/dictionary-fr.ts",
       "language": "en,en-GB,fr"
+    },
+    {
+      "filename": "packages/protocol/src/site-routes.ts",
+      "language": "en,en-GB,fr"
     }
   ],
   "useGitignore": true,
@@ -47,16 +51,20 @@
     "linecap",
     "linejoin",
     "linkedin",
+    "methode",
     "minmax",
     "Neue",
     "nowrap",
     "nums",
     "oklch",
     "revalidator",
+    "senat",
+    "senateurs",
     "subgrid",
     "taverla",
     "tnum",
     "unitless",
+    "unstub",
     "workerd"
   ]
 }

@@ -1,5 +1,6 @@
 import { Result } from '@adrienlcp/result'
 
+import { routeOfSitePath } from '@analytics/protocol/site-routes'
 import {
   WEB_VITAL_METRICS,
   type WebVitalsBeacon
@@ -52,7 +53,7 @@ export const recordWebVitals = async ({
     buckets,
     day: toUtcDay(receivedAt),
     device: deviceForViewport(beacon.viewportWidth),
-    path: beacon.path,
+    path: routeOfSitePath({ path: beacon.path, site: beacon.site }),
     site: beacon.site
   })
   if (stored.status === 'failure') return stored

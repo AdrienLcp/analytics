@@ -1,13 +1,14 @@
-import { optOutQuery } from './browser'
+import { optOutQuery, sendsGlobalPrivacyControl } from './browser'
 
 const OPT_OUT_STORAGE_KEY = 'analytics:ignore'
 
 /**
  * `?analytics=off` on any page of a tracked site stops counting this browser
  * there, `?analytics=on` resumes it: the owner's own visits stay out of the
- * numbers without a cookie or an account.
+ * numbers without a cookie or an account. A site's own opt-out switch writes
+ * the same key.
  */
-export const isOptedOut = (): boolean => {
+const isRefusedOnThisSite = (): boolean => {
   try {
     const choice = optOutQuery()
 
@@ -19,3 +20,11 @@ export const isOptedOut = (): boolean => {
     return false
   }
 }
+
+/**
+ * Refused on this site, or everywhere through Global Privacy Control, which
+ * `?analytics=on` does not override: that signal is the visitor's choice, not
+ * the owner's.
+ */
+export const isOptedOut = (): boolean =>
+  isRefusedOnThisSite() || sendsGlobalPrivacyControl()

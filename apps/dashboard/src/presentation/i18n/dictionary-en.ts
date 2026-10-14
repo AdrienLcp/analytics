@@ -117,8 +117,8 @@ export const EN_DICTIONARY = defineDictionary({
       deviceNote: 'Read from the window width: mobile, tablet or desktop.',
       language: 'Browser language',
       languageNote: 'fr-FR, en-US, de…',
-      path: 'Page path',
-      pathNote: 'Without its query string.',
+      path: 'Page route',
+      pathNote: 'Its route, like /e/:eventId: never the id or the code.',
       referrer: 'Referrer host',
       referrerNote: 'linkedin.com, never the full link.',
       speed: 'Page speed',
@@ -193,7 +193,7 @@ export const EN_DICTIONARY = defineDictionary({
     pending: {
       countries: 'Resolved at the edge; no address is kept.',
       locales: 'The language each browser asks for.',
-      pages: 'The paths people open, without query strings.',
+      pages: 'The routes people open, never the ids or codes in their paths.',
       referrers: 'The sites visits arrive from, by host only.',
       themesAndDevices: 'Light or dark; mobile, tablet or desktop.'
     },
