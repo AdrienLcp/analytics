@@ -1,4 +1,4 @@
 {
   "extends": "@adrienlcp/tsconfig/base.json",
-  "include": ["vitest.config.ts"]
+  "include": ["apps/**/*", "packages/**/*", "vitest.config.ts"]
 }
