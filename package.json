@@ -19,7 +19,7 @@
   "packageManager": "pnpm@12.8.1+sha512.f64ba907507f5ceafe06c8d38e6052d0179444580ec1279ddd5bfc11cb48aa8a2644b66598e07e761da84872a9fc57d5f902b87fa49d024198d558612aabbe45",
   "private": true,
   "scripts": {
-    "build": "tsc --noEmit && pnpm --filter @analytics/protocol build && pnpm --filter @analytics/dashboard build && pnpm --filter @analytics/tracker build && pnpm --filter @analytics/api build",
+    "build": "tsc --noEmit -p tsconfig.root.json && pnpm --filter @analytics/protocol build && pnpm --filter @analytics/dashboard build && pnpm --filter @analytics/tracker build && pnpm --filter @analytics/api build",
     "deploy": "pnpm build && pnpm --filter @analytics/api run deploy",
     "deps:upgrade": "corepack use pnpm@latest && pnpm -r up -L && biome migrate --write",
     "dev": "pnpm build && pnpm --filter @analytics/api dev",
@@ -29,7 +29,7 @@
     "spell": "cspell --no-progress --gitignore \"**\"",
     "test": "pnpm -r test",
     "test:coverage": "vitest run --coverage",
-    "typecheck": "tsc --noEmit && pnpm -r typecheck",
+    "typecheck": "tsc --noEmit -p tsconfig.root.json && pnpm -r typecheck",
     "validate": "pnpm lint:ci && pnpm spell && pnpm build && pnpm test"
   },
   "type": "module",
