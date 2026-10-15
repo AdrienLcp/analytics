@@ -1,5 +1,6 @@
 import type { Device, PageViewBeacon } from '@analytics/protocol/page-view'
 import type { SiteId } from '@analytics/protocol/site-ids'
+import { routeOfSitePath } from '@analytics/protocol/site-routes'
 
 import { toIsoString } from '@/infrastructure/dates'
 
@@ -34,7 +35,7 @@ export const toPageView = ({
   country,
   device: deviceForViewport(beacon.viewportWidth),
   locale: beacon.locale,
-  path: beacon.path,
+  path: routeOfSitePath({ path: beacon.path, site: beacon.site }),
   site: beacon.site,
   theme: beacon.theme,
   viewedAt: toIsoString(viewedAt)

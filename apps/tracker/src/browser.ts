@@ -1,10 +1,32 @@
 const OPT_OUT_QUERY_PARAMETER = 'analytics'
 const LOCAL_HOSTNAMES = new Set(['localhost', '127.0.0.1', '[::1]'])
 
-/** `location.pathname` only: a query string or a hash can carry a token or an email. */
+/**
+ * `location.pathname` only: a query string or a hash can carry a token or an
+ * email. Still raw — it leaves the browser only as its route.
+ */
 export const currentPath = (): string => location.pathname
 
 export const currentOrigin = (): string => location.origin
+
+/**
+ * The origin of the page that linked here, `null` without one: the collector
+ * keeps no more than its host, so the path, which can carry a code, never
+ * leaves the browser.
+ */
+export const referrerOrigin = (): string | null => {
+  if (!document.referrer) return null
+
+  try {
+    return new URL(document.referrer).origin
+  } catch {
+    return null
+  }
+}
+
+/** The visitor's browser asks every site not to sell or share their data. */
+export const sendsGlobalPrivacyControl = (): boolean =>
+  'globalPrivacyControl' in navigator && navigator.globalPrivacyControl === true
 
 export const viewportWidth = (): number => Math.round(innerWidth)
 

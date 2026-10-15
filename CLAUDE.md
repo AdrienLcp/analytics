@@ -43,3 +43,7 @@ each test.
 Never store or log an IP address, a user agent, a full referrer URL or a query
 string. A new column has to answer "could this tell two visitors apart?" with
 no.
+
+A page is stored as its route from `packages/protocol/src/site-routes.ts`,
+never its path: the sites' paths carry ids and access codes, and the dashboard
+is public.

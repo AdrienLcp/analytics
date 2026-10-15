@@ -1,8 +1,14 @@
 import { API_ROUTES } from '@analytics/protocol/routes'
 import { isSiteId } from '@analytics/protocol/site-ids'
+import { routeOfSitePath } from '@analytics/protocol/site-routes'
 import { TRACKER_SITE_DATA_KEY } from '@analytics/protocol/tracker-script'
 
-import { currentOrigin, currentPath, viewportWidth } from './browser'
+import {
+  currentOrigin,
+  currentPath,
+  referrerOrigin,
+  viewportWidth
+} from './browser'
 import { onPathChange } from './navigation'
 import { pageViewBeacon } from './page-view-beacon'
 import { sendBeacon } from './send-beacon'
@@ -24,10 +30,7 @@ const startTracking = (script: HTMLScriptElement) => {
   const track = () => {
     if (currentPath() === trackedPath) return
 
-    const referrer =
-      trackedPath === null
-        ? document.referrer || null
-        : `${currentOrigin()}${trackedPath}`
+    const referrer = trackedPath === null ? referrerOrigin() : currentOrigin()
 
     sendBeacon({
       beacon: pageViewBeacon({ referrer, site }),
@@ -43,6 +46,7 @@ const startTracking = (script: HTMLScriptElement) => {
     sendBeacon({
       beacon: {
         ...measurements,
+        path: routeOfSitePath({ path: measurements.path, site }),
         site,
         viewportWidth: viewportWidth()
       },

@@ -114,8 +114,9 @@ export const FR_DICTIONARY = defineDictionary({
         'Lu dans la largeur de la fenêtre : mobile, tablette ou ordinateur.',
       language: 'Langue du navigateur',
       languageNote: 'fr-FR, en-US, de…',
-      path: 'Chemin de la page',
-      pathNote: 'Sans ses paramètres d’URL.',
+      path: 'Route de la page',
+      pathNote:
+        'Sa route, comme /e/:eventId : jamais l’identifiant ni le code.',
       referrer: 'Domaine de provenance',
       referrerNote: 'linkedin.com, jamais le lien complet.',
       speed: 'Vitesse des pages',
@@ -192,7 +193,8 @@ export const FR_DICTIONARY = defineDictionary({
     pending: {
       countries: 'Déduits en bordure de réseau ; aucune adresse gardée.',
       locales: 'La langue que demande chaque navigateur.',
-      pages: 'Les chemins ouverts, sans paramètres d’URL.',
+      pages:
+        'Les routes ouvertes, jamais les identifiants ou codes de leurs chemins.',
       referrers: 'Les sites d’où arrivent les visites, par domaine.',
       themesAndDevices: 'Clair ou sombre ; mobile, tablette ou ordinateur.'
     },
