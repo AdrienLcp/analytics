@@ -28,5 +28,8 @@
       "pattern": "analytics.adrienlcp.com"
     }
   ],
+  "triggers": {
+    "crons": ["17 3 * * *"]
+  },
   "workers_dev": false
 }

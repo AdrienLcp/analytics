@@ -1,5 +1,11 @@
 import '@/infrastructure/install-temporal'
 
 import { createApp } from '@/app'
+import { runRetentionPurge } from '@/infrastructure/cron/retention-cron'
 
-export default createApp()
+const app = createApp()
+
+export default {
+  fetch: app.fetch,
+  scheduled: runRetentionPurge
+} satisfies ExportedHandler<Env>
