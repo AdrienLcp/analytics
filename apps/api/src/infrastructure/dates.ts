@@ -9,3 +9,7 @@ export const toIsoString = (instant: Temporal.Instant): string =>
 /** The `YYYY-MM-DD` day an instant falls on, in UTC. */
 export const toUtcDay = (instant: Temporal.Instant): string =>
   instant.toZonedDateTimeISO('UTC').toPlainDate().toString()
+
+/** The `Date` an API outside the Worker's own code asks for. */
+export const toDate = (instant: Temporal.Instant): Date =>
+  new Date(instant.epochMilliseconds)

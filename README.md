@@ -8,6 +8,9 @@ https://analytics.adrienlcp.com.
   no fingerprint and no hash of any of them is stored. A row holds a route, the
   host that referred the visit, a country, a locale, a theme and a device class.
   With nothing to consent to, there is no consent banner.
+- **Nothing is kept past 25 months.** A daily Cron Trigger deletes every page
+  view and every day of Web Vitals older than that, the longest the CNIL lets
+  audience measurement keep its data without consent.
 - **A visit needs no identifier.** A page view reached from another page of the
   same site continues a visit; anything else starts one.
 - **One small script.** `tracker.js` weighs under 5 kB gzipped, Web Vitals included, follows

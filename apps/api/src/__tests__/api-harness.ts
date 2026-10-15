@@ -5,6 +5,8 @@ import { createTestHarness } from 'wrangler'
 import type { PageViewBeacon } from '@analytics/protocol/page-view'
 import type { WebVitalsBeacon } from '@analytics/protocol/web-vitals'
 
+import { toDate } from '@/infrastructure/dates'
+
 export const PORTFOLIO_ORIGIN = 'https://adrienlcp.com'
 export const BROWSER_USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
@@ -89,9 +91,18 @@ export const createApiHarness = () => {
   const sendWebVitals = (beacon: unknown, sender?: BeaconSender) =>
     postBeacon('/api/vitals', beacon, sender)
 
+  /** Fires the Worker's Cron Trigger as if Cloudflare had scheduled it for `scheduledTime`. */
+  const runCron = async (scheduledTime: Temporal.Instant) => {
+    const { outcome } = await server
+      .getWorker<Env>()
+      .scheduled({ cron: '17 3 * * *', scheduledTime: toDate(scheduledTime) })
+    return outcome
+  }
+
   return {
     request,
     resetDatabase,
+    runCron,
     sendBeacon,
     sendWebVitals,
     start,
