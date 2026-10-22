@@ -13,14 +13,14 @@ describe('routeOfSitePath', () => {
     ).toBe('/e/:eventId/organiser')
   })
 
-  it('[site routes] never keeps a taverla room or pairing code', () => {
-    expect(routeOfSitePath({ path: '/play/K7PD', site: 'taverla' })).toBe(
+  it('[site routes] never keeps a melee room or pairing code', () => {
+    expect(routeOfSitePath({ path: '/play/K7PD', site: 'melee' })).toBe(
       '/play/:roomCode'
     )
-    expect(routeOfSitePath({ path: '/pair/482913', site: 'taverla' })).toBe(
+    expect(routeOfSitePath({ path: '/pair/482913', site: 'melee' })).toBe(
       '/pair/:pairingCode'
     )
-    expect(routeOfSitePath({ path: '/en/credits', site: 'taverla' })).toBe(
+    expect(routeOfSitePath({ path: '/en/credits', site: 'melee' })).toBe(
       '/:locale/credits'
     )
   })

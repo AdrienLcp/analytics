@@ -6,6 +6,7 @@ import type { SiteId } from '@analytics/protocol/site-ids'
  * numbers.
  */
 const SITE_ORIGINS = {
+  melee: ['https://melee.adrienlcp.com'],
   'on-record': ['https://on-record.adrienlcp.com'],
   portfolio: ['https://adrienlcp.com'],
   scoreboard: ['https://scoreboard.adrienlcp.com'],

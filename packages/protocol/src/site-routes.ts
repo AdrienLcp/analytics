@@ -9,6 +9,18 @@ import type { SiteId } from './site-ids'
  * before it is listed here is counted as `UNKNOWN_ROUTE` until it is.
  */
 export const SITE_ROUTES = {
+  melee: [
+    '/',
+    '/:locale',
+    '/:locale/:game',
+    '/:locale/credits',
+    '/host/:roomCode',
+    '/invite/:roomCode',
+    '/pair/:pairingCode',
+    '/play/:roomCode',
+    '/wall',
+    '/wall/:roomCode'
+  ],
   'on-record': [
     '/',
     '/deputes',

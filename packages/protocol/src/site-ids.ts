@@ -4,6 +4,7 @@
  */
 export const SITE_IDS = [
   'portfolio',
+  'melee',
   'taverla',
   'on-record',
   'scoreboard'
