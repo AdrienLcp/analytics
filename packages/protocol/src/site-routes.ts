@@ -57,18 +57,6 @@ export const SITE_ROUTES = {
     '/e/:eventId/organiser',
     '/e/:eventId/umpire',
     '/e/:eventId/umpire/:umpireCode'
-  ],
-  taverla: [
-    '/',
-    '/:locale',
-    '/:locale/:game',
-    '/:locale/credits',
-    '/host/:roomCode',
-    '/invite/:roomCode',
-    '/pair/:pairingCode',
-    '/play/:roomCode',
-    '/wall',
-    '/wall/:roomCode'
   ]
 } as const satisfies Record<SiteId, readonly RoutePattern[]>
 

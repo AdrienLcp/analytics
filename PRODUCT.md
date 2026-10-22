@@ -31,7 +31,7 @@ needed because there is nothing to consent to. The code is public (AGPL).
 ## Operating Context
 
 - Opened from the portfolio, often on a phone, usually once.
-- Sites tracked: portfolio, taverla, on-record (Séance is excluded on purpose).
+- Sites tracked: portfolio, melee, on-record, scoreboard (Séance is excluded on purpose).
 - Periods: 7 days, 30 days, 12 months (daily or monthly buckets, UTC).
 - Served same-origin by the Worker at https://analytics.adrienlcp.com.
 

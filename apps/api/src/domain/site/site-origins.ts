@@ -9,8 +9,7 @@ const SITE_ORIGINS = {
   melee: ['https://melee.adrienlcp.com'],
   'on-record': ['https://on-record.adrienlcp.com'],
   portfolio: ['https://adrienlcp.com'],
-  scoreboard: ['https://scoreboard.adrienlcp.com'],
-  taverla: ['https://melee.adrienlcp.com', 'https://taverla.adrienlcp.com']
+  scoreboard: ['https://scoreboard.adrienlcp.com']
 } as const satisfies Record<SiteId, readonly string[]>
 
 export const isOriginOfSite = ({
