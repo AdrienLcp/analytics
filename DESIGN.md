@@ -250,6 +250,7 @@ A real empty state, never sample figures: a dot-screen field (`dot`, 14px grid) 
 - **Masthead:** label type in `ink-2`, the registration mark and owner name in `ink`, a source link underlined in `ink-3` that goes to `ink` on hover. Held down, a text link or the table's toggle sits on a `seal` tint. The owner name hides on a phone.
 - **Token bar:** sticky, `ground` fill, `hair` rules above and below, 72px tall, groups labelled in label type.
 - **Skip link:** `ink` block, revealed on focus.
+- **Footer:** label type in `ink-2` under a hairline: where the figures are counted and their time zone, then the credit ("Made by Adrien Lacourpaille", the name linked to his site in the reader's language) and the source link, both drawn like the masthead's source link. Wraps an item to a line on a phone.
 
 ### Privacy colophon
 The page's closing section: a full-ink rule, a Headline title in four columns, then lists of what is counted and what is never recorded, each item a check or a never icon (14px) beside the text, divided by `hair` rules.

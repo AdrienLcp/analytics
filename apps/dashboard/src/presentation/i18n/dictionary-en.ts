@@ -248,7 +248,9 @@ export const EN_DICTIONARY = defineDictionary({
     })
   },
   footer: {
+    credit: 'Made by <author>{name}</author>',
     hosting: 'Counted on a Cloudflare Worker, kept in D1',
+    source: 'Source code',
     utc: 'Days and months in UTC'
   },
   head: {

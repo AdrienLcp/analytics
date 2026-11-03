@@ -1,0 +1,22 @@
+// Pure module: mixins only.
+
+@use './typography'
+
+/// A link set in a running line, the masthead's or the footer's: underlined
+/// in the lightest ink at rest, in full ink under the pointer, on the seal
+/// while held down.
+@mixin running-link
+  @include typography.underline
+
+  color: var(--ink-2)
+  text-decoration: underline
+  text-decoration-color: var(--ink-3)
+
+  &[data-hovered]
+    color: var(--ink)
+    text-decoration-color: var(--ink)
+
+  &[data-pressed]
+    background: var(--seal)
+    color: var(--seal-ink)
+    text-decoration-color: var(--ink)

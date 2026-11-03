@@ -249,7 +249,9 @@ export const FR_DICTIONARY = defineDictionary({
     })
   },
   footer: {
+    credit: 'Réalisé par <author>{name}</author>',
     hosting: 'Compté sur un Worker Cloudflare, gardé dans D1',
+    source: 'Code source',
     utc: 'Jours et mois en UTC'
   },
   head: {

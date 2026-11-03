@@ -4,10 +4,9 @@ import { Link } from '@/presentation/components/link'
 import { focusMain, MAIN_HREF } from '@/presentation/components/main'
 import { RegistrationMark } from '@/presentation/components/registration-mark'
 import { useTranslate } from '@/presentation/i18n/i18n-provider'
+import { SOURCE_REPOSITORY_HREF } from '@/presentation/site-credits'
 
 import './masthead.sass'
-
-const REPOSITORY_URL = 'https://github.com/AdrienLcp/analytics'
 
 const skipToMain = (event: React.MouseEvent<HTMLAnchorElement>): void => {
   event.preventDefault()
@@ -29,7 +28,7 @@ export const Masthead: React.FC = () => {
       </span>
       <span className='owner'>{translate('masthead.owner')}</span>
       <span className='spacer' />
-      <Link className='source' href={REPOSITORY_URL}>
+      <Link className='source' href={SOURCE_REPOSITORY_HREF}>
         {translate('masthead.source')}
       </Link>
     </header>
