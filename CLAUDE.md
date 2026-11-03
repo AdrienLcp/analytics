@@ -42,7 +42,10 @@ each test.
 
 Never store or log an IP address, a user agent, a full referrer URL or a query
 string. A new column has to answer "could this tell two visitors apart?" with
-no.
+no. Workers Logs' invocation logs stay off in `wrangler.jsonc`: they record
+every request's headers, the IP address and the user agent among them. What
+the logs and the database keep, and for how long, is stated on the
+dashboard's `/legal` page; a change to either changes that page.
 
 A human's page view is engaged and not automated: the tracker draws a view
 key per page view and sends it back on the first key, click, touch or hide;

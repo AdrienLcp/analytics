@@ -1,12 +1,6 @@
-import { toIsoString, toUtcDay } from '@/infrastructure/dates'
+import { RETENTION_MONTHS } from '@analytics/protocol/retention'
 
-/**
- * How long a page view and a day of Web Vitals are kept. The CNIL exempts
- * audience measurement from consent only when the data it collects is kept
- * no longer than 25 months (deliberation 2020-091 and its audience
- * measurement guidance); anything older is deleted.
- */
-export const RETENTION_MONTHS = 25
+import { toIsoString, toUtcDay } from '@/infrastructure/dates'
 
 export type RetentionCutoff = {
   /** ISO 8601 instant: a page view viewed before it has expired. */

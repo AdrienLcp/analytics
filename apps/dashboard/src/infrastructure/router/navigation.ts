@@ -17,6 +17,7 @@ import {
 } from '@analytics/protocol/stats-periods'
 
 export const paths = {
+  legal: '/legal',
   root: '/',
   site: '/:site'
 } as const

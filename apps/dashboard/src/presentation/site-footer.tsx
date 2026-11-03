@@ -1,5 +1,6 @@
 import type React from 'react'
 
+import { paths } from '@/infrastructure/router/navigation'
 import { Link } from '@/presentation/components/link'
 import { useI18n } from '@/presentation/i18n/i18n-provider'
 import { RichText } from '@/presentation/i18n/rich-text'
@@ -9,7 +10,8 @@ import './site-footer.sass'
 
 /**
  * The annual's imprint: where the figures are counted and in which time zone,
- * then who made the dashboard, linked to his site, and its source.
+ * then who made the dashboard, linked to his site, its source, and the legal
+ * page the law requires.
  */
 export const SiteFooter: React.FC = () => {
   const { locale, translate } = useI18n()
@@ -35,6 +37,9 @@ export const SiteFooter: React.FC = () => {
       </span>
       <Link className='link' href={SOURCE_REPOSITORY_HREF}>
         {translate('footer.source')}
+      </Link>
+      <Link className='link' href={paths.legal}>
+        {translate('footer.legal')}
       </Link>
     </footer>
   )

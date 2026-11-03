@@ -105,14 +105,15 @@ export const EN_DICTIONARY = defineDictionary({
       fingerprint: 'Hash or fingerprint',
       fingerprintNote: 'No identifier is derived from anything.',
       ip: 'IP address',
-      ipNote: 'Not stored, not logged.',
+      ipNote:
+        'Never stored with a page view; logged only with a request that fails.',
       query: 'Query string',
       queryNote: 'Never sent: the tracker reads the path alone.',
       referrer: 'Full referrer URL',
       referrerNote: 'Only its host survives.',
       title: 'Never recorded',
       userAgent: 'User agent',
-      userAgentNote: 'Read once to tell crawlers apart, never kept.'
+      userAgentNote: 'Read once to tell crawlers apart, never stored.'
     },
     recorded: {
       audience: 'Human or robot',
@@ -250,6 +251,7 @@ export const EN_DICTIONARY = defineDictionary({
   footer: {
     credit: 'Made by <author>{name}</author>',
     hosting: 'Counted on a Cloudflare Worker, kept in D1',
+    legal: 'Legal notice and privacy',
     source: 'Source code',
     utc: 'Days and months in UTC'
   },
@@ -260,6 +262,62 @@ export const EN_DICTIONARY = defineDictionary({
     lede: 'Page views and visits on <b>{site}</b> over {span}. Nobody is identified: no cookie, no IP address and no user agent is ever stored.',
     robotsLede:
       'Page views on <b>{site}</b> over {span} that came from robots: the browser said it was automated, or nobody ever pressed a key, clicked, touched or left the page. Nobody is identified: no cookie, no IP address and no user agent is ever stored.'
+  },
+  legal: {
+    device: {
+      body: 'This dashboard sets no cookie. What it remembers stays in your browser, for this site only:',
+      heading: 'What your browser keeps',
+      locale:
+        'The language you picked, if you picked one, until you clear this site’s data.',
+      scroll:
+        'How far down each page you had scrolled, so going back returns you there. Gone when you close the tab.',
+      transitions:
+        'Which pages this tab moved between with an animation, so going back plays it again. Gone when you close the tab.'
+    },
+    host: {
+      body: 'The dashboard, the API behind it and its database are hosted by:',
+      heading: 'Host'
+    },
+    intro:
+      'Who publishes this dashboard, what it keeps and for how long, and what you can ask.',
+    measurement: {
+      body: 'This dashboard measures no one: it loads no tracker, so your visit here is counted nowhere.',
+      heading: 'Audience measurement',
+      sites:
+        'On the sites it measures, this measurement needs no consent under the CNIL’s guidelines, and a browser that sends Global Privacy Control is never counted.'
+    },
+    publisher: {
+      address:
+        'As a non-professional publisher, I give the host’s identity in place of a postal address (LCEN, article 6-III-2).',
+      body: 'This dashboard is published by {name}, a private individual, not a business. You can write to me through <contact>my contact page</contact>.',
+      heading: 'Publisher'
+    },
+    rights: {
+      body: 'Under the GDPR, you may access, correct or erase what concerns you, or object to its use. Nothing in the database can be traced back to one person, so there is nothing to find under your name; ask through <contact>my contact page</contact> all the same, and I answer within a month.',
+      complaint:
+        'If you believe your rights are not respected, you may lodge a complaint with the <authority>CNIL</authority>.',
+      heading: 'Your rights'
+    },
+    server: {
+      heading: 'What the server keeps',
+      logs: defineTranslation(
+        'When something fails, the Worker writes a line naming the failure, and it writes one each night for the purge. Cloudflare keeps these lines {days:plural}; a line written while answering a request carries that request as Cloudflare received it, IP address and browser included.',
+        { plural: { days: { one: 'for {?} day', other: 'for {?} days' } } }
+      ),
+      pageViews:
+        'Each page view one of my sites sends becomes one row in the database: when it happened, and the fields listed at the foot of this page, under “{colophon}”. Page speed is kept as counts per day and per range of values, never per visit.',
+      retention: defineTranslation(
+        'Both are deleted {months:plural} after they were recorded, by a purge that runs every night.',
+        { plural: { months: { one: '{?} month', other: '{?} months' } } }
+      ),
+      viewKey:
+        'To tell a person from a robot, the tracker draws a random key for each page view and sends it back once someone presses a key, clicks, touches or leaves the page, which erases it. The key names one page load, never a visitor.'
+    },
+    thirdParties: {
+      body: 'Your browser talks to this dashboard only: its fonts, its code and its figures all come from this address. Its host, Cloudflare, receives your IP address with each request, to deliver the page and protect the site from abuse.',
+      heading: 'Who else receives your data'
+    },
+    title: 'Legal notice and privacy'
   },
   loading: {
     body: 'Reading the figures for {site}.',

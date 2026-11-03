@@ -80,7 +80,7 @@ export const FR_DICTIONARY = defineDictionary({
     ),
     tick: '{value:number}',
     valueText: defineTranslation(
-      '{bucket} : {pageViews:plural}, {visits:plural}',
+      '{bucket} : {pageViews:plural}, {visits:plural}',
       {
         plural: {
           pageViews: { one: '{?} page vue', other: '{?} pages vues' },
@@ -94,21 +94,22 @@ export const FR_DICTIONARY = defineDictionary({
   },
   colophon: {
     definition:
-      '<b>Une visite est une page vue qui arrive de l’extérieur du site.</b> Passer d’une page à l’autre du même site ajoute des pages vues, pas des visites. Rien sur cette page ne permet de distinguer deux visiteurs : pas de bandeau de consentement, il n’y a rien à consentir.',
+      '<b>Une visite est une page vue qui arrive de l’extérieur du site.</b> Passer d’une page à l’autre du même site ajoute des pages vues, pas des visites. Rien sur cette page ne permet de distinguer deux visiteurs : pas de bandeau de consentement, il n’y a rien à consentir.',
     never: {
       cookie: 'Cookies',
       cookieNote: 'Aucun cookie n’est déposé, rien ne marque le navigateur.',
       fingerprint: 'Hash ou empreinte',
       fingerprintNote: 'Aucun identifiant n’est dérivé de quoi que ce soit.',
       ip: 'Adresse IP',
-      ipNote: 'Ni stockée, ni journalisée.',
+      ipNote:
+        'Jamais stockée avec une page vue, journalisée seulement avec une requête qui échoue.',
       query: 'Paramètres d’URL',
-      queryNote: 'Jamais envoyés : le traceur ne lit que le chemin.',
+      queryNote: 'Jamais envoyés : le traceur ne lit que le chemin.',
       referrer: 'URL de provenance complète',
       referrerNote: 'Seul son domaine est gardé.',
       title: 'Jamais enregistré',
       userAgent: 'User agent',
-      userAgentNote: 'Lu une fois pour repérer les robots, jamais gardé.'
+      userAgentNote: 'Lu une fois pour repérer les robots, jamais stocké.'
     },
     recorded: {
       audience: 'Humain ou robot',
@@ -116,15 +117,15 @@ export const FR_DICTIONARY = defineDictionary({
         'Si le navigateur se dit automatisé, et si quelqu’un a appuyé sur une touche, cliqué, touché ou quitté la page.',
       country: 'Pays',
       countryNote:
-        'Déduit en bordure de réseau ; l’adresse d’origine est écartée.',
+        'Déduit en bordure de réseau ; l’adresse d’origine est écartée.',
       device: 'Type d’appareil',
       deviceNote:
-        'Lu dans la largeur de la fenêtre : mobile, tablette ou ordinateur.',
+        'Lu dans la largeur de la fenêtre : mobile, tablette ou ordinateur.',
       language: 'Langue du navigateur',
       languageNote: 'fr-FR, en-US, de…',
       path: 'Route de la page',
       pathNote:
-        'Sa route, comme /e/:eventId : jamais l’identifiant ni le code.',
+        'Sa route, comme /e/:eventId : jamais l’identifiant ni le code.',
       referrer: 'Domaine de provenance',
       referrerNote: 'linkedin.com, jamais le lien complet.',
       speed: 'Vitesse des pages',
@@ -180,36 +181,36 @@ export const FR_DICTIONARY = defineDictionary({
     bodyDays: defineTranslation('{count:plural}', {
       plural: {
         count: {
-          one: 'Dès que le traceur sera sur {site}, chaque page vue arrivera ici en moins d’une minute : une ligne pour les pages vues, une pour les visites. Les listes ci-dessous se rempliront en même temps.',
+          one: 'Dès que le traceur sera sur {site}, chaque page vue arrivera ici en moins d’une minute : une ligne pour les pages vues, une pour les visites. Les listes ci-dessous se rempliront en même temps.',
           other:
-            'Dès que le traceur sera sur {site}, chaque page vue arrivera ici en moins d’une minute : une ligne pour les pages vues, une pour les visites, sur {?} jours. Les listes ci-dessous se rempliront en même temps.'
+            'Dès que le traceur sera sur {site}, chaque page vue arrivera ici en moins d’une minute : une ligne pour les pages vues, une pour les visites, sur {?} jours. Les listes ci-dessous se rempliront en même temps.'
         }
       }
     }),
     bodyMonths: defineTranslation('{count:plural}', {
       plural: {
         count: {
-          one: 'Dès que le traceur sera sur {site}, chaque page vue arrivera ici en moins d’une minute : une barre pour les pages vues, une pour les visites. Les listes ci-dessous se rempliront en même temps.',
+          one: 'Dès que le traceur sera sur {site}, chaque page vue arrivera ici en moins d’une minute : une barre pour les pages vues, une pour les visites. Les listes ci-dessous se rempliront en même temps.',
           other:
-            'Dès que le traceur sera sur {site}, chaque page vue arrivera ici en moins d’une minute : une barre pour les pages vues, une pour les visites, sur {?} mois. Les listes ci-dessous se rempliront en même temps.'
+            'Dès que le traceur sera sur {site}, chaque page vue arrivera ici en moins d’une minute : une barre pour les pages vues, une pour les visites, sur {?} mois. Les listes ci-dessous se rempliront en même temps.'
         }
       }
     }),
     breakdownsLede:
-      'Chacune fera son total, le reste regroupé en « autres ». Aucune ne peut isoler un visiteur.',
+      'Chacune fera son total, le reste regroupé en « autres ». Aucune ne peut isoler un visiteur.',
     breakdownsTitle: 'Ce que ces listes montreront',
     lede: 'Rien n’a encore été mesuré sur <b>{site}</b> sur {span}. Tant que le traceur n’y tourne pas, chaque chiffre ci-dessous est un zéro honnête.',
     pending: {
-      countries: 'Déduits en bordure de réseau ; aucune adresse gardée.',
+      countries: 'Déduits en bordure de réseau ; aucune adresse gardée.',
       locales: 'La langue que demande chaque navigateur.',
       pages:
         'Les routes ouvertes, jamais les identifiants ou codes de leurs chemins.',
       referrers: 'Les sites d’où arrivent les visites, par domaine.',
-      themesAndDevices: 'Clair ou sombre ; mobile, tablette ou ordinateur.'
+      themesAndDevices: 'Clair ou sombre ; mobile, tablette ou ordinateur.'
     },
     recorded: '0 enregistré',
     robotsBody:
-      'Une page vue arrive ici quand son navigateur se dit automatisé, ou quand personne n’appuie jamais sur une touche, ne clique, ne touche ni ne quitte la page : ce que fait un navigateur sans écran qui charge une page puis s’éteint.',
+      'Une page vue arrive ici quand son navigateur se dit automatisé, ou quand personne n’appuie jamais sur une touche, ne clique, ne touche ni ne quitte la page : ce que fait un navigateur sans écran qui charge une page puis s’éteint.',
     robotsLede:
       'Aucun robot compté sur <b>{site}</b> sur {span}. Chaque page vue de la période venait d’une personne, s’il en est venu.',
     robotsTitle: 'Aucun robot en vue',
@@ -227,7 +228,7 @@ export const FR_DICTIONARY = defineDictionary({
           unavailable:
             'L’API a répondu, mais n’a pas pu lire sa base pour l’instant. Les pages vues sont toujours comptées.',
           unreachable:
-            'L’API est injoignable. Les pages vues sont toujours comptées ; seule cette page n’a pas pu les lire.'
+            'L’API est injoignable. Les pages vues sont toujours comptées ; seule cette page n’a pas pu les lire.'
         }
       }
     }),
@@ -251,6 +252,7 @@ export const FR_DICTIONARY = defineDictionary({
   footer: {
     credit: 'Réalisé par <author>{name}</author>',
     hosting: 'Compté sur un Worker Cloudflare, gardé dans D1',
+    legal: 'Mentions légales et confidentialité',
     source: 'Code source',
     utc: 'Jours et mois en UTC'
   },
@@ -260,9 +262,69 @@ export const FR_DICTIONARY = defineDictionary({
         unit: { day: 'Totaux par jour, UTC', month: 'Totaux par mois, UTC' }
       }
     }),
-    lede: 'Pages vues et visites sur <b>{site}</b> sur {span}. Personne n’est identifié : aucun cookie, aucune adresse IP, aucun user agent n’est jamais stocké.',
+    lede: 'Pages vues et visites sur <b>{site}</b> sur {span}. Personne n’est identifié : aucun cookie, aucune adresse IP, aucun user agent n’est jamais stocké.',
     robotsLede:
-      'Pages vues sur <b>{site}</b> sur {span} venues de robots : le navigateur s’est dit automatisé, ou personne n’a jamais appuyé sur une touche, cliqué, touché ni quitté la page. Personne n’est identifié : aucun cookie, aucune adresse IP, aucun user agent n’est jamais stocké.'
+      'Pages vues sur <b>{site}</b> sur {span} venues de robots : le navigateur s’est dit automatisé, ou personne n’a jamais appuyé sur une touche, cliqué, touché ni quitté la page. Personne n’est identifié : aucun cookie, aucune adresse IP, aucun user agent n’est jamais stocké.'
+  },
+  legal: {
+    device: {
+      body: 'Ce tableau de bord ne dépose aucun cookie. Ce qu’il retient reste dans votre navigateur, pour ce site seulement :',
+      heading: 'Ce que garde votre navigateur',
+      locale:
+        'La langue que vous avez choisie, si vous en avez choisi une, jusqu’à ce que vous effaciez les données du site.',
+      scroll:
+        'Jusqu’où vous aviez fait défiler chaque page, pour vous y ramener quand vous revenez en arrière. Effacé à la fermeture de l’onglet.',
+      transitions:
+        'Entre quelles pages cet onglet est passé avec une animation, pour la rejouer quand vous revenez en arrière. Effacé à la fermeture de l’onglet.'
+    },
+    host: {
+      body: 'Le tableau de bord, l’API qui le sert et sa base de données sont hébergés par :',
+      heading: 'Hébergeur'
+    },
+    intro:
+      'Qui publie ce tableau de bord, ce qu’il garde et combien de temps, et ce que vous pouvez demander.',
+    measurement: {
+      body: 'Ce tableau de bord ne mesure personne : il ne charge aucun traceur, votre visite ici n’est comptée nulle part.',
+      heading: 'Mesure d’audience',
+      sites:
+        'Sur les sites qu’il mesure, cette mesure est dispensée de consentement selon les lignes directrices de la CNIL, et un navigateur qui envoie Global Privacy Control n’est jamais compté.'
+    },
+    publisher: {
+      address:
+        'En tant qu’éditeur non professionnel, je donne l’identité de l’hébergeur à la place d’une adresse postale (LCEN, article 6-III-2).',
+      body: 'Ce tableau de bord est publié par {name}, un particulier, pas une entreprise. Vous pouvez m’écrire depuis <contact>ma page de contact</contact>.',
+      heading: 'Éditeur'
+    },
+    rights: {
+      body: 'Le RGPD vous permet d’accéder à ce qui vous concerne, de le rectifier, de l’effacer ou de vous opposer à son usage. Rien dans la base ne peut être rattaché à une personne, il n’y a donc rien à trouver à votre nom ; demandez tout de même depuis <contact>ma page de contact</contact>, je réponds sous un mois.',
+      complaint:
+        'Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la <authority>CNIL</authority>.',
+      heading: 'Vos droits'
+    },
+    server: {
+      heading: 'Ce que garde le serveur',
+      logs: defineTranslation(
+        'Quand quelque chose échoue, le Worker écrit une ligne qui nomme la panne, et il en écrit une chaque nuit pour la purge. Cloudflare garde ces lignes {days:plural} ; une ligne écrite en répondant à une requête porte cette requête telle que Cloudflare l’a reçue, adresse IP et navigateur compris.',
+        {
+          plural: {
+            days: { one: 'pendant {?} jour', other: 'pendant {?} jours' }
+          }
+        }
+      ),
+      pageViews:
+        'Chaque page vue qu’envoie l’un de mes sites devient une ligne de la base : sa date, et les champs listés au pied de cette page, sous « {colophon} ». La vitesse des pages est gardée en comptes par jour et par tranche de valeurs, jamais par visite.',
+      retention: defineTranslation(
+        'Les deux sont supprimés {months:plural} après leur enregistrement, par une purge qui tourne chaque nuit.',
+        { plural: { months: { one: '{?} mois', other: '{?} mois' } } }
+      ),
+      viewKey:
+        'Pour distinguer une personne d’un robot, le traceur tire une clé au hasard pour chaque page vue et la renvoie dès qu’on appuie sur une touche, clique, touche l’écran ou quitte la page, ce qui l’efface. Cette clé désigne un chargement de page, jamais un visiteur.'
+    },
+    thirdParties: {
+      body: 'Votre navigateur ne parle qu’à ce tableau de bord : ses polices, son code et ses chiffres viennent tous de cette adresse. Son hébergeur, Cloudflare, reçoit votre adresse IP à chaque requête, pour livrer la page et protéger le site des abus.',
+      heading: 'Qui d’autre reçoit vos données'
+    },
+    title: 'Mentions légales et confidentialité'
   },
   loading: {
     body: 'Lecture des chiffres de {site}.',

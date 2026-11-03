@@ -250,10 +250,13 @@ A real empty state, never sample figures: a dot-screen field (`dot`, 14px grid) 
 - **Masthead:** label type in `ink-2`, the registration mark and owner name in `ink`, a source link underlined in `ink-3` that goes to `ink` on hover. Held down, a text link or the table's toggle sits on a `seal` tint. The owner name hides on a phone.
 - **Token bar:** sticky, `ground` fill, `hair` rules above and below, 72px tall, groups labelled in label type.
 - **Skip link:** `ink` block, revealed on focus.
-- **Footer:** label type in `ink-2` under a hairline: where the figures are counted and their time zone, then the credit ("Made by Adrien Lacourpaille", the name linked to his site in the reader's language) and the source link, both drawn like the masthead's source link. Wraps an item to a line on a phone.
+- **Footer:** label type in `ink-2` under a hairline: where the figures are counted and their time zone, then the credit ("Made by Adrien Lacourpaille", the name linked to his site in the reader's language) the source link and the legal page, all three drawn like the masthead's source link. Wraps an item to a line on a phone, each item balanced over its lines so no word is left alone on the last.
 
 ### Privacy colophon
 The page's closing section: a full-ink rule, a Headline title in four columns, then lists of what is counted and what is never recorded, each item a check or a never icon (14px) beside the text, divided by `hair` rules.
+
+### Legal page
+The legal notice and privacy policy at `/legal`, between the token bar and the colophon, which still closes the page and keeps the list of what a page view records: the legal page points to it rather than repeating it. A Screen Title head with its lede beside it, set like a section head, then one full-ink rule and a run of parts divided by `hair` rules: each a 22px title in columns 1-4 beside its Body text in columns 5-12, held to the colophon measure; both full width below 860px. Paragraphs are `ink`, with `pretty` wrapping; links inside them keep the sentence's ink, underlined in `ink-3`. Stored keys are a subgrid list ruled in `hair`: the key in the mono snippet voice, its purpose in `ink-2`, stacked on a phone.
 
 ## Do's and Don'ts
 

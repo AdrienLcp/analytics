@@ -20,7 +20,10 @@
   "main": "src/index.ts",
   "name": "analytics",
   "observability": {
-    "enabled": true
+    "enabled": true,
+    "logs": {
+      "invocation_logs": false
+    }
   },
   "routes": [
     {

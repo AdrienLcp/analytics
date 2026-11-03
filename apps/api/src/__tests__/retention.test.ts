@@ -1,11 +1,11 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 
+import { RETENTION_MONTHS } from '@analytics/protocol/retention'
 import {
   type SiteStatsResponse,
   siteStatsResponseSchema
 } from '@analytics/protocol/site-stats'
 
-import { RETENTION_MONTHS } from '@/domain/retention/retention-window'
 import { now } from '@/infrastructure/clock'
 
 import { aBeacon, aWebVitalsBeacon, createApiHarness } from './api-harness'

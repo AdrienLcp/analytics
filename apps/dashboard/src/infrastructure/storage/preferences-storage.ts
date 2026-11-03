@@ -8,7 +8,8 @@ import {
 
 import { isLocale, type Locale } from '@/presentation/i18n/locales'
 
-const LOCALE_KEY = 'analytics:locale'
+/** Where the language chosen on this device is kept, named on the legal page. */
+export const LOCALE_KEY = 'analytics:locale'
 
 /**
  * Succeeds with `null` when no language was ever chosen on this device, which

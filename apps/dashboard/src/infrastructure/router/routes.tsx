@@ -7,6 +7,7 @@ import { SiteStatsFallback } from '@/features/site-stats/site-stats-fallback'
 import {
   audienceInSearch,
   DEFAULT_SITE,
+  paths,
   periodInSearch,
   sitePathFor
 } from '@/infrastructure/router/navigation'
@@ -61,6 +62,12 @@ export const routes: RouteObject[] = [
     children: [
       { Component: SiteStatsFallback, index: true, loader: openDefaultSite },
       ...SITE_IDS.map(siteRouteFor),
+      {
+        lazy: async () => ({
+          Component: (await import('@/features/legal/legal-page')).LegalPage
+        }),
+        path: paths.legal
+      },
       { Component: NotFoundPage, path: '*' }
     ],
     ErrorBoundary: ErrorScreen,

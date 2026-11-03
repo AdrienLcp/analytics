@@ -8,6 +8,7 @@ import {
   useNavigate
 } from 'react-router'
 
+import { SCROLL_POSITIONS_KEY } from '@/infrastructure/storage/session-storage-keys'
 import { AppShell } from '@/presentation/app-shell'
 import { RouterProvider } from '@/presentation/components/router-provider'
 
@@ -55,7 +56,7 @@ export const RootRoute: React.FC = () => {
       <AppShell>
         <Outlet />
       </AppShell>
-      <ScrollRestoration />
+      <ScrollRestoration storageKey={SCROLL_POSITIONS_KEY} />
     </RouterProvider>
   )
 }

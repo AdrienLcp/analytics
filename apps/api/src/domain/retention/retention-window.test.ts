@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
-import { RETENTION_MONTHS, retentionCutoffAt } from './retention-window'
+import { RETENTION_MONTHS } from '@analytics/protocol/retention'
+
+import { retentionCutoffAt } from './retention-window'
 
 describe('retentionCutoffAt', () => {
   it('[retention] keeps the last 25 calendar months', () => {

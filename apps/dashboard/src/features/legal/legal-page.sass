@@ -1,0 +1,104 @@
+@use '@/presentation/styles/layout'
+@use '@/presentation/styles/link'
+@use '@/presentation/styles/typography'
+
+@layer components
+  .legal-page
+    @include layout.wrap
+
+    padding-top: var(--space-page-top)
+
+    .legal-head
+      @include layout.grid
+
+      align-items: end
+
+      h1
+        @include typography.screen-title
+
+        grid-column: 1 / span 7
+
+      p
+        color: var(--ink-2)
+        grid-column: 9 / span 4
+        max-width: var(--measure-lede)
+        text-wrap: pretty
+
+    .legal-sections
+      border-top: var(--hairline-strong)
+      margin-top: var(--space-plate)
+
+    .legal-section
+      @include layout.grid
+
+      padding-block: var(--space-xl) var(--space-6xl)
+      row-gap: var(--space-l)
+
+      & + .legal-section
+        border-top: var(--hairline)
+
+      h2
+        @include typography.title-small
+
+        grid-column: 1 / span 4
+        text-wrap: balance
+
+    .legal-body
+      display: grid
+      gap: var(--space-l)
+      grid-column: 5 / span 8
+      max-width: var(--measure-colophon)
+      text-wrap: pretty
+
+    .text-link
+      @include link.text-link
+
+    .host-address
+      display: grid
+      font-style: normal
+
+    .stored-keys
+      column-gap: var(--space-2xl)
+      display: grid
+      grid-template-columns: max-content minmax(0, 1fr)
+
+      div
+        align-items: baseline
+        border-top: var(--hairline)
+        display: grid
+        grid-column: 1 / -1
+        grid-template-columns: subgrid
+        padding-block: var(--space-s)
+
+        &:last-child
+          border-bottom: var(--hairline)
+
+      code
+        @include typography.snippet
+
+        overflow-wrap: anywhere
+
+      dd
+        color: var(--ink-2)
+
+    @include layout.below-wide
+      .legal-head
+        h1
+          grid-column: 1 / -1
+
+        p
+          grid-column: 1 / span 8
+          margin-top: var(--space-l)
+
+    @include layout.below-medium
+      .legal-head p,
+      .legal-section h2,
+      .legal-body
+        grid-column: 1 / -1
+
+    @include layout.below-narrow
+      .stored-keys
+        grid-template-columns: minmax(0, 1fr)
+
+        div
+          row-gap: var(--space-4xs)
