@@ -189,11 +189,11 @@ A centred measure (max 1440px) with a side gutter (`gutter`) and a twelve-column
 - **Wide (> 1100px):** gutter 56px, column gap 40px. Titles take columns 1-7 or 1-8; their lede sits beside them in columns 9-12, aligned to the baseline end.
 - **Below 1100px:** gutter 40px, column gap 28px. Titles go full width, the lede drops beneath at 8 columns; third-width lists become half-width.
 - **Below 860px:** gutter 24px, column gap 20px, stamp 104px. Credits fold to two per row and every list goes full width. The token bar wraps its groups onto a second row wherever they do not fit on one.
-- **Below 560px:** gutter 16px, stamp 88px, body 16px. Token-bar controls stretch to fill the row, never below the 44px touch target; group labels become visually hidden.
+- **Below 560px:** gutter 16px, stamp 88px, body 16px. Token-bar controls stretch to fill the row, never below the 44px touch target; group labels become visually hidden. Sites take the first row, period and language the second, traffic the third.
 
 Vertical rhythm is large and repeated: 88px above a plate head and a plate frame, 120px above a section head and the footer, 140px above the colophon (each shrinking by roughly a quarter on a phone). Inside sections, 12-28px steps.
 
-The token bar is the one sticky element: it holds site, period and language choices at the top of the viewport over a `ground` fill.
+The token bar is the one sticky element: it holds site, period, traffic (humans or robots) and language choices at the top of the viewport over a `ground` fill.
 
 **The Width-Driven Axis Rule.** The chart's date axis shows as many ticks as fit at the current width without touching, computed from the measured label width; it never uses a fixed tick count.
 

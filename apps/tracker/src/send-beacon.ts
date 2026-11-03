@@ -1,4 +1,7 @@
-import type { PageViewBeacon } from '@analytics/protocol/page-view'
+import type {
+  PageEngagementBeacon,
+  PageViewBeacon
+} from '@analytics/protocol/page-view'
 import type { WebVitalsBeacon } from '@analytics/protocol/web-vitals'
 
 /**
@@ -10,7 +13,7 @@ export const sendBeacon = ({
   beacon,
   url
 }: {
-  beacon: PageViewBeacon | WebVitalsBeacon
+  beacon: PageEngagementBeacon | PageViewBeacon | WebVitalsBeacon
   url: string
 }): void => {
   const body = JSON.stringify(beacon)

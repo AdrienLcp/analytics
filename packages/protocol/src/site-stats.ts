@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import { AUDIENCES } from './audiences'
 import { STATS_PERIODS } from './stats-periods'
 import { webVitalsSummarySchema } from './web-vitals'
 
@@ -7,7 +8,10 @@ export const statsPeriodSchema = z.enum(STATS_PERIODS)
 
 export type StatsPeriod = z.infer<typeof statsPeriodSchema>
 
+export const audienceSchema = z.enum(AUDIENCES)
+
 export const siteStatsQuerySchema = z.object({
+  audience: audienceSchema.default('humans'),
   period: statsPeriodSchema.default('30d')
 })
 
@@ -42,6 +46,7 @@ export const siteStatsBreakdownsSchema = z.object({
 export type SiteStatsBreakdowns = z.infer<typeof siteStatsBreakdownsSchema>
 
 export const siteStatsResponseSchema = z.object({
+  audience: audienceSchema,
   breakdowns: siteStatsBreakdownsSchema,
   period: statsPeriodSchema,
   series: z.array(trafficBucketSchema),

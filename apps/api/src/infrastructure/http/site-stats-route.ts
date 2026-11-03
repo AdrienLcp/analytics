@@ -36,9 +36,11 @@ export const registerSiteStatsRoute = (app: WorkerApp) => {
     zValidator('param', z.object({ site: siteIdSchema }), invalidInput),
     zValidator('query', siteStatsQuerySchema, invalidInput),
     async (context) => {
+      const query = context.req.valid('query')
       const stats = await readSiteStats({
+        audience: query.audience,
         now: now(),
-        period: context.req.valid('query').period,
+        period: query.period,
         site: context.req.valid('param').site,
         siteTraffic: context.var.stores.siteTraffic,
         webVitals: context.var.stores.webVitals

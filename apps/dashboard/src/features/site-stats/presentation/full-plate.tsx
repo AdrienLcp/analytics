@@ -1,6 +1,7 @@
 import type React from 'react'
 import { useId } from 'react'
 
+import type { Audience } from '@analytics/protocol/audiences'
 import type { SiteId } from '@analytics/protocol/site-ids'
 import type {
   SiteStatsResponse,
@@ -22,6 +23,12 @@ import { SectionHead } from './section-head'
 import { SpeedCredits } from './speed-credits'
 import { TrafficChart } from './traffic-chart'
 import { TrafficTable } from './traffic-table'
+
+/** The lede says what was counted: people's page views, or how robots were told apart. */
+const LEDE_BY_AUDIENCE = {
+  humans: 'head.lede',
+  robots: 'head.robotsLede'
+} as const satisfies Record<Audience, string>
 
 type FullPlateProps = {
   period: StatsPeriod
@@ -54,7 +61,7 @@ export const FullPlate: React.FC<FullPlateProps> = ({
       <PlateHead
         lede={
           <RichText
-            parts={translate.rich('head.lede', {
+            parts={translate.rich(LEDE_BY_AUDIENCE[stats.audience], {
               b: strong,
               site,
               span: translate('period.span', { period })

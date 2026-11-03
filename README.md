@@ -6,16 +6,20 @@ https://analytics.adrienlcp.com.
 
 - **Nothing identifies a visitor.** No cookie, no IP address, no user agent,
   no fingerprint and no hash of any of them is stored. A row holds a route, the
-  host that referred the visit, a country, a locale, a theme and a device class.
+  host that referred the visit, a country, a locale, a theme, a device class
+  and whether a person or a robot made it.
   With nothing to consent to, there is no consent banner.
 - **Nothing is kept past 25 months.** A daily Cron Trigger deletes every page
   view and every day of Web Vitals older than that, the longest the CNIL lets
   audience measurement keep its data without consent.
 - **A visit needs no identifier.** A page view reached from another page of the
   same site continues a visit; anything else starts one.
+- **People apart from robots.** A page view counts as a person's once someone
+  presses a key, clicks, touches or leaves the page, and its browser did not
+  say it was automated. A headless browser that loads a page and is shut down
+  does neither; the dashboard shows its page views under Robots.
 - **One small script.** `tracker.js` weighs under 5 kB gzipped, Web Vitals included, follows
-  single-page navigation and never runs on `localhost` or in an automated
-  browser.
+  single-page navigation and never runs on `localhost`.
 
 ## Add it to a site
 

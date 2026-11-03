@@ -3,6 +3,11 @@ import { defineDictionary, defineTranslation } from '@adrienlcp/i18n'
 const UTC = 'UTC'
 
 export const FR_DICTIONARY = defineDictionary({
+  audience: {
+    name: defineTranslation('{audience:enum}', {
+      enum: { audience: { humans: 'Humains', robots: 'Robots' } }
+    })
+  },
   breakdowns: {
     countries: 'Pays',
     country: defineTranslation('{code:displayname}', {
@@ -103,9 +108,12 @@ export const FR_DICTIONARY = defineDictionary({
       referrerNote: 'Seul son domaine est gardé.',
       title: 'Jamais enregistré',
       userAgent: 'User agent',
-      userAgentNote: 'Lu une fois pour écarter les robots, jamais gardé.'
+      userAgentNote: 'Lu une fois pour repérer les robots, jamais gardé.'
     },
     recorded: {
+      audience: 'Humain ou robot',
+      audienceNote:
+        'Si le navigateur se dit automatisé, et si quelqu’un a appuyé sur une touche, cliqué, touché ou quitté la page.',
       country: 'Pays',
       countryNote:
         'Déduit en bordure de réseau ; l’adresse d’origine est écartée.',
@@ -129,6 +137,7 @@ export const FR_DICTIONARY = defineDictionary({
     title: 'Ce qui est compté, et ce qui ne l’est jamais'
   },
   controls: {
+    audience: 'Trafic',
     label: 'Réglages du tableau de bord',
     language: 'Langue',
     period: 'Période',
@@ -199,6 +208,11 @@ export const FR_DICTIONARY = defineDictionary({
       themesAndDevices: 'Clair ou sombre ; mobile, tablette ou ordinateur.'
     },
     recorded: '0 enregistré',
+    robotsBody:
+      'Une page vue arrive ici quand son navigateur se dit automatisé, ou quand personne n’appuie jamais sur une touche, ne clique, ne touche ni ne quitte la page : ce que fait un navigateur sans écran qui charge une page puis s’éteint.',
+    robotsLede:
+      'Aucun robot compté sur <b>{site}</b> sur {span}. Chaque page vue de la période venait d’une personne, s’il en est venu.',
+    robotsTitle: 'Aucun robot en vue',
     snippetLabel: 'Toute l’installation, une balise',
     themesAndDevices: 'Thèmes et appareils',
     title: 'Cette planche est encore vierge',
@@ -244,7 +258,9 @@ export const FR_DICTIONARY = defineDictionary({
         unit: { day: 'Totaux par jour, UTC', month: 'Totaux par mois, UTC' }
       }
     }),
-    lede: 'Pages vues et visites sur <b>{site}</b> sur {span}. Personne n’est identifié : aucun cookie, aucune adresse IP, aucun user agent n’est jamais stocké.'
+    lede: 'Pages vues et visites sur <b>{site}</b> sur {span}. Personne n’est identifié : aucun cookie, aucune adresse IP, aucun user agent n’est jamais stocké.',
+    robotsLede:
+      'Pages vues sur <b>{site}</b> sur {span} venues de robots : le navigateur s’est dit automatisé, ou personne n’a jamais appuyé sur une touche, cliqué, touché ni quitté la page. Personne n’est identifié : aucun cookie, aucune adresse IP, aucun user agent n’est jamais stocké.'
   },
   loading: {
     body: 'Lecture des chiffres de {site}.',

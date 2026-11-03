@@ -95,23 +95,25 @@ export const EmptyPlate: React.FC<EmptyPlateProps> = ({
     unit
   })
   const trackerUrl = new URL(TRACKER_FILE_NAME, currentOrigin()).href
+  const isRobots = stats.audience === 'robots'
+  const range = rangeLabel({ series, translate, unit })
 
   return (
     <>
       <PlateHead
         lede={
           <RichText
-            parts={translate.rich('empty.lede', {
-              b: strong,
-              site,
-              span: translate('period.span', { period })
-            })}
+            parts={translate.rich(
+              isRobots ? 'empty.robotsLede' : 'empty.lede',
+              {
+                b: strong,
+                site,
+                span: translate('period.span', { period })
+              }
+            )}
           />
         }
-        meta={[
-          rangeLabel({ series, translate, unit }),
-          translate('empty.waiting')
-        ]}
+        meta={isRobots ? [range] : [range, translate('empty.waiting')]}
         site={site}
       />
       <Credits
@@ -161,19 +163,25 @@ export const EmptyPlate: React.FC<EmptyPlateProps> = ({
               {translate('credits.count', { value: 0 })}
             </span>
           }
-          title={translate('empty.title')}
+          title={translate(isRobots ? 'empty.robotsTitle' : 'empty.title')}
         >
-          <p>
-            {unit === 'day'
-              ? translate('empty.bodyDays', { count, site })
-              : translate('empty.bodyMonths', { count, site })}
-          </p>
-          <figure className='snippet'>
-            <pre>
-              {`<script defer data-${TRACKER_SITE_DATA_KEY}="${site}"\n  src="${trackerUrl}"></script>`}
-            </pre>
-            <figcaption>{translate('empty.snippetLabel')}</figcaption>
-          </figure>
+          {isRobots ? (
+            <p>{translate('empty.robotsBody')}</p>
+          ) : (
+            <>
+              <p>
+                {unit === 'day'
+                  ? translate('empty.bodyDays', { count, site })
+                  : translate('empty.bodyMonths', { count, site })}
+              </p>
+              <figure className='snippet'>
+                <pre>
+                  {`<script defer data-${TRACKER_SITE_DATA_KEY}="${site}"\n  src="${trackerUrl}"></script>`}
+                </pre>
+                <figcaption>{translate('empty.snippetLabel')}</figcaption>
+              </figure>
+            </>
+          )}
         </PlateNotice>
       </PlateFrame>
       <section aria-labelledby={listsTitleId}>

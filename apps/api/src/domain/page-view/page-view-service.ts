@@ -10,8 +10,10 @@ import type { PageViewStore } from './page-view-store'
 
 export type RecordPageViewError = 'foreign_origin' | 'storage_unavailable'
 
-export type RecordPageViewOutcome = 'recorded' | 'ignored_bot'
-
+/**
+ * A crawler's page view is kept, marked automated, so the dashboard can show
+ * what the human figures leave out.
+ */
 export const recordPageView = async ({
   beacon,
   country,
@@ -26,22 +28,18 @@ export const recordPageView = async ({
   pageViews: PageViewStore
   receivedAt: Temporal.Instant
   userAgent: string | null
-}): Promise<Result<RecordPageViewOutcome, RecordPageViewError>> => {
+}): Promise<Result<void, RecordPageViewError>> => {
   if (origin === null || !isOriginOfSite({ origin, site: beacon.site })) {
     return Result.failure('foreign_origin')
   }
 
-  if (isBotUserAgent(userAgent)) return Result.success('ignored_bot')
-
   const pageView = toPageView({
     beacon,
     country,
+    isAutomated: beacon.isAutomated || isBotUserAgent(userAgent),
     siteHosts: hostsOfSite(beacon.site),
     viewedAt: receivedAt
   })
 
-  const stored = await pageViews.insert(pageView)
-  if (stored.status === 'failure') return stored
-
-  return Result.success('recorded')
+  return pageViews.insert(pageView)
 }

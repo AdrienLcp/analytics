@@ -21,7 +21,7 @@ const readStats = async (query = ''): Promise<SiteStatsResponse> => {
 
 describe('collecting page views', () => {
   it('[collect] counts a direct arrival as a page view and a visit', async () => {
-    const response = await api.sendBeacon(aBeacon({ path: '/en/cv' }))
+    const response = await api.sendEngagedBeacon(aBeacon({ path: '/en/cv' }))
     expect(response.status).toBe(202)
 
     const stats = await readStats()
@@ -32,8 +32,8 @@ describe('collecting page views', () => {
   })
 
   it('[collect] continues the visit on a page reached from the same site', async () => {
-    await api.sendBeacon(aBeacon())
-    await api.sendBeacon(
+    await api.sendEngagedBeacon(aBeacon())
+    await api.sendEngagedBeacon(
       aBeacon({
         path: '/en/about',
         referrer: 'https://adrienlcp.com'
@@ -45,8 +45,8 @@ describe('collecting page views', () => {
   })
 
   it('[collect] stores a raw path as its route, whatever the tracker sent', async () => {
-    await api.sendBeacon(aBeacon({ path: '/en/projects/scoreboard' }))
-    await api.sendBeacon(aBeacon({ path: '/:locale/projects/:slug' }))
+    await api.sendEngagedBeacon(aBeacon({ path: '/en/projects/scoreboard' }))
+    await api.sendEngagedBeacon(aBeacon({ path: '/:locale/projects/:slug' }))
 
     const stats = await readStats()
     expect(stats.breakdowns.pages).toEqual([
@@ -55,7 +55,7 @@ describe('collecting page views', () => {
   })
 
   it('[collect] stores a path no route of the site matches as the unknown route', async () => {
-    await api.sendBeacon(aBeacon({ path: '/e/3f9a1c/umpire/481516' }))
+    await api.sendEngagedBeacon(aBeacon({ path: '/e/3f9a1c/umpire/481516' }))
 
     const stats = await readStats()
     expect(stats.totals.pageViews).toBe(1)
@@ -63,7 +63,7 @@ describe('collecting page views', () => {
   })
 
   it('[collect] keeps only the host of an external referrer', async () => {
-    await api.sendBeacon(
+    await api.sendEngagedBeacon(
       aBeacon({ referrer: 'https://www.linkedin.com/in/someone?trk=abc' })
     )
 
@@ -83,16 +83,6 @@ describe('collecting page views', () => {
     expect(stats.totals.pageViews).toBe(0)
   })
 
-  it('[collect] accepts a crawler without counting it', async () => {
-    const response = await api.sendBeacon(aBeacon(), {
-      userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1)'
-    })
-    expect(response.status).toBe(202)
-
-    const stats = await readStats()
-    expect(stats.totals.pageViews).toBe(0)
-  })
-
   it('[collect] rejects a body that is not a page view', async () => {
     const malformed = await api.request('/api/collect', {
       body: '{not json',
@@ -107,9 +97,98 @@ describe('collecting page views', () => {
   })
 })
 
+describe('telling humans from robots', () => {
+  it('[audience] counts a page view nobody engaged with as a robot', async () => {
+    await api.sendBeacon(aBeacon())
+
+    const humans = await readStats()
+    expect(humans.audience).toBe('humans')
+    expect(humans.totals).toEqual({ pageViews: 0, visits: 0 })
+
+    const robots = await readStats('?audience=robots')
+    expect(robots.audience).toBe('robots')
+    expect(robots.totals).toEqual({ pageViews: 1, visits: 1 })
+    expect(robots.breakdowns.devices).toEqual([{ count: 1, key: 'desktop' }])
+  })
+
+  it('[audience] counts a page view as a human once it is engaged', async () => {
+    const beacon = aBeacon()
+    await api.sendBeacon(beacon)
+    const engaged = await api.sendEngagement({
+      site: beacon.site,
+      viewKey: beacon.viewKey
+    })
+    expect(engaged.status).toBe(202)
+
+    expect((await readStats()).totals.pageViews).toBe(1)
+    expect((await readStats('?audience=robots')).totals.pageViews).toBe(0)
+  })
+
+  it('[audience] counts a browser that declares itself automated as a robot, engaged or not', async () => {
+    await api.sendEngagedBeacon(aBeacon({ isAutomated: true }))
+
+    expect((await readStats()).totals.pageViews).toBe(0)
+    expect((await readStats('?audience=robots')).totals.pageViews).toBe(1)
+  })
+
+  it('[audience] counts a crawler user agent as a robot, engaged or not', async () => {
+    const response = await api.sendEngagedBeacon(aBeacon(), {
+      userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1)'
+    })
+    expect(response.status).toBe(202)
+
+    expect((await readStats()).totals.pageViews).toBe(0)
+    expect((await readStats('?audience=robots')).totals.pageViews).toBe(1)
+  })
+})
+
+describe('recording an engagement', () => {
+  it('[engagement] refuses an engagement from an origin that is not the site', async () => {
+    const beacon = aBeacon()
+    await api.sendBeacon(beacon)
+
+    const response = await api.sendEngagement(
+      { site: beacon.site, viewKey: beacon.viewKey },
+      { origin: 'https://preview.portfolio-9qi.pages.dev' }
+    )
+    expect(response.status).toBe(403)
+    expect((await readStats()).totals.pageViews).toBe(0)
+  })
+
+  it('[engagement] accepts an engagement no stored page view matches, counting nothing', async () => {
+    const response = await api.sendEngagement({
+      site: 'portfolio',
+      viewKey: crypto.randomUUID()
+    })
+    expect(response.status).toBe(202)
+
+    expect((await readStats()).totals.pageViews).toBe(0)
+  })
+
+  it('[engagement] engages only the page view of its own site', async () => {
+    const beacon = aBeacon()
+    await api.sendBeacon(beacon)
+    await api.sendEngagement(
+      { site: 'scoreboard', viewKey: beacon.viewKey },
+      { origin: 'https://scoreboard.adrienlcp.com' }
+    )
+
+    expect((await readStats()).totals.pageViews).toBe(0)
+  })
+
+  it('[engagement] rejects a body that is not an engagement', async () => {
+    const response = await api.sendEngagement({
+      site: 'portfolio',
+      viewKey: 'not-a-key'
+    })
+    expect(response.status).toBe(400)
+    expect(await response.json()).toMatchObject({ code: 'invalid_input' })
+  })
+})
+
 describe('reading stats', () => {
   it('[stats] fills every day of the period, today last', async () => {
-    await api.sendBeacon(aBeacon())
+    await api.sendEngagedBeacon(aBeacon())
 
     const stats = await readStats('?period=7d')
     expect(stats.series).toHaveLength(7)
@@ -119,12 +198,15 @@ describe('reading stats', () => {
     )
   })
 
-  it('[stats] refuses an unknown site or period', async () => {
+  it('[stats] refuses an unknown site, period or audience', async () => {
     const unknownSite = await api.request('/api/sites/nope/stats')
     expect(unknownSite.status).toBe(400)
     expect(await unknownSite.json()).toMatchObject({ code: 'invalid_input' })
     expect(
       (await api.request('/api/sites/portfolio/stats?period=1h')).status
+    ).toBe(400)
+    expect(
+      (await api.request('/api/sites/portfolio/stats?audience=aliens')).status
     ).toBe(400)
   })
 })

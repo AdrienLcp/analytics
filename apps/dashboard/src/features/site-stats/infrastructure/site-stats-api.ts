@@ -1,6 +1,7 @@
 import { Result } from '@adrienlcp/result'
 import type { z } from 'zod'
 
+import type { Audience } from '@analytics/protocol/audiences'
 import { API_ROUTES } from '@analytics/protocol/routes'
 import type { SiteId } from '@analytics/protocol/site-ids'
 import {
@@ -23,13 +24,16 @@ export type SiteStatsError =
   | 'unreachable'
 
 const siteStatsPathFor = ({
+  audience,
   period,
   site
 }: {
+  audience: Audience
   period: StatsPeriod
   site: SiteId
 }): string => {
   const query = new URLSearchParams({
+    audience,
     period
   } satisfies z.input<typeof siteStatsQuerySchema>)
 
@@ -46,10 +50,12 @@ const parseJson = async (response: Response): Promise<unknown> => {
 
 /** Validated against the schema the Worker builds its answer from. */
 export const fetchSiteStats = async ({
+  audience,
   period,
   signal,
   site
 }: {
+  audience: Audience
   period: StatsPeriod
   signal: AbortSignal
   site: SiteId
@@ -57,7 +63,9 @@ export const fetchSiteStats = async ({
   let response: Response
 
   try {
-    response = await fetch(siteStatsPathFor({ period, site }), { signal })
+    response = await fetch(siteStatsPathFor({ audience, period, site }), {
+      signal
+    })
   } catch {
     return Result.failure(signal.aborted ? 'aborted' : 'unreachable')
   }

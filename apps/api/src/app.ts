@@ -4,6 +4,7 @@ import { createPageViewStore } from '@/domain/page-view/page-view-store'
 import { createSiteTrafficStore } from '@/domain/site-stats/site-stats-store'
 import { createWebVitalsStore } from '@/domain/web-vitals/web-vitals-store'
 import { registerCollectRoute } from '@/infrastructure/http/collect-route'
+import { registerEngagementRoute } from '@/infrastructure/http/engagement-route'
 import {
   answerUnexpected,
   notFoundBody
@@ -31,6 +32,7 @@ export const createApp = (): WorkerApp => {
   })
 
   registerCollectRoute(app)
+  registerEngagementRoute(app)
   registerSiteStatsRoute(app)
   registerWebVitalsRoute(app)
 

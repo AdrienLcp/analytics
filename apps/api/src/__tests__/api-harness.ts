@@ -14,11 +14,13 @@ export const BROWSER_USER_AGENT =
 export const aBeacon = (
   overrides: Partial<PageViewBeacon> = {}
 ): PageViewBeacon => ({
+  isAutomated: false,
   locale: 'fr-FR',
   path: '/',
   referrer: null,
   site: 'portfolio',
   theme: 'dark',
+  viewKey: crypto.randomUUID(),
   viewportWidth: 1440,
   ...overrides
 })
@@ -88,6 +90,19 @@ export const createApiHarness = () => {
   const sendBeacon = (beacon: unknown, sender?: BeaconSender) =>
     postBeacon('/api/collect', beacon, sender)
 
+  const sendEngagement = (beacon: unknown, sender?: BeaconSender) =>
+    postBeacon('/api/engagement', beacon, sender)
+
+  /** A page view someone then touched or left: what a person's visit sends. */
+  const sendEngagedBeacon = async (
+    beacon: PageViewBeacon,
+    sender?: BeaconSender
+  ) => {
+    const collected = await sendBeacon(beacon, sender)
+    await sendEngagement({ site: beacon.site, viewKey: beacon.viewKey }, sender)
+    return collected
+  }
+
   const sendWebVitals = (beacon: unknown, sender?: BeaconSender) =>
     postBeacon('/api/vitals', beacon, sender)
 
@@ -104,6 +119,8 @@ export const createApiHarness = () => {
     resetDatabase,
     runCron,
     sendBeacon,
+    sendEngagedBeacon,
+    sendEngagement,
     sendWebVitals,
     start,
     stop: () => server.close()

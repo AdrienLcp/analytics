@@ -1,3 +1,4 @@
+import type { Audience } from '@analytics/protocol/audiences'
 import type {
   SiteStatsBreakdowns,
   SiteStatsResponse,
@@ -13,12 +14,14 @@ const NO_TRAFFIC: Traffic = { pageViews: 0, visits: 0 }
 
 /** A bucket nobody visited is absent from the query and present, at zero, in the series. */
 export const toSiteStats = ({
+  audience,
   breakdowns,
   period,
   traffic,
   webVitals,
   window
 }: {
+  audience: Audience
   breakdowns: SiteStatsBreakdowns
   period: StatsPeriod
   traffic: readonly TrafficBucket[]
@@ -38,5 +41,5 @@ export const toSiteStats = ({
     NO_TRAFFIC
   )
 
-  return { breakdowns, period, series, totals, webVitals }
+  return { audience, breakdowns, period, series, totals, webVitals }
 }

@@ -44,6 +44,12 @@ Never store or log an IP address, a user agent, a full referrer URL or a query
 string. A new column has to answer "could this tell two visitors apart?" with
 no.
 
+A human's page view is engaged and not automated: the tracker draws a view
+key per page view and sends it back on the first key, click, touch or hide;
+the API clears the key once it lands, so it never outlives the page load it
+names. Robots are stored too, under the same columns, so the dashboard can
+show what the human figures leave out.
+
 A page is stored as its route from `packages/protocol/src/site-routes.ts`,
 never its path: the sites' paths carry ids and access codes, and the dashboard
 is public.

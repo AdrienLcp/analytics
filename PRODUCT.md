@@ -38,8 +38,11 @@ needed because there is nothing to consent to. The code is public (AGPL).
 ## Capabilities and Constraints
 
 - Metrics: page views, visits; breakdowns by page path, referrer host, country,
-  locale, theme (light/dark), device class.
-- API: `GET /api/sites/:site/stats?period=7d|30d|12m`, contract in
+  locale, theme (light/dark), device class. People's traffic by default, the
+  robots' on demand: a page view is a person's once someone presses a key,
+  clicks, touches or leaves the page, and its browser did not say it was
+  automated.
+- API: `GET /api/sites/:site/stats?period=7d|30d|12m&audience=humans|robots`, contract in
   `packages/protocol` (`siteStatsResponseSchema`).
 - Locales: English (default) and French, through `@adrienlcp/i18n`.
 - Stack: Vite + React, react-router (data mode), indented Sass — Adrien's

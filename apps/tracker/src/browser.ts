@@ -33,8 +33,11 @@ export const viewportWidth = (): number => Math.round(innerWidth)
 /** As the browser reports it, `null` when it reports none. */
 export const browserLocale = (): string | null => navigator.language || null
 
-/** A test runner or a crawler driving the browser, never a visitor. */
+/** A test runner or a crawler driving the browser: counted, as a robot. */
 export const isAutomated = (): boolean => navigator.webdriver
+
+/** A fresh one per page view, so it names a page load and never a visitor. */
+export const newViewKey = (): string => crypto.randomUUID()
 
 /** Over HTTPS from a real host: a local build or a preview is never counted. */
 export const isServedPublicly = (): boolean =>

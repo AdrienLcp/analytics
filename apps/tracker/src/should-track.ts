@@ -1,9 +1,8 @@
-import { isAutomated, isServedPublicly } from './browser'
+import { isServedPublicly } from './browser'
 import { isOptedOut } from './opt-out'
 
 /**
- * A local build, an automated browser, an opted-out owner or a visitor whose
- * browser sends Global Privacy Control is never counted.
+ * A local build, an opted-out owner or a visitor whose browser sends Global
+ * Privacy Control is never counted. An automated browser is, as a robot.
  */
-export const shouldTrack = (): boolean =>
-  isServedPublicly() && !isAutomated() && !isOptedOut()
+export const shouldTrack = (): boolean => isServedPublicly() && !isOptedOut()

@@ -6,9 +6,12 @@ import { TRACKER_SITE_DATA_KEY } from '@analytics/protocol/tracker-script'
 import {
   currentOrigin,
   currentPath,
+  isAutomated,
+  newViewKey,
   referrerOrigin,
   viewportWidth
 } from './browser'
+import { onFirstEngagement } from './engagement'
 import { onPathChange } from './navigation'
 import { pageViewBeacon } from './page-view-beacon'
 import { sendBeacon } from './send-beacon'
@@ -24,6 +27,7 @@ const startTracking = (script: HTMLScriptElement) => {
   if (site === undefined || !isSiteId(site) || !shouldTrack()) return
 
   const collectUrl = new URL(API_ROUTES.collect, script.src).href
+  const engagementUrl = new URL(API_ROUTES.engagement, script.src).href
   const webVitalsUrl = new URL(API_ROUTES.webVitals, script.src).href
   let trackedPath: string | null = null
 
@@ -31,16 +35,22 @@ const startTracking = (script: HTMLScriptElement) => {
     if (currentPath() === trackedPath) return
 
     const referrer = trackedPath === null ? referrerOrigin() : currentOrigin()
+    const viewKey = newViewKey()
 
     sendBeacon({
-      beacon: pageViewBeacon({ referrer, site }),
+      beacon: pageViewBeacon({ referrer, site, viewKey }),
       url: collectUrl
+    })
+    onFirstEngagement(() => {
+      sendBeacon({ beacon: { site, viewKey }, url: engagementUrl })
     })
     trackedPath = currentPath()
   }
 
   track()
   onPathChange(track)
+
+  if (isAutomated()) return
 
   reportWebVitalsOnHide((measurements) => {
     sendBeacon({

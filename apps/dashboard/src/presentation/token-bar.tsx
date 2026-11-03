@@ -1,12 +1,14 @@
 import type React from 'react'
 import { useId } from 'react'
 
+import { AUDIENCES } from '@analytics/protocol/audiences'
 import { SITE_IDS } from '@analytics/protocol/site-ids'
 import { STATS_PERIODS } from '@analytics/protocol/stats-periods'
 
 import {
   DEFAULT_SITE,
   sitePathFor,
+  useLocationAudience,
   useLocationPeriod,
   useLocationSite
 } from '@/infrastructure/router/navigation'
@@ -36,15 +38,18 @@ const chosenLocale = (keys: Iterable<unknown>): Locale | undefined =>
 
 /**
  * The bar the whole dashboard is driven from: which site, over which period,
- * in which language. Site and period are links, so the address always names
- * what is on screen; the language is this device's preference.
+ * whose traffic, in which language. Site, period and traffic are links, so the
+ * address always names what is on screen; the language is this device's
+ * preference.
  */
 export const TokenBar: React.FC = () => {
   const { locale, setLocale, translate } = useI18n()
   const currentSite = useLocationSite()
   const currentPeriod = useLocationPeriod()
+  const currentAudience = useLocationAudience()
   const siteLabelId = useId()
   const periodLabelId = useId()
+  const audienceLabelId = useId()
   const languageLabelId = useId()
 
   return (
@@ -59,7 +64,11 @@ export const TokenBar: React.FC = () => {
               <Link
                 aria-current={site === currentSite ? 'page' : undefined}
                 className='token'
-                href={sitePathFor({ period: currentPeriod, site })}
+                href={sitePathFor({
+                  audience: currentAudience,
+                  period: currentPeriod,
+                  site
+                })}
                 key={site}
                 routerOptions={TAB_LIKE}
               >
@@ -83,6 +92,7 @@ export const TokenBar: React.FC = () => {
                 aria-label={translate('period.long', { period })}
                 className='token'
                 href={sitePathFor({
+                  audience: currentAudience,
                   period,
                   site: currentSite ?? DEFAULT_SITE
                 })}
@@ -90,6 +100,32 @@ export const TokenBar: React.FC = () => {
                 routerOptions={TAB_LIKE}
               >
                 {translate('period.short', { period })}
+              </Link>
+            ))}
+          </div>
+        </Group>
+        <Group aria-labelledby={audienceLabelId} className='group audience'>
+          <span className='group-label' id={audienceLabelId}>
+            {translate('controls.audience')}
+          </span>
+          <div className='tokens'>
+            {AUDIENCES.map((audience) => (
+              <Link
+                aria-current={
+                  currentSite !== null && audience === currentAudience
+                    ? 'page'
+                    : undefined
+                }
+                className='token'
+                href={sitePathFor({
+                  audience,
+                  period: currentPeriod,
+                  site: currentSite ?? DEFAULT_SITE
+                })}
+                key={audience}
+                routerOptions={TAB_LIKE}
+              >
+                {translate('audience.name', { audience })}
               </Link>
             ))}
           </div>

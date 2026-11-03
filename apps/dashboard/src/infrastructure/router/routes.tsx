@@ -5,6 +5,7 @@ import { SITE_IDS, type SiteId } from '@analytics/protocol/site-ids'
 import { NotFoundPage } from '@/features/not-found/not-found-page'
 import { SiteStatsFallback } from '@/features/site-stats/site-stats-fallback'
 import {
+  audienceInSearch,
   DEFAULT_SITE,
   periodInSearch,
   sitePathFor
@@ -26,25 +27,33 @@ const siteRouteFor = (site: SiteId): RouteObject => ({
 
     return {
       Component: page.SiteStatsPage,
-      loader: ({ request }) =>
-        loader.siteStatsLoader({
-          period: periodInSearch(new URL(request.url).searchParams),
+      loader: ({ request }) => {
+        const search = new URL(request.url).searchParams
+
+        return loader.siteStatsLoader({
+          audience: audienceInSearch(search),
+          period: periodInSearch(search),
           signal: request.signal,
           site
         })
+      }
     }
   },
   path: sitePathFor({ site })
 })
 
-/** The bare address opens the first site, keeping a period it was given. */
-const openDefaultSite: RouteObject['loader'] = ({ request }) =>
-  redirect(
+/** The bare address opens the first site, keeping a period and a traffic it was given. */
+const openDefaultSite: RouteObject['loader'] = ({ request }) => {
+  const search = new URL(request.url).searchParams
+
+  return redirect(
     sitePathFor({
-      period: periodInSearch(new URL(request.url).searchParams),
+      audience: audienceInSearch(search),
+      period: periodInSearch(search),
       site: DEFAULT_SITE
     })
   )
+}
 
 export const routes: RouteObject[] = [
   {

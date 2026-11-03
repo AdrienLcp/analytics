@@ -9,6 +9,11 @@ const UTC = 'UTC'
  * labelled with the one before.
  */
 export const EN_DICTIONARY = defineDictionary({
+  audience: {
+    name: defineTranslation('{audience:enum}', {
+      enum: { audience: { humans: 'Humans', robots: 'Robots' } }
+    })
+  },
   breakdowns: {
     countries: 'Countries',
     country: defineTranslation('{code:displayname}', {
@@ -107,9 +112,12 @@ export const EN_DICTIONARY = defineDictionary({
       referrerNote: 'Only its host survives.',
       title: 'Never recorded',
       userAgent: 'User agent',
-      userAgentNote: 'Read once to turn crawlers away, never kept.'
+      userAgentNote: 'Read once to tell crawlers apart, never kept.'
     },
     recorded: {
+      audience: 'Human or robot',
+      audienceNote:
+        'Whether the browser says it is automated, and whether anyone pressed a key, clicked, touched or left the page.',
       country: 'Country',
       countryNote:
         'Resolved at the network edge; the address it came from is dropped.',
@@ -131,6 +139,7 @@ export const EN_DICTIONARY = defineDictionary({
     title: 'What is counted, and what never is'
   },
   controls: {
+    audience: 'Traffic',
     label: 'Dashboard controls',
     language: 'Language',
     period: 'Period',
@@ -198,6 +207,11 @@ export const EN_DICTIONARY = defineDictionary({
       themesAndDevices: 'Light or dark; mobile, tablet or desktop.'
     },
     recorded: '0 recorded',
+    robotsBody:
+      'A page view lands here when its browser says it is automated, or when nobody ever presses a key, clicks, touches or leaves the page: what a headless browser that loads a page and is shut down does.',
+    robotsLede:
+      'No robot was counted on <b>{site}</b> over {span}. Every page view in that time came from a person, if any came at all.',
+    robotsTitle: 'No robot in sight',
     snippetLabel: 'The whole install, one tag',
     themesAndDevices: 'Themes and devices',
     title: 'This plate is still blank',
@@ -241,7 +255,9 @@ export const EN_DICTIONARY = defineDictionary({
     bucketing: defineTranslation('{unit:enum}', {
       enum: { unit: { day: 'Daily totals, UTC', month: 'Monthly totals, UTC' } }
     }),
-    lede: 'Page views and visits on <b>{site}</b> over {span}. Nobody is identified: no cookie, no IP address and no user agent is ever stored.'
+    lede: 'Page views and visits on <b>{site}</b> over {span}. Nobody is identified: no cookie, no IP address and no user agent is ever stored.',
+    robotsLede:
+      'Page views on <b>{site}</b> over {span} that came from robots: the browser said it was automated, or nobody ever pressed a key, clicked, touched or left the page. Nobody is identified: no cookie, no IP address and no user agent is ever stored.'
   },
   loading: {
     body: 'Reading the figures for {site}.',

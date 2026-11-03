@@ -26,7 +26,7 @@ const monthsFromNow = (months: number): Temporal.Instant =>
   now().toZonedDateTimeISO('UTC').add({ months }).toInstant()
 
 const collectOneVisit = async () => {
-  expect((await api.sendBeacon(aBeacon())).status).toBe(202)
+  expect((await api.sendEngagedBeacon(aBeacon())).status).toBe(202)
   expect((await api.sendWebVitals(aWebVitalsBeacon())).status).toBe(202)
 }
 

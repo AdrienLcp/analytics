@@ -1,6 +1,7 @@
 import { Result } from '@adrienlcp/result'
 import { z } from 'zod'
 
+import type { Audience } from '@analytics/protocol/audiences'
 import type { SiteId } from '@analytics/protocol/site-ids'
 import {
   type SiteStatsBreakdowns,
@@ -13,6 +14,12 @@ import { logger } from '@/infrastructure/logging/logger'
 import { BUCKET_KEY_LENGTH, type StatsWindow } from './stats-window'
 
 const BREAKDOWN_SIZE = 10
+
+/** Literal conditions, like the columns: an audience is never built from what a request says. */
+const AUDIENCE_CONDITIONS = {
+  humans: 'is_automated = 0 AND is_engaged = 1',
+  robots: '(is_automated = 1 OR is_engaged = 0)'
+} as const satisfies Record<Audience, string>
 
 /** Literal column names: a breakdown is never built from what a request says. */
 const BREAKDOWN_COLUMNS = {
@@ -37,6 +44,7 @@ export type SiteTraffic = {
 
 export type SiteTrafficStore = {
   read: (query: {
+    audience: Audience
     site: SiteId
     window: StatsWindow
   }) => Promise<Result<SiteTraffic, 'storage_unavailable'>>
@@ -62,11 +70,13 @@ export const createSiteTrafficStore = (
   }
 
   return {
-    read: async ({ site, window }) => {
+    read: async ({ audience, site, window }) => {
+      const ofAudience = AUDIENCE_CONDITIONS[audience]
+
       const trafficStatement = database
         .prepare(
           `SELECT substr(viewed_at, 1, ?) AS bucket, COUNT(*) AS page_views, SUM(is_entry) AS visits
-            FROM page_views WHERE site = ? AND viewed_at >= ?
+            FROM page_views WHERE site = ? AND viewed_at >= ? AND ${ofAudience}
             GROUP BY bucket`
         )
         .bind(BUCKET_KEY_LENGTH[window.unit], site, window.since)
@@ -77,7 +87,7 @@ export const createSiteTrafficStore = (
         return database
           .prepare(
             `SELECT ${column} AS key, COUNT(*) AS count
-              FROM page_views WHERE site = ? AND viewed_at >= ? AND ${column} IS NOT NULL
+              FROM page_views WHERE site = ? AND viewed_at >= ? AND ${ofAudience} AND ${column} IS NOT NULL
               GROUP BY key ORDER BY count DESC, key LIMIT ?`
           )
           .bind(site, window.since, BREAKDOWN_SIZE)

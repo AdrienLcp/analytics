@@ -26,6 +26,10 @@ const RECORDED: readonly ColophonEntry[] = [
   },
   { name: 'colophon.recorded.theme', note: 'colophon.recorded.themeNote' },
   { name: 'colophon.recorded.device', note: 'colophon.recorded.deviceNote' },
+  {
+    name: 'colophon.recorded.audience',
+    note: 'colophon.recorded.audienceNote'
+  },
   { name: 'colophon.recorded.speed', note: 'colophon.recorded.speedNote' }
 ]
 
