@@ -129,16 +129,20 @@ The privacy claim is part of the visual system: the page ends on a colophon of w
 A near-monochrome print palette, ink on paper, with two data hues and a pale periwinkle stamp tint. Every colour is defined through `light-dark()` and follows the system theme; the dashboard has no theme switch of its own.
 
 ### Primary
+
 - **Plate Periwinkle** (`page-views`): the page-views series (line, area at `page-views-fill`, bars, dots, legend swatch) and the fill of breakdown share bars. The only saturated colour that covers area.
 
 ### Secondary
+
 - **Terracotta** (`visits`): the visits series only: the dashed line, the visit bars, dots and legend swatch. Never used for chrome.
 
 ### Tertiary
+
 - **Stamp Tint** (`seal`): the rotating stamp's disc, the hover state of tokens, the chart's active-bucket band (at 0.55 opacity) and text selection. A tint, never a text colour; text on it stays in `ink`.
 - **Periwinkle Sequence** (`sequence-1` to `sequence-3`): a three-step ramp, darkest first in light mode, for the parts of one whole (stacked device or locale shares).
 
 ### Neutral
+
 - **Paper** (`ground`): page background, and the backing behind anything that must mask the dot field or a line (sticky bar, table head, chart halo).
 - **Warm Edge / Green Edge** (`edge-warm`, `edge-green`): the two radial lights on the body background only.
 - **Ink** (`ink`): primary text, section-opening rules, the current token, the tooltip, the focus ring.
@@ -149,6 +153,7 @@ A near-monochrome print palette, ink on paper, with two data hues and a pale per
 - **Dot** (`dot`): the dot-screen texture of empty and pending fields.
 
 ### Named Rules
+
 **The Data Owns The Colour Rule.** Periwinkle and terracotta mean page views and visits, everywhere, without exception. Chrome is ink; a new hue needs a new data meaning.
 
 **The Light-Dark Rule.** Every colour token is a `light-dark()` pair on `:root`. No component defines its own dark value and nothing is stamped on `<html>`.
@@ -164,6 +169,7 @@ A near-monochrome print palette, ink on paper, with two data hues and a pale per
 **Character:** A slightly quirky grotesk at a single weight carries everything that is read; a mono at caption size carries everything that is scanned. Both are self-hosted, preloaded, OFL-licensed.
 
 ### Hierarchy
+
 - **Display** (400, 56-92px, growing with the screen, 0.94, -0.02em): the site name heading a plate. Balanced wrap, breaks anywhere rather than overflow.
 - **Headline** (400, 36-56px, growing with the screen, 1, -0.02em): section titles and the colophon title. Error and not-found headings sit between Display and Headline (44-72px), the empty plate's heading below it (30-44px).
 - **Figure** (400, 40-60px, growing with the screen, 1, -0.02em, tabular): the four credit figures beneath a plate.
@@ -174,6 +180,7 @@ A near-monochrome print palette, ink on paper, with two data hues and a pale per
 - **Axis** (Geist Mono 400, 11px, 0.06em, not uppercased): chart axis values and dates.
 
 ### Named Rules
+
 **The Single Weight Rule.** Everything is set at 400, `strong` and `b` included. Emphasis is ink strength (`ink` against `ink-2`), never bold.
 
 **The Tabular Figures Rule.** The body sets `tabular-nums`, so every number in every column aligns without per-component work.
@@ -202,9 +209,11 @@ The token bar is the one sticky element: it holds site, period, traffic (humans 
 Flat. Depth is conveyed by rules, the dot-screen texture and the paper's two radial lights, never by shadow on a surface. The only shadow is on the chart tooltip, the one element that floats over content.
 
 ### Shadow Vocabulary
+
 - **Overlay shadow** (`--shadow-overlay`: `0 10px 28px -12px` in `--shadow-ink`, `oklch(0% 0 0 / 0.35)`): the chart tooltip only.
 
 ### Named Rules
+
 **The Printed Sheet Rule.** Surfaces are paper; they do not lift. A new floating element (tooltip, popover) may borrow the overlay shadow; a container never does.
 
 ## Shapes
@@ -214,6 +223,7 @@ Square-cut. Tokens, the plate frame, code snippets, the tooltip and the table ca
 ## Components
 
 ### Tokens (buttons and toggles)
+
 Square-cut, ruled, typographic.
 - **Shape:** square (0), 44px tall at the default text size, never below the 44px touch target (`max(var(--target), 2.125rem)`, `2.5rem` on a phone, so it grows with the reader's text size), 14px horizontal padding, label type.
 - **Default:** transparent with a `hair` border, `ink` text.
@@ -225,9 +235,11 @@ Square-cut, ruled, typographic.
 - The same control serves as the retry and reload buttons on error screens.
 
 ### Plate frame
+
 The chart's frame: a 1px `hair` border, padding 32px 32px 20px, four registration crosshairs in `ink-3`, the stamp at the top right (64px in from the edge, half above the border), and a caption row with the plate title and the series legend. The legend draws page views as a solid 2px swatch and visits as a dashed one, matching the chart.
 
 ### Traffic chart
+
 - Daily periods draw lines; monthly periods draw paired bars (page views left, visits right).
 - Page views: 2px periwinkle line over a `page-views-fill` area, with a 6px `ground` halo beneath it.
 - **Visits are dashed (6 5, butt caps) and drawn over page views.** Visits never exceed page views, so when the two values are equal the dashed terracotta still reads on top of the solid line.
@@ -235,32 +247,40 @@ The chart's frame: a 1px `hair` border, padding 32px 32px 20px, four registratio
 - Tooltip: `ink` fill, `on-ink` text, min 168px, label-type date, fades and slides 4px in 160ms, flips to the left side near the right edge.
 
 ### Credits
+
 The four figures beneath a plate: ruled in full `ink` above and `hair` below, separated by `hair` vertical rules, label-type name, Figure-type value, Body Small footnote. Each credit spans two rows of a **subgrid** so every value and footnote aligns across the row regardless of label length. Four across, two across below 860px.
 
 ### Speed credits
+
 The three Core Web Vitals (LCP, INP, CLS) as a second row of credits after the lists, under their own section head: the same rules and subgrid, four rows per credit. Label-type name with its abbreviation in `ink-3`, the p75 as the Figure, a 22px verdict in words (Good, Needs improvement, Poor; "Not measured yet" in `ink-3`), then a threshold scale and a Body Small note naming the question and the number of page loads, the count in `ink`. The scale is a 6px band from 0 to a fixed end per metric: good in `ink-3` at 0.35, needs improvement hatched in `ink-3`, poor solid `ink-3`, the two thresholds as 11px mono ticks under their edges, and a 2px × 18px `ink` marker at the p75, pinned to the end past it. With no sample the band is dotted (`dot`) and carries no marker. Ink only: the verdict is a word, never a colour. Three across, one per row below 860px with a `hair` rule between rows.
 
 ### Breakdown lists
+
 Each list opens with a full-ink rule, a 22px title and a label-type total on the same baseline. Rows are a three-column grid (key, count, share at 4.6em) divided by `hair` rules, with a 6px share bar beneath in periwinkle (`ink-3` for the "other" row). Row hover underlines the key in `hair`.
 
 ### Empty and pending states
+
 A real empty state, never sample figures: a dot-screen field (`dot`, 14px grid) behind a `ground`-backed copy block with a Headline-sized heading and the install snippet in a ruled mono block. Pending lists show dotted placeholder bars; while loading, the field breathes (2.4s), and holds still under reduced motion: the dotted bars and the copy say it is waiting.
 
 ### Navigation
+
 - **Masthead:** label type in `ink-2`, the registration mark and owner name in `ink`, a source link underlined in `ink-3` that goes to `ink` on hover. Held down, a text link or the table's toggle sits on a `seal` tint. The owner name hides on a phone.
 - **Token bar:** sticky, `ground` fill, `hair` rules above and below, 72px tall, groups labelled in label type.
 - **Skip link:** `ink` block, revealed on focus.
 - **Footer:** label type in `ink-2` under a hairline: where the figures are counted and their time zone, then the credit ("Made by Adrien Lacourpaille", the name linked to his site in the reader's language) the source link and the legal page, all three drawn like the masthead's source link. Wraps an item to a line on a phone, each item balanced over its lines so no word is left alone on the last.
 
 ### Privacy colophon
+
 The page's closing section: a full-ink rule, a Headline title in four columns, then lists of what is counted and what is never recorded, each item a check or a never icon (14px) beside the text, divided by `hair` rules.
 
 ### Legal page
+
 The legal notice and privacy policy at `/legal`, between the token bar and the colophon, which still closes the page and keeps the list of what a page view records: the legal page points to it rather than repeating it. A Screen Title head with its lede beside it, set like a section head, then one full-ink rule and a run of parts divided by `hair` rules: each a 22px title in columns 1-4 beside its Body text in columns 5-12, held to the colophon measure; both full width below 860px. Paragraphs are `ink`, with `pretty` wrapping; links inside them keep the sentence's ink, underlined in `ink-3`. Stored keys are a subgrid list ruled in `hair`: the key in the mono snippet voice, its purpose in `ink-2`, stacked on a phone.
 
 ## Do's and Don'ts
 
 ### Do:
+
 - **Do** keep periwinkle for page views and terracotta for visits in every chart, legend, swatch and tooltip.
 - **Do** draw visits dashed and on top of page views.
 - **Do** separate and open sections with 1px rules: full `ink` to open, `hair` to divide.
@@ -271,6 +291,7 @@ The legal notice and privacy policy at `/legal`, between the token bar and the c
 - **Do** show the honest number, including zero, and a real empty state when there is no data.
 
 ### Don't:
+
 - **Don't** show sample, demo or placeholder figures, and don't add "NEW", "SAMPLE" or similar markers; the dashboard shows real data only.
 - **Don't** build KPI cards or put a shadow or radius on a container.
 - **Don't** use bold; `strong` is ink, not weight.

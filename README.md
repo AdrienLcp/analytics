@@ -51,11 +51,11 @@ parameter is public and worth telling apart can be listed literally
 
 The tracker counts nobody who has refused, in any of three ways:
 
-| Signal | Set by | Undone by |
-| --- | --- | --- |
-| `localStorage['analytics:ignore'] === 'true'` on the site's origin | The site's own opt-out switch, on its legal page | The switch removing the key |
-| `?analytics=off` on any page of the site | The owner, to keep his own visits out; it writes the key above | `?analytics=on`, which removes it |
-| `navigator.globalPrivacyControl === true` | The visitor's browser or extension | Only the visitor; `?analytics=on` does not override it |
+| Signal                                                             | Set by                                                         | Undone by                                              |
+| ------------------------------------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------ |
+| `localStorage['analytics:ignore'] === 'true'` on the site's origin | The site's own opt-out switch, on its legal page               | The switch removing the key                            |
+| `?analytics=off` on any page of the site                           | The owner, to keep his own visits out; it writes the key above | `?analytics=on`, which removes it                      |
+| `navigator.globalPrivacyControl === true`                          | The visitor's browser or extension                             | Only the visitor; `?analytics=on` does not override it |
 
 A site's switch writes exactly `'true'` under `analytics:ignore` and removes
 the key to resume; any other value counts the browser. The tracker reads the
@@ -63,9 +63,9 @@ key once, when the page loads.
 
 ## API
 
-| Route | Does |
-| --- | --- |
-| `POST /api/collect` | Records one page view (`text/plain` JSON, sent by `navigator.sendBeacon`) |
+| Route                                            | Does                                                                                              |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `POST /api/collect`                              | Records one page view (`text/plain` JSON, sent by `navigator.sendBeacon`)                         |
 | `GET /api/sites/:site/stats?period=7d\|30d\|12m` | Totals, a zero-filled series and the top pages, referrers, countries, locales, themes and devices |
 
 ## Layout
