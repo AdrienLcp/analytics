@@ -1,10 +1,11 @@
-import { prefersReducedMotion } from '@adrienlcp/browser'
 import type React from 'react'
+import { ViewTransition } from 'react'
 import {
   type NavigateOptions,
   Outlet,
   ScrollRestoration,
   useHref,
+  useLocation,
   useNavigate
 } from 'react-router'
 
@@ -40,21 +41,21 @@ const ignoreSupersededNavigation = (error: unknown): void => {
 
 export const RootRoute: React.FC = () => {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   return (
     <RouterProvider
       navigate={(path, options) => {
-        void Promise.resolve(
-          navigate(path, {
-            viewTransition: !prefersReducedMotion(),
-            ...options
-          })
-        ).catch(ignoreSupersededNavigation)
+        void Promise.resolve(navigate(path, options)).catch(
+          ignoreSupersededNavigation
+        )
       }}
       {...hrefResolution}
     >
       <AppShell>
-        <Outlet />
+        <ViewTransition default='none' enter='auto' exit='auto' key={pathname}>
+          <Outlet />
+        </ViewTransition>
       </AppShell>
       <ScrollRestoration storageKey={SCROLL_POSITIONS_KEY} />
     </RouterProvider>
