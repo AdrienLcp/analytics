@@ -19,6 +19,13 @@ const METRIC_BY_NAME: Partial<Record<Metric['name'], WebVitalMetric>> = {
 const REPORT_OPTIONS = { reportAllChanges: true }
 
 /**
+ * `web-vitals` reads its entry lists with `Array.prototype.at`, which arrived
+ * in Chromium 92 and Safari 15.4: on an older browser it would throw on every
+ * layout shift, so that browser counts page views and measures nothing.
+ */
+const readsArraysFromTheEnd = (): boolean => 'at' in Array.prototype
+
+/**
  * Measures through Google's `web-vitals` and reports the first time the page
  * is hidden — the last moment a browser reliably lets a beacon leave, closing
  * tabs included. The listener bubbles, so it runs after every capturing
@@ -29,6 +36,8 @@ const REPORT_OPTIONS = { reportAllChanges: true }
 export const reportWebVitalsOnHide = (
   report: (measurements: Measurements) => void
 ): void => {
+  if (!readsArraysFromTheEnd()) return
+
   const emptyLoad = (): Measurements => ({
     cls: null,
     inp: null,

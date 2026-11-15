@@ -1,3 +1,5 @@
+import { randomUuid } from './random-uuid'
+
 const OPT_OUT_QUERY_PARAMETER = 'analytics'
 const LOCAL_HOSTNAMES = new Set(['localhost', '127.0.0.1', '[::1]'])
 
@@ -37,7 +39,7 @@ export const browserLocale = (): string | null => navigator.language || null
 export const isAutomated = (): boolean => navigator.webdriver
 
 /** A fresh one per page view, so it names a page load and never a visitor. */
-export const newViewKey = (): string => crypto.randomUUID()
+export const newViewKey = (): string => randomUuid()
 
 /** Over HTTPS from a real host: a local build or a preview is never counted. */
 export const isServedPublicly = (): boolean =>
