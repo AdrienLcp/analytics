@@ -1,10 +1,14 @@
 {
   "author": "Adrien Lacourpaille",
+  "dependencies": {
+    "@adrienlcp/result": "^0.1.1"
+  },
   "devDependencies": {
     "@adrienlcp/biome-config": "^0.3.0",
     "@adrienlcp/tsconfig": "^0.1.1",
     "@biomejs/biome": "2.6.4",
     "@cspell/dict-fr-fr": "^2.3.2",
+    "@types/node": "^26.6.6",
     "@vitest/coverage-v8": "~5.1.0",
     "cspell": "^10.4.0",
     "typescript": "^7.0.2",
@@ -26,6 +30,8 @@
     "dev:dashboard": "pnpm --filter @analytics/dashboard dev",
     "lint": "biome check --write",
     "lint:ci": "biome ci",
+    "secrets:sync": "node scripts/operations/sync-secrets.ts",
+    "ship": "node scripts/operations/ship.ts",
     "spell": "cspell --no-progress --gitignore \"**\"",
     "test": "pnpm -r test",
     "test:coverage": "vitest run --coverage",

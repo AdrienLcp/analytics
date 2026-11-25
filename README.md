@@ -82,8 +82,11 @@ packages/protocol/   → the wire contract, in Zod, shared by both
 pnpm install
 pnpm dev        # builds the tracker, applies migrations locally, runs wrangler dev
 pnpm validate   # build, lint, tests against a local D1
-pnpm deploy     # remote migrations, then wrangler deploy
+pnpm ship       # pushes main; CI applies the remote migrations, then wrangler deploy
 ```
+
+Deploying, the hosting, the secrets, updating the dependencies and what to do
+when a step breaks: [`docs/operations/`](docs/operations/README.md).
 
 ## License
 
